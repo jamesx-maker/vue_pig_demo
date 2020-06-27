@@ -14,6 +14,7 @@ service.interceptors.request.use(
   },
   error => {
     console.log(error)
+    // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject()
   }
 )

@@ -86,7 +86,7 @@ router.beforeEach((to, from, next) => {
   // to:将要访问的路径
   // from:代表从哪个路径跳转
   // next放行
-  document.title = `${to.meta.title} | vue-manage-system`
+  document.title = `${to.meta.title} | HZAU-pig-system`
   const role = localStorage.getItem('ms_username')
   // const tokenStr = window.sessionStorage.getItem('token')
   // if (!tokenStr) return next('/login')
