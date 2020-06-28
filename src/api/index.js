@@ -2,7 +2,7 @@ import request from 'request'
 
 export const fetchData = query => {
   return request({
-    url: './table.json',
+    url: '.',
     method: 'get',
     params: query
   })
@@ -10,7 +10,7 @@ export const fetchData = query => {
 
 export const statioid = query => {
   return request({
-    url: './getstationid',
+    url: '.',
     method: 'get',
     params: query
   })

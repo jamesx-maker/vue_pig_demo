@@ -78,6 +78,10 @@ a {
     background: #f6faff;
 }
 
+.el-table th {
+    display: table-cell!important;
+}
+
 .mgb20 {
     margin-bottom: 20px;
 }

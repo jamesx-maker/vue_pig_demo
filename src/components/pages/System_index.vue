@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card shadow="hover" class="mgb20" style="height:252px;">
           <div class="user-info">
-            <img src="../../assets/img/img.jpg" class="user-avator" alt/>
+            <img src="../../assets/img/HZAU.jpg" class="user-avator" alt/>
             <div class="user-info-cont">
               <div class="user-info-name">{{name}}</div>
               <div>{{role}}</div>
@@ -21,15 +21,15 @@
         </el-card>
         <el-card shadow="hover" style="height:252px;">
           <div slot="header" class="clearfix">
-            <span>语言详情</span>
+            <span>品种详情</span>
           </div>
-          Vue
+          长白
           <el-progress :percentage="71.3" color="#42b983"></el-progress>
-          JavaScript
+          大白
           <el-progress :percentage="24.1" color="#f1e05a"></el-progress>
-          CSS
+          梅山
           <el-progress :percentage="13.7"></el-progress>
-          HTML
+          杜洛克
           <el-progress :percentage="5.9" color="#f56c6c"></el-progress>
         </el-card>
       </el-col>
@@ -118,64 +118,34 @@
 // import bus from '../common/bus'
 
 export default {
-  name: 'dashboard',
+  name: 'system_index',
   data () {
     return {
       name: localStorage.getItem('ms_username'),
       todoList: [
         {
-          title: '今天要修复100个bug',
+          title: '下周三要添加饲料',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '下周三要添加饲料',
           status: false
         },
         {
-          title: '今天要写100行代码加几个bug吧',
+          title: '下周三要添加饲料',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '下周三要添加饲料',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '下周三要添加饲料',
           status: true
         },
         {
-          title: '今天要写100行代码加几个bug吧',
+          title: '下周三要添加饲料',
           status: true
-        }
-      ],
-      data: [
-        {
-          name: '2018/09/04',
-          value: 1083
-        },
-        {
-          name: '2018/09/05',
-          value: 941
-        },
-        {
-          name: '2018/09/06',
-          value: 1139
-        },
-        {
-          name: '2018/09/07',
-          value: 816
-        },
-        {
-          name: '2018/09/08',
-          value: 327
-        },
-        {
-          name: '2018/09/09',
-          value: 228
-        },
-        {
-          name: '2018/09/10',
-          value: 1065
         }
       ]
       // options: {

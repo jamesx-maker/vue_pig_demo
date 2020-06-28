@@ -60,9 +60,29 @@ export default {
       collapse: false,
       items: [
         {
-          icon: 'el-icon-lx-home',
+          icon: 'el-icon-monitor',
           index: 'dashboard',
           title: '系统首页'
+        },
+        {
+          icon: 'el-icon-house',
+          index: 'station_info',
+          title: '饲喂站信息'
+        },
+        {
+          icon: 'el-icon-magic-stick',
+          index: 'pig_manage',
+          title: '母猪管理',
+          subs: [
+            {
+              index: 'form',
+              title: '基本表单'
+            },
+            {
+              index: 'upload',
+              title: '文件上传'
+            }
+          ]
         },
         {
           icon: 'el-icon-lx-cascades',
@@ -73,35 +93,6 @@ export default {
           icon: 'el-icon-lx-copy',
           index: 'tabs',
           title: 'tab选项卡'
-        },
-        {
-          icon: 'el-icon-lx-calendar',
-          index: '3',
-          title: '表单相关',
-          subs: [
-            {
-              index: 'form',
-              title: '基本表单'
-            },
-            {
-              index: '3-2',
-              title: '三级菜单',
-              subs: [
-                {
-                  index: 'editor',
-                  title: '富文本编辑器'
-                },
-                {
-                  index: 'markdown',
-                  title: 'markdown编辑器'
-                }
-              ]
-            },
-            {
-              index: 'upload',
-              title: '文件上传'
-            }
-          ]
         },
         {
           icon: 'el-icon-lx-emoji',

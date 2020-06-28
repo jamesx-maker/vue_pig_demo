@@ -20,8 +20,13 @@ const routes = [
     children: [
       {
         path: '/dashboard',
-        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/System_index.vue'),
         meta: { title: '系统首页' }
+      },
+      {
+        path: '/station_info',
+        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/Station_info'),
+        meta: { title: '饲喂站信息' }
       },
       {
         path: '/icon',
