@@ -141,46 +141,16 @@ export default {
         },
         {
           icon: 'el-icon-data-line',
-          index: 'analysis',
-          title: '信息分析',
-          subs: [
-            {
-              index: 'growfit',
-              title: '生长拟合'
-            },
-            {
-              index: 'intake_spread',
-              title: '采食分布'
-            }
-          ]
-        },
-        {
-          icon: 'el-icon-data-line',
-          index: 'analysis',
-          title: '信息分析',
-          subs: [
-            {
-              index: 'growfit',
-              title: '生长拟合'
-            },
-            {
-              index: 'intake_spread',
-              title: '采食分布'
-            }
-          ]
-        },
-        {
-          icon: 'el-icon-data-line',
           index: 'medicine',
           title: '药品免疫',
           subs: [
             {
-              index: 'medicine/1',
+              index: 'medicine1',
               title: '疫苗入库'
             },
             {
-              index: 'intake_spread',
-              title: 'medicine/2'
+              index: 'medicine2',
+              title: '疫苗入库出库'
             }
           ]
         },
