@@ -63,6 +63,9 @@ const routes = [
         component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/delivery_warn'),
         meta: { title: '分娩提醒' }
       },
+      // 默认
+      // 默认
+      // 默认
       {
         path: '/icon',
         component: () => import(/* webpackChunkName: "icon" */ '../components/pages/Icon.vue'),

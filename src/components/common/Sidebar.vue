@@ -24,12 +24,12 @@
                 :key="subItem.index"
               >
                 <template slot="title">{{ subItem.title }}</template>
-                <el-menu-item
-                  v-for="(threeItem,i) in subItem.subs"
-                  :key="i"
-                  :index="threeItem.index"
-                >{{ threeItem.title }}
-                </el-menu-item>
+<!--                <el-menu-item-->
+<!--                  v-for="(threeItem,i) in subItem.subs"-->
+<!--                  :key="i"-->
+<!--                  :index="threeItem.index"-->
+<!--                >{{ threeItem.title }}-->
+<!--                </el-menu-item>-->
               </el-submenu>
               <el-menu-item
                 v-else
