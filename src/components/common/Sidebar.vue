@@ -61,7 +61,7 @@ export default {
       items: [
         {
           icon: 'el-icon-monitor',
-          index: 'dashboard',
+          index: 'index',
           title: '系统首页'
         },
         {
@@ -75,49 +75,160 @@ export default {
           title: '母猪管理',
           subs: [
             {
-              index: 'form',
-              title: '基本表单'
+              index: 'addition_pig',
+              title: '入栏'
             },
             {
-              index: 'upload',
-              title: '文件上传'
+              index: 'subtraction_pig',
+              title: '出栏'
+            },
+            {
+              index: 'change_station',
+              title: '转栏'
+            },
+            {
+              index: 'change_ear',
+              title: '更换耳标'
+            },
+            {
+              index: 'setintake',
+              title: '下料设置'
+            },
+            {
+              index: 'farrow',
+              title: '生产信息'
+            },
+            {
+              index: 'delivery_warn',
+              title: '分娩提醒'
             }
           ]
         },
         {
-          icon: 'el-icon-lx-cascades',
-          index: 'table',
-          title: '基础表格'
+          icon: 'el-icon-rank',
+          index: 'food_manage',
+          title: '饲料管理'
         },
         {
-          icon: 'el-icon-lx-copy',
-          index: 'tabs',
-          title: 'tab选项卡'
+          icon: 'el-icon-s-data',
+          index: 'data',
+          title: '数据查询',
+          subs: [
+            {
+              index: 'intake_data',
+              title: '采食信息'
+            },
+            {
+              index: 'default_intake',
+              title: '默认饲喂量'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-data-line',
+          index: 'analysis',
+          title: '信息分析',
+          subs: [
+            {
+              index: 'growfit',
+              title: '生长拟合'
+            },
+            {
+              index: 'intake_spread',
+              title: '采食分布'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-data-line',
+          index: 'analysis',
+          title: '信息分析',
+          subs: [
+            {
+              index: 'growfit',
+              title: '生长拟合'
+            },
+            {
+              index: 'intake_spread',
+              title: '采食分布'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-data-line',
+          index: 'analysis',
+          title: '信息分析',
+          subs: [
+            {
+              index: 'growfit',
+              title: '生长拟合'
+            },
+            {
+              index: 'intake_spread',
+              title: '采食分布'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-data-line',
+          index: 'medicine',
+          title: '药品免疫',
+          subs: [
+            {
+              index: 'medicine/1',
+              title: '疫苗入库'
+            },
+            {
+              index: 'intake_spread',
+              title: 'medicine/2'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-data-line',
+          index: 'machine_manage',
+          title: '设备管理',
+          subs: [
+            {
+              index: 'errorcode',
+              title: '故障码'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-user',
+          index: 'usermanage',
+          title: '用户管理',
+          subs: [
+            {
+              index: 'usersetting',
+              title: '用户设置'
+            },
+            {
+              index: 'othersetting',
+              title: '其他设置'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-user',
+          index: 'reporter',
+          title: '报告',
+          subs: [
+            {
+              index: 'pigreport',
+              title: '母猪报告'
+            },
+            {
+              index: 'errorreport',
+              title: '异常信息报告'
+            }
+          ]
         },
         {
           icon: 'el-icon-lx-emoji',
           index: 'icon',
           title: '自定义图标'
-        },
-        {
-          icon: 'el-icon-pie-chart',
-          index: 'charts',
-          title: 'schart图表'
-        },
-        {
-          icon: 'el-icon-rank',
-          index: '6',
-          title: '拖拽组件',
-          subs: [
-            {
-              index: 'drag',
-              title: '拖拽列表'
-            },
-            {
-              index: 'dialog',
-              title: '拖拽弹框'
-            }
-          ]
         },
         {
           icon: 'el-icon-lx-global',

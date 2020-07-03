@@ -1,0 +1,190 @@
+<template>
+    <div>
+      <div class="choosekind">
+        <div style="margin-top: 10px;margin-left: 10px">
+          <el-select v-model="value" placeholder="请选择品种">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+        </div>
+        <div class="food">
+        <el-table
+        class="settable1"
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          prop="key"
+          label=""
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="date"
+          label="50-100"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="100-150"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="150-200"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          prop="value4"
+          label="200-250"
+          width="100">
+        </el-table-column>
+      </el-table>
+      </div>
+      </div>
+      <div class="time">
+        <el-table
+        border
+        class="settable2"
+        ref="singleTable"
+        :data="timeData"
+        highlight-current-row
+        @current-change="handleCurrentChange"
+        style="width: 100%">
+        <el-table-column
+          prop="key"
+          label=""
+          width="120">
+        </el-table-column>
+        <el-table-column
+          property="date"
+          label="起始"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          property="name"
+          label="终止"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          label="操作">
+          <el-button
+            size="mini"
+            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        </el-table-column>
+      </el-table>
+      </div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'defaultintake',
+  data () {
+    return {
+      options: [{
+        value: '选项1',
+        label: '长白'
+      }, {
+        value: '选项2',
+        label: '梅山'
+      }, {
+        value: '选项3',
+        label: '大白'
+      }, {
+        value: '选项4',
+        label: '杜洛克'
+      }],
+      value: '',
+      tableData: [
+        {
+          key: '妊娠初期',
+          date: '1.0',
+          name: '1.2',
+          address: '1.4',
+          value4: '1.6'
+        },
+        {
+          key: '妊娠前期',
+          date: '1.80',
+          name: '1.92',
+          address: '2.07',
+          value4: '2.20'
+        },
+        {
+          key: '妊娠中期',
+          date: '2.20',
+          name: '2.40',
+          address: '2.60',
+          value4: '2.80'
+        },
+        {
+          key: '妊娠后期',
+          date: '3.00',
+          name: '3.25',
+          address: '3.50',
+          value4: '3.75'
+        }],
+      timeData: [
+        {
+          key: '妊娠初期',
+          date: '1',
+          name: '3'
+        },
+        {
+          key: '妊娠前期',
+          date: '4',
+          name: '30'
+        },
+        {
+          key: '妊娠中期',
+          date: '31',
+          name: '89'
+        },
+        {
+          key: '妊娠后期',
+          date: '90',
+          name: '107'
+        }
+      ],
+      currentRow: null
+    }
+  },
+  methods: {
+    setCurrent (row) {
+      this.$refs.singleTable.setCurrentRow(row)
+    },
+    handleCurrentChange (val) {
+      this.currentRow = val
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .choosekind{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .food{
+    margin-left: 64px;
+  }
+  .setbox{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    width: 700px;
+    height: auto;
+    margin: auto;
+  }
+  .settable1{
+    margin-right: 100px;
+    margin-top: 5px;
+    max-width: 500px;
+  }
+  .settable2{
+    margin: auto;
+    margin-top: 15px;
+    max-width: 500px;
+  }
+</style>

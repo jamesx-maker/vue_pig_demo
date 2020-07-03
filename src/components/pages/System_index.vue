@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item>
+          <i class="el-icon-monitor"></i> 系统首页
+        </el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <el-row :gutter="20">
       <el-col :span="8">
         <el-card shadow="hover" class="mgb20" style="height:252px;">

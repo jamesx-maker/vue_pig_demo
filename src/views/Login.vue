@@ -70,7 +70,7 @@ export default {
           this.$message.success('登录成功')
           localStorage.setItem('ms_username', this.param.username)
           localStorage.setItem('token', 'HZAU')
-          this.$router.push('/dashboard')
+          this.$router.push('/index')
         } else {
           this.$message.error('请输入账号和密码')
           console.log('error submit!!')
@@ -87,7 +87,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url(../../assets/img/hzau.png);
+    background-image: url(../assets/img/hzau.png);
     background-size: 100%;
   }
 

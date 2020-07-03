@@ -40,12 +40,12 @@
       >
 <!--        <el-table-column type="selection" width="55" align="center"></el-table-column>-->
         <el-table-column prop="id" label="饲喂站号" align="center"></el-table-column>
-        <el-table-column prop="temperature" label="温度" align="center"></el-table-column>
+        <el-table-column prop="temperature" label="温度/℃" align="center"></el-table-column>
         <el-table-column prop="humidity" label="湿度" align="center"></el-table-column>
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.state==='正常运行'?'success':(scope.row.state==='关机'?'danger':'')"
+              :type="scope.row.state==='运行中'?'success':(scope.row.state==='已关机'?'danger':'')"
             >{{scope.row.state}}
             </el-tag>
           </template>
@@ -100,7 +100,6 @@
 </template>
 
 <script>
-import { fetchData } from '../../api'
 
 export default {
   name: 'Station_info',
@@ -117,25 +116,37 @@ export default {
           id: '01 - 0123',
           temperature: 25,
           humidity: 0.45,
-          state: '正常运行'
+          state: '运行中'
         },
         {
           id: '02 - 0451',
           temperature: 25,
           humidity: 0.45,
-          state: '关机'
+          state: '已关机'
         },
         {
           id: '11 - 0123',
           temperature: 25,
           humidity: 0.45,
-          state: '正常运行'
+          state: '运行中'
         },
         {
           id: '82 - 0451',
           temperature: 25,
           humidity: 0.45,
-          state: '关机'
+          state: '已关机'
+        },
+        {
+          id: '01 - 0123',
+          temperature: 25,
+          humidity: 0.45,
+          state: '运行中'
+        },
+        {
+          id: '02 - 0451',
+          temperature: 25,
+          humidity: 0.45,
+          state: '已关机'
         }
       ],
       delList: [],
@@ -152,16 +163,19 @@ export default {
   methods: {
     // 获取 easy-mock 的模拟数据
     getData () {
-      fetchData(this.query).then(res => {
-        console.log(res)
-        this.tableData = res.list
-        this.pageTotal = res.pageTotal || 50
-      })
+      console.log(this.tableData)
     },
-    // 触发搜索按钮
+    // 触发添加按钮
     handleAddition () {
-      this.$set(this.query, 'pageIndex', 1)
-      this.getData()
+      console.log('添加')
+      this.tableData.push(
+        {
+          id: this.query.room + '-' + this.query.station_id,
+          temperature: 25,
+          humidity: 0.45,
+          state: '已关机'
+        }
+      )
     },
     // 删除操作
     handleDelete (index) {
@@ -176,16 +190,6 @@ export default {
         .catch(() => {
         })
     },
-    // delAllSelection () {
-    //   const length = this.multipleSelection.length
-    //   let str = ''
-    //   this.delList = this.delList.concat(this.multipleSelection)
-    //   for (let i = 0; i < length; i++) {
-    //     str += this.multipleSelection[i].name + ' '
-    //   }
-    //   this.$message.error(`删除了${str}`)
-    //   this.multipleSelection = []
-    // },
     // 编辑操作
     handleEdit (index, row) {
       this.idx = index

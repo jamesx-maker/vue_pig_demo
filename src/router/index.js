@@ -10,23 +10,58 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import(/* webpackChunkName: "login" */ '../components/pages/Login.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
     meta: { title: '登录' }
   },
   {
-    path: '/dashboard',
+    path: '/home',
     component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
     meta: { title: '自述文件' },
     children: [
       {
-        path: '/dashboard',
+        path: '/index',
         component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/System_index.vue'),
         meta: { title: '系统首页' }
       },
       {
         path: '/station_info',
-        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/Station_info'),
+        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/1_stationinfo/Station_info'),
         meta: { title: '饲喂站信息' }
+      },
+      {
+        path: '/addition_pig',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/addition_pig'),
+        meta: { title: '入栏' }
+      },
+      {
+        path: '/subtraction_pig',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/subtraction_pig'),
+        meta: { title: '出栏' }
+      },
+      {
+        path: '/change_station',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/changestation'),
+        meta: { title: '转栏' }
+      },
+      {
+        path: '/change_ear',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/change_ear'),
+        meta: { title: '更换耳标' }
+      },
+      {
+        path: '/setintake',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/setintake'),
+        meta: { title: '下料设置' }
+      },
+      {
+        path: '/farrow',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/farrow'),
+        meta: { title: '生产信息' }
+      },
+      {
+        path: '/delivery_warn',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/delivery_warn'),
+        meta: { title: '分娩提醒' }
       },
       {
         path: '/icon',
@@ -42,11 +77,6 @@ const routes = [
         path: '/tabs',
         component: () => import(/* webpackChunkName: "tabs" */ '../components/pages/Tabs.vue'),
         meta: { title: 'tab选项卡' }
-      },
-      {
-        path: '/form',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/BaseForm.vue'),
-        meta: { title: '基本表单' }
       },
       {
         // 国际化组件
