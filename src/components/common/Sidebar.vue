@@ -19,6 +19,7 @@
             </template>
             <template v-for="subItem in item.subs">
               <el-submenu
+                align="center"
                 v-if="subItem.subs"
                 :index="subItem.index"
                 :key="subItem.index"
