@@ -16,16 +16,14 @@
         <!--          @click="delAllSelection"-->
         <!--        >批量删除-->
         <!--        </el-button>-->
-        <el-input v-model="query.room"
+        <el-input v-model.number="query.room"
                   placeholder="请输入单元号"
-                  type="tel"
                   maxlength="2"
                   show-word-limit
                   class="handle-input mr10">
         </el-input>
-        <el-input v-model="query.station_id"
+        <el-input v-model.number="query.station_id"
                   placeholder="饲喂站号"
-                  type="tel"
                   maxlength="4"
                   show-word-limit
                   class="handle-input mr10"></el-input>
@@ -135,18 +133,6 @@ export default {
           temperature: 25,
           humidity: 0.45,
           state: '已关机'
-        },
-        {
-          id: '01 - 0123',
-          temperature: 25,
-          humidity: 0.45,
-          state: '运行中'
-        },
-        {
-          id: '02 - 0451',
-          temperature: 25,
-          humidity: 0.45,
-          state: '已关机'
         }
       ],
       delList: [],
@@ -158,24 +144,38 @@ export default {
     }
   },
   created () {
-    this.getData()
+    // this.getData()
   },
   methods: {
+    // 高位补0函数
+    formatZero (num, len) {
+      if (String(num).length > len) {
+        return num
+      }
+      return (Array(len).join(0) + num).slice(-len)
+    },
     // 获取 easy-mock 的模拟数据
     getData () {
       console.log(this.tableData)
     },
     // 触发添加按钮
     handleAddition () {
-      console.log('添加')
-      this.tableData.push(
-        {
-          id: this.query.room + '-' + this.query.station_id,
-          temperature: 25,
-          humidity: 0.45,
-          state: '已关机'
-        }
-      )
+      // console.log(typeof (this.query.room))
+      // console.log(typeof (this.query.station_id))
+      if (typeof (this.query.room) === 'number' && typeof (this.query.station_id) === 'number') {
+        const room = this.formatZero(this.query.room, 2)
+        const stationId = this.formatZero(this.query.station_id, 4)
+        this.tableData.push(
+          {
+            id: room + '-' + stationId,
+            temperature: 25,
+            humidity: 0.45,
+            state: '已关机'
+          }
+        )
+      } else {
+        this.$message.error('格式错误，请重新输入')
+      }
     },
     // 删除操作
     handleDelete (index) {
