@@ -71,13 +71,12 @@
           background
           layout="total, prev, pager, next"
           :current-page="query.pageIndex"
-          :page-size="query.pageSize"
-          :total="pageTotal"
+          :page-size='query.pageSize'
+          :total="tableData.length"
           @current-change="handlePageChange"
         ></el-pagination>
       </div>
     </div>
-
     <!-- 编辑弹出框 -->
     <el-dialog title="开关机" :visible.sync="editVisible" width="30%">
 <!--          <el-input v-model="form.name"></el-input>-->
@@ -133,9 +132,32 @@ export default {
           temperature: 25,
           humidity: 0.45,
           state: '已关机'
+        },
+        {
+          id: '01 - 0123',
+          temperature: 25,
+          humidity: 0.45,
+          state: '运行中'
+        },
+        {
+          id: '02 - 0451',
+          temperature: 25,
+          humidity: 0.45,
+          state: '已关机'
+        },
+        {
+          id: '11 - 0123',
+          temperature: 25,
+          humidity: 0.45,
+          state: '运行中'
+        },
+        {
+          id: '82 - 0451',
+          temperature: 25,
+          humidity: 0.45,
+          state: '已关机'
         }
       ],
-      delList: [],
       editVisible: false,
       pageTotal: 0,
       form: {},
@@ -153,10 +175,6 @@ export default {
         return num
       }
       return (Array(len).join(0) + num).slice(-len)
-    },
-    // 获取 easy-mock 的模拟数据
-    getData () {
-      console.log(this.tableData)
     },
     // 触发添加按钮
     handleAddition () {
@@ -196,16 +214,11 @@ export default {
       this.form = row
       this.editVisible = true
     },
-    // 保存编辑
-    saveEdit () {
-      this.editVisible = false
-      this.$message.success(`修改第 ${this.idx + 1} 行成功`)
-      this.$set(this.tableData, this.idx, this.form)
-    },
+    getData () {},
     // 分页导航
     handlePageChange (val) {
+      console.log(this.query.pageIndex)
       this.$set(this.query, 'pageIndex', val)
-      this.getData()
     }
   }
 }

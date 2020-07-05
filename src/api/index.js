@@ -8,7 +8,7 @@ export const fetchData = query => {
   })
 }
 
-export const statioid = query => {
+export const StationList = query => {
   return request({
     url: '.',
     method: 'get',

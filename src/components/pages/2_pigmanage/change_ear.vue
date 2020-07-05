@@ -45,7 +45,6 @@ export default {
         }
       },
       options: [],
-      // stationid: '',
       stationpigs: [],
       addpig: {
         pig_stationid_id: '',
