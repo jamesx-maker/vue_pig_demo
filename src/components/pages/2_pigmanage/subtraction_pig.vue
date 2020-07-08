@@ -5,7 +5,7 @@
           <el-breadcrumb-item>
             <i class="el-icon-magic-stick"></i> 母猪管理
           </el-breadcrumb-item>
-          <el-breadcrumb-item>出栏</el-breadcrumb-item>
+          <el-breadcrumb-item>离栏</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <div class="container">
@@ -29,7 +29,7 @@
           <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
           <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
           <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-          <el-table-column label="操作出栏">
+          <el-table-column label="操作离栏">
             <template slot-scope="scope">
               <el-button size="mini" type="danger" @click="decpigs(scope.row.stationid,scope.row.pigid)">出栏</el-button>
             </template>

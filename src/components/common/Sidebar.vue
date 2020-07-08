@@ -81,7 +81,7 @@ export default {
             },
             {
               index: 'subtraction_pig',
-              title: '出栏'
+              title: '离栏'
             },
             {
               index: 'change_station',
