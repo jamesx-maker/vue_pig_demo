@@ -1,38 +1,31 @@
-import axios from 'axios'
+import axios from '../api/http'
+import QS from 'qs'
+import base from './base'
 
-const service = axios.create({
-  // process.env.NODE_ENV === 'development' 来判断是否开发环境
-  // easy-mock服务挂了，暂时不使用了
-  // baseURL: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
-  timeout: 5000
-})
+/**
+ * 这是测试接口的方法
+ * get方法，对应get请求
+ * @desc登录请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export function TestLogin () {
+  return axios({
+    url: `${base.url}/login/`,
+    method: 'get'
+  })
+}
 
-service.interceptors.request.use(
-  config => {
-    // config.headers['X-Token'] = getToken()
-    return config
-  },
-  error => {
-    console.log(error)
-    // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject()
-  }
-)
-
-service.interceptors.response.use(
-  response => {
-    if (response.status === 200) {
-      return response.data
-    } else {
-      // eslint-disable-next-line prefer-promise-reject-errors
-      Promise.reject()
-    }
-  },
-  error => {
-    console.log(error)
-    // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject()
-  }
-)
-
-export default service
+/**
+ * post方法，对应post请求
+ * @desc注册请求
+ * @param {String} url [请求的url地址]
+ * @param {Object} params [请求时携带的参数]
+ */
+export function Login (data) {
+  return axios({
+    url: `${base.url}/login/`,
+    method: 'post',
+    data: QS.stringify(data)
+  })
+}

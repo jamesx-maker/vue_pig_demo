@@ -4,14 +4,14 @@
       <div class="ms-title">管理系统</div>
       <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
         <el-form-item prop="username">
-          <el-input v-model="param.username" placeholder="username">
+          <el-input v-model="param.username" placeholder="请输入用户名">
             <el-button slot="prepend" icon="el-icon-user"></el-button>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             type="password"
-            placeholder="password"
+            placeholder="请输入密码"
             v-model="param.password"
             @keyup.enter.native="submitForm()"
           >
@@ -28,12 +28,14 @@
 </template>
 
 <script>
+import { Login } from '../api/request'
+
 export default {
-  data: function () {
+  data () {
     return {
       param: {
         username: 'admin',
-        password: '123123'
+        password: '123456'
       },
       rules: {
         username: [
@@ -67,12 +69,20 @@ export default {
     submitForm () {
       this.$refs.login.validate(valid => {
         if (valid) {
-          this.$message.success('登录成功')
-          localStorage.setItem('ms_username', this.param.username)
-          localStorage.setItem('token', 'HZAU')
-          this.$router.push('/index')
+          Login(this.param).then(res => {
+            if (res.status === 200) {
+              this.$message.success('登录成功')
+              localStorage.clear()
+              localStorage.setItem('ms_username', this.param.username)
+              localStorage.setItem('token', 'HZAU')
+              this.$router.push('/index')
+            }
+            console.log(res)
+          }).catch(err => {
+            console.log(err)
+          })
         } else {
-          this.$message.error('请输入账号和密码')
+          this.$message.error('请输入正确的账号和密码')
           console.log('error submit!!')
           return false
         }
