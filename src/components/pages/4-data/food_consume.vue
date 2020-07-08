@@ -1,10 +1,10 @@
 <template>
-    <div>outfood</div>
+    <div>food_consume</div>
 </template>
 
 <script>
 export default {
-  name: 'outfood'
+  name: 'food_consume'
 }
 </script>
 

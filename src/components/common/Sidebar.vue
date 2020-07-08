@@ -105,11 +105,6 @@ export default {
           ]
         },
         {
-          icon: 'el-icon-rank',
-          index: 'food_manage',
-          title: '饲料管理'
-        },
-        {
           icon: 'el-icon-s-data',
           index: 'data',
           title: '数据查询',
@@ -121,6 +116,10 @@ export default {
             {
               index: 'default_intake',
               title: '默认饲喂量'
+            },
+            {
+              index: 'food_consume',
+              title: '饲料消耗'
             }
           ]
         },
@@ -136,21 +135,6 @@ export default {
             {
               index: 'intake_spread',
               title: '采食分布'
-            }
-          ]
-        },
-        {
-          icon: 'el-icon-data-line',
-          index: 'medicine',
-          title: '药品免疫',
-          subs: [
-            {
-              index: 'medicine1',
-              title: '疫苗入库'
-            },
-            {
-              index: 'medicine2',
-              title: '疫苗入库出库'
             }
           ]
         },

@@ -41,7 +41,7 @@ const routes = [
       {
         path: '/subtraction_pig',
         component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/subtraction_pig'),
-        meta: { title: '出栏' }
+        meta: { title: '离栏' }
       },
       {
         path: '/change_station',
@@ -79,6 +79,11 @@ const routes = [
         meta: { title: '默认饲喂量' }
       },
       {
+        path: '/food_consume',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/food_consume'),
+        meta: { title: '饲料消耗' }
+      },
+      {
         path: '/growfit',
         component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_analysis/growfit'),
         meta: { title: '生长拟合' }
@@ -90,27 +95,27 @@ const routes = [
       },
       {
         path: '/errorcode',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7_machinemanage/errorcode'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/6_machinemanage/errorcode'),
         meta: { title: '故障码' }
       },
       {
         path: '/usersetting',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/8_usermanage/usersetting'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7_usermanage/usersetting'),
         meta: { title: '用户设置' }
       },
       {
         path: '/othersetting',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/8_usermanage/othersetting'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7_usermanage/othersetting'),
         meta: { title: '其他设置' }
       },
       {
         path: '/pigreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/9_report/pigreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/8_report/pigreport'),
         meta: { title: '母猪报告' }
       },
       {
         path: '/errorreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/9_report/errorreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/8_report/errorreport'),
         meta: { title: '异常信息报告' }
       },
       // 默认
