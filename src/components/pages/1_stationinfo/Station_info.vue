@@ -9,13 +9,6 @@
     </div>
     <div class="container">
       <div class="handle-box">
-        <!--        <el-button-->
-        <!--          type="primary"-->
-        <!--          icon="el-icon-delete"-->
-        <!--          class="handle-del mr10"-->
-        <!--          @click="delAllSelection"-->
-        <!--        >批量删除-->
-        <!--        </el-button>-->
         <el-input v-model.number="query.room"
                   placeholder="请输入单元号"
                   maxlength="2"
@@ -79,7 +72,6 @@
     </div>
     <!-- 编辑弹出框 -->
     <el-dialog title="开关机" :visible.sync="editVisible" width="30%">
-<!--          <el-input v-model="form.name"></el-input>-->
       <div align="center">
         <el-button
           icon="el-icon-check"

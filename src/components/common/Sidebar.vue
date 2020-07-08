@@ -127,7 +127,7 @@ export default {
         {
           icon: 'el-icon-data-line',
           index: 'analysis',
-          title: '信息分析',
+          title: '统计分析',
           subs: [
             {
               index: 'growfit',

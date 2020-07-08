@@ -53,7 +53,9 @@
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入与配公猪号" v-model="addpig.malepignum">
+          <el-input
+            placeholder="请输入与配公猪号"
+            v-model="addpig.malepignum">
           </el-input>
         </el-col>
       </el-row>
@@ -74,7 +76,7 @@
           <el-button type="primary" @click="addpigs">入栏</el-button>
         </el-col>
       </el-row>
-      <el-table :data="stationpigs" border>
+      <el-table :data="existpigs" border>
         <el-table-column label="饲喂站号" prop="stationid" align="center"></el-table-column>
         <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
         <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
@@ -96,6 +98,8 @@
 </template>
 
 <script>
+import { getstation, querypig, additionpig } from '../../../api/request'
+
 export default {
   name: 'addition_pig',
   data () {
@@ -106,8 +110,7 @@ export default {
         }
       },
       options: [],
-      // stationid: '',
-      stationpigs: [],
+      existpigs: [],
       addpig: {
         pig_stationid_id: '',
         pigid: '',
@@ -122,55 +125,42 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
-      this.$message.success('提交成功！')
-    },
     getstationid () {
-      this.$http.get('getstationid/').then((res) => {
-        // console.log
-        this.options.splice(0)
-        for (let i = 0; i < res.data.id.length; i++) {
-          this.options.push({
-            value: res.data.id[i],
-            label: res.data.id[i]
-          })
-        }
+      getstation().then((res) => {
+        console.log(res)
+        // this.options.splice(0)
+        // for (let i = 0; i < res.data.id.length; i++) {
+        //   this.options.push({
+        //     value: res.data.id[i],
+        //     label: res.data.id[i]
+        //   })
+        // }
       })
     },
-    getstationpig (A) {
-      this.$http.post('getstationpig/', A).then((res) => {
-        this.stationpigs.splice(0)
-        // console.log(res)
-        const result = JSON.parse(res.data.pigs)
-        // console.log(result)
-        for (const i in result) {
-          this.stationpigs.push(result[i].fields)
-        }
-        // console.log(this.stationpigs)
+    getstationpig (id) {
+      querypig(id).then((res) => {
+        console.log(res)
+        // this.stationpigs.splice(0)
+        // const result = JSON.parse(res.data.pigs)
+        // for (const i in result) {
+        //   this.stationpigs.push(result[i].fields)
+        // }
       })
     },
     addpigs () {
-      this.$http.post('addpigs/', this.addpig).then((res) => {
-        if (res.data.code !== 'ok') return this.$message.error(res.data.message)
+      additionpig(this.addpig).then((res) => {
+        console.log(res)
         this.$message.success(res.data.message)
         // console.log(res)
-        this.getstationpig(this.addpig.pig_stationid_id)
-        this.addpig.malepignum = ''
-        this.addpig.pigid = ''
-        this.addpig.backfat = ''
-        this.addpig.gesage = ''
-        this.addpig.vaccine = ''
-        this.addpig.earid = ''
-        this.addpig.kind = ''
-        this.addpig.breedtime = ''
-      })
-    },
-    decpigs (A, B) {
-      this.$http.post('decpigs/', [A, B]).then((res) => {
-        if (res.data.code !== 'ok') return this.$message.error(res.data.message)
-        this.$message.success(res.data.message)
-        console.log(res)
-        this.getstationpig(this.addpig.pig_stationid_id)
+        // this.getstationpig(this.addpig.pig_stationid_id)
+        // this.addpig.malepignum = ''
+        // this.addpig.pigid = ''
+        // this.addpig.backfat = ''
+        // this.addpig.gesage = ''
+        // this.addpig.vaccine = ''
+        // this.addpig.earid = ''
+        // this.addpig.kind = ''
+        // this.addpig.breedtime = ''
       })
     }
   }
