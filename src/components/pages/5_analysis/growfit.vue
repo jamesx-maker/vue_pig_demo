@@ -49,7 +49,7 @@ export default {
           axisLine: {
             symbol: ['none', 'arrow']
           },
-          min: 80,
+          min: 40,
           splitLine: {
             lineStyle: {
               type: 'dashed'
@@ -143,7 +143,7 @@ export default {
     },
     generateData (fitfunc, coefficient) {
       const data = []
-      for (let i = 80; i <= 160; i += 0.1) {
+      for (let i = 40; i <= 120; i += 0.1) {
         data.push([i, fitfunc(i, coefficient)])
       }
       return data

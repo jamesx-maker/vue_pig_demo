@@ -1,6 +1,14 @@
 <template>
     <div>
-      <div class="choosekind">
+      <div class="crumbs">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item>
+            <i class="el-icon-magic-stick"></i> 数据查询
+          </el-breadcrumb-item>
+          <el-breadcrumb-item>默认饲喂量</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+      <div class="container choosekind">
         <div style="margin-top: 10px;margin-left: 10px">
           <el-select v-model="value" placeholder="请选择品种">
           <el-option
@@ -43,38 +51,38 @@
         </el-table-column>
       </el-table>
       </div>
-      </div>
-      <div class="time">
-        <el-table
-        border
-        class="settable2"
-        ref="singleTable"
-        :data="timeData"
-        highlight-current-row
-        @current-change="handleCurrentChange"
-        style="width: 100%">
-        <el-table-column
-          prop="key"
-          label=""
-          width="120">
-        </el-table-column>
-        <el-table-column
-          property="date"
-          label="起始"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          property="name"
-          label="终止"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          label="操作">
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        </el-table-column>
-      </el-table>
+        <div class="time">
+          <el-table
+            border
+            class="settable2"
+            ref="singleTable"
+            :data="timeData"
+            highlight-current-row
+            @current-change="handleCurrentChange"
+            style="width: 100%">
+            <el-table-column
+              prop="key"
+              label=""
+              width="120">
+            </el-table-column>
+            <el-table-column
+              property="date"
+              label="起始"
+              width="120">
+            </el-table-column>
+            <el-table-column
+              property="name"
+              label="终止"
+              width="120">
+            </el-table-column>
+            <el-table-column
+              label="操作">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
     </div>
 </template>

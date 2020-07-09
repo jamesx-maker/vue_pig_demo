@@ -1,52 +1,62 @@
 <template>
   <div>
-    <!--      搜索与添加区域-->
-    <el-row :gutter="20">
-      <el-col :span="6">
-        <el-select v-model="addpig.pig_stationid_id" placeholder="请选择饲喂站" @change="getstationpig(addpig.pig_stationid_id)">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </el-col>
-      <el-col :span="10">
-        <el-input placeholder="请输入耳标号">
-        </el-input>
-        <el-button type="primary" >查询</el-button>
-      </el-col>
-    </el-row>
-    <!--    饲喂站列表区域-->
-    <el-table border>
-      <el-table-column type="index"></el-table-column>
-      <el-table-column label="身份码" ></el-table-column>
-      <el-table-column label="胎龄" ></el-table-column>
-      <el-table-column label="背膘厚" ></el-table-column>
-      <el-table-column label="采食开始时间" ></el-table-column>
-      <el-table-column label="采食结束时间" ></el-table-column>
-      <el-table-column label="采食量" ></el-table-column>
-      <el-table-column label="操作" >
-        <template slot-scope="scope">
-          <el-switch
-            v-model="scope.row"
-            active-color="#13ce66"
-            inactive-color="#ff4949">
-          </el-switch>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!--      分页区域-->
-    <!--    <el-pagination>-->
-    <!--      @size-change=""-->
-    <!--      @current-change=""-->
-    <!--      :current-page=""-->
-    <!--      :page-sizes="[1, 2, 3]"-->
-    <!--      :page-size="queryInfo.pagesize"-->
-    <!--      layout="total, sizes, prev, pager, next, jumper"-->
-    <!--      :total="total">-->
-    <!--    </el-pagination>-->
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item>
+          <i class="el-icon-magic-stick"></i> 数据查询
+        </el-breadcrumb-item>
+        <el-breadcrumb-item>采食信息</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <div class="container">
+      <!--      搜索与添加区域-->
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-select v-model="addpig.pig_stationid_id" placeholder="请选择饲喂站" @change="getstationpig(addpig.pig_stationid_id)">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col :span="10">
+          <el-input placeholder="请输入耳标号">
+          </el-input>
+          <el-button type="primary" >查询</el-button>
+        </el-col>
+      </el-row>
+      <!--    饲喂站列表区域-->
+      <el-table border>
+        <el-table-column type="index"></el-table-column>
+        <el-table-column label="身份码" ></el-table-column>
+        <el-table-column label="胎龄" ></el-table-column>
+        <el-table-column label="背膘厚" ></el-table-column>
+        <el-table-column label="采食开始时间" ></el-table-column>
+        <el-table-column label="采食结束时间" ></el-table-column>
+        <el-table-column label="采食量" ></el-table-column>
+        <el-table-column label="操作" >
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row"
+              active-color="#13ce66"
+              inactive-color="#ff4949">
+            </el-switch>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--      分页区域-->
+      <!--    <el-pagination>-->
+      <!--      @size-change=""-->
+      <!--      @current-change=""-->
+      <!--      :current-page=""-->
+      <!--      :page-sizes="[1, 2, 3]"-->
+      <!--      :page-size="queryInfo.pagesize"-->
+      <!--      layout="total, sizes, prev, pager, next, jumper"-->
+      <!--      :total="total">-->
+      <!--    </el-pagination>-->
+    </div>
   </div>
 </template>
 

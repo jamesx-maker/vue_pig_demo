@@ -110,12 +110,12 @@ const routes = [
       },
       {
         path: '/pigreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/8_report/pigreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/pigreport'),
         meta: { title: '母猪报告' }
       },
       {
         path: '/errorreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/8_report/errorreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/errorreport'),
         meta: { title: '异常信息报告' }
       },
       // 默认

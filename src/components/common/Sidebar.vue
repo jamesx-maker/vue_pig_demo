@@ -120,6 +120,14 @@ export default {
             {
               index: 'food_consume',
               title: '饲料消耗'
+            },
+            {
+              index: 'pigreport',
+              title: '母猪报告'
+            },
+            {
+              index: 'errorreport',
+              title: '异常信息报告'
             }
           ]
         },
@@ -161,21 +169,6 @@ export default {
             {
               index: 'othersetting',
               title: '其他设置'
-            }
-          ]
-        },
-        {
-          icon: 'el-icon-user',
-          index: 'reporter',
-          title: '报告',
-          subs: [
-            {
-              index: 'pigreport',
-              title: '母猪报告'
-            },
-            {
-              index: 'errorreport',
-              title: '异常信息报告'
             }
           ]
         },
