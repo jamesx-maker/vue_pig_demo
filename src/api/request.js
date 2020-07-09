@@ -1,5 +1,4 @@
 import axios from '../api/http'
-import QS from 'qs'
 import base from './base'
 
 //
@@ -24,7 +23,7 @@ export function Login (data) {
   return axios({
     url: `${base.url}/login/`,
     method: 'post',
-    data: QS.stringify(data)
+    data: JSON.stringify(data)
   })
 }
 
@@ -47,8 +46,24 @@ export function querypig () {
 // 入栏母猪
 export function additionpig (data) {
   return axios({
-    url: `${base.url}/pig/`,
+    url: `${base.url}/pigbase/`,
     method: 'post',
-    data: QS.stringify(data)
+    data: JSON.stringify(data)
+  })
+}
+
+// 获取拟合散点
+export function getpoint () {
+  return axios({
+    url: `${base.url}/getpoint/`,
+    method: 'get'
+  })
+}
+
+// 获取拟合函数
+export function getcoefficient () {
+  return axios({
+    url: `${base.url}/getcoefficient/`,
+    method: 'get'
   })
 }

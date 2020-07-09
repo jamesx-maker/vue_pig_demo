@@ -4,6 +4,7 @@
 
 <script>
 import echarts from 'echarts'
+import { getpoint, getcoefficient } from '../../../api/request'
 
 export default {
   name: 'growfit',
@@ -48,7 +49,7 @@ export default {
           axisLine: {
             symbol: ['none', 'arrow']
           },
-          min: 40,
+          min: 80,
           splitLine: {
             lineStyle: {
               type: 'dashed'
@@ -142,25 +143,25 @@ export default {
     },
     generateData (fitfunc, coefficient) {
       const data = []
-      for (let i = 40; i <= 120; i += 0.1) {
+      for (let i = 80; i <= 160; i += 0.1) {
         data.push([i, fitfunc(i, coefficient)])
       }
       return data
     },
     GetPoint () {
-      this.$http({ url: 'http://127.0.0.1:8000/getpoint' }).then(res => {
-        // console.log(res)
-        this.echarts_option.series[0].data = res.data.data
+      getpoint().then(res => {
+        // console.log(res.data)
+        this.echarts_option.series[0].data = res.data.code
       }).catch(err => {
         console.log(err)
       })
     },
     GetParam () {
-      this.$http({ url: 'http://127.0.0.1:8000/getcoefficient' }).then(res => {
-        // console.log(res.data.data)
-        const SParam = res.data.data.SCoefficient.popt
-        const LParam = res.data.data.LCoefficient.popt
-        const GParam = res.data.data.GCoefficient.popt
+      getcoefficient().then(res => {
+        // console.log(res.data.code)
+        const SParam = res.data.code.SCoefficient.popt
+        const LParam = res.data.code.LCoefficient.popt
+        const GParam = res.data.code.GCoefficient.popt
         this.echarts_option.series[1].data = this.generateData(this.SaturationFit, SParam)
         this.echarts_option.series[2].data = this.generateData(this.LogisticFit, LParam)
         this.echarts_option.series[3].data = this.generateData(this.GompertzFit, GParam)

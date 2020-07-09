@@ -11,13 +11,13 @@
     <div class="container">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-select v-model="addpig.pig_stationid_id"
+          <el-select v-model="addpig.pig_stationid"
                      clearable
                      placeholder="请选择饲喂站"
-                     @change="getstationpig(addpig.pig_stationid_id)"
+                     @change="getstationpig(addpig.pig_stationid)"
                      size="250px">
             <el-option
-              v-for="item in options"
+              v-for="item in station_options"
               :key="item.value"
               :label="item.label"
               :value="item.value">
@@ -69,8 +69,18 @@
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入疫苗情况" v-model="addpig.vaccine">
-          </el-input>
+          <el-select
+            placeholder="请选择疫苗情况"
+            v-model="addpig.vaccine"
+            multiple
+            collapse-tags>
+            <el-option
+              v-for="item in vaccine_options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-col>
         <el-col :span="6">
           <el-button type="primary" @click="addpigs">入栏</el-button>
@@ -109,10 +119,32 @@ export default {
           return time.getTime() > Date.now()
         }
       },
-      options: [],
+      station_options: [],
+      vaccine_options: [
+        {
+          value: '疫苗1',
+          label: '疫苗1'
+        },
+        {
+          value: '疫苗2',
+          label: '疫苗2'
+        },
+        {
+          value: '疫苗3',
+          label: '疫苗3'
+        },
+        {
+          value: '疫苗4',
+          label: '疫苗4'
+        },
+        {
+          value: '疫苗5',
+          label: '疫苗5'
+        }
+      ],
       existpigs: [],
       addpig: {
-        pig_stationid_id: '',
+        pig_stationid: '',
         pigid: '',
         earid: '',
         kind: '',
@@ -148,9 +180,10 @@ export default {
       })
     },
     addpigs () {
+      console.log(this.addpig.vaccine)
       additionpig(this.addpig).then((res) => {
         console.log(res)
-        this.$message.success(res.data.message)
+        // this.$message.success(res.data.message)
         // console.log(res)
         // this.getstationpig(this.addpig.pig_stationid_id)
         // this.addpig.malepignum = ''
