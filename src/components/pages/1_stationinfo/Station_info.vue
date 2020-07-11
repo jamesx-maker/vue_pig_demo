@@ -71,7 +71,7 @@
           layout="total, prev, pager, next"
           :current-page="page.pageIndex"
           :page-size='page.pageSize'
-          :total="tableData.length"
+          :total="page.total"
           @current-change="handlePageChange"
         ></el-pagination>
       </div>
@@ -107,7 +107,8 @@ export default {
       },
       page: {
         pageIndex: 1,
-        pageSize: 10
+        pageSize: 10,
+        total: 0
       },
       tableData: [
         {
@@ -115,48 +116,6 @@ export default {
           temperature: 25,
           humidity: 0.45,
           status: '运行中'
-        },
-        {
-          id: '02 - 0451',
-          temperature: 25,
-          humidity: 0.45,
-          status: '已关机'
-        },
-        {
-          id: '11 - 0123',
-          temperature: 25,
-          humidity: 0.45,
-          status: '运行中'
-        },
-        {
-          id: '82 - 0451',
-          temperature: 25,
-          humidity: 0.45,
-          status: '已关机'
-        },
-        {
-          id: '01 - 0123',
-          temperature: 25,
-          humidity: 0.45,
-          status: '运行中'
-        },
-        {
-          id: '02 - 0451',
-          temperature: 25,
-          humidity: 0.45,
-          status: '已关机'
-        },
-        {
-          id: '11 - 0123',
-          temperature: 25,
-          humidity: 0.45,
-          status: '运行中'
-        },
-        {
-          id: '82 - 0451',
-          temperature: 25,
-          humidity: 0.45,
-          status: '已关机'
         }
       ],
       editVisible: false,
@@ -170,6 +129,8 @@ export default {
     getstation(this.page).then(res => {
       console.log(res)
       this.tableData = res.data.all_station
+      console.log(res.data.total)
+      this.page.total = res.data.total
     })
   },
   methods: {
@@ -189,9 +150,12 @@ export default {
         addstation(sendpar).then(res => {
           if (res.status === 200) {
             this.$message.success(res.data.code)
-            console.log(res)
+            // console.log(res)
             getstation(this.page).then(res => {
-              console.log(res)
+              // console.log(res)
+              this.tableData = res.data.all_station
+              console.log(res.data.total)
+              this.page.total = res.data.total
             })
           } else {
             this.$message.error(res.data.code)
