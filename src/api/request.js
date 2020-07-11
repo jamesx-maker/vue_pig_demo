@@ -27,11 +27,22 @@ export function Login (data) {
   })
 }
 
-// 获取饲喂站id
-export function getstation () {
+// 查询饲喂站id
+export function getstation (data) {
   return axios({
     url: `${base.url}/station/`,
-    method: 'get'
+    method: 'get',
+    params: data
+    // params: { params: JSON.stringify(data) }
+  })
+}
+
+// 添加饲喂站id
+export function addstation (data) {
+  return axios({
+    url: `${base.url}/station/`,
+    method: 'post',
+    data: JSON.stringify(data)
   })
 }
 

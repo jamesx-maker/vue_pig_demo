@@ -1,5 +1,17 @@
 <template>
-  <div id="main" style="width: 1050px;height:550px;"></div>
+  <div>
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item>
+          <i class="el-icon-data-line"></i> 统计分析
+        </el-breadcrumb-item>
+        <el-breadcrumb-item>采食分布</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+    <div class="container">
+      <div id="main" style="width: 1050px;height:550px;"></div>
+    </div>
+  </div>
 </template>
 
 <script>

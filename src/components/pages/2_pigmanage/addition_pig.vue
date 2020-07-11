@@ -25,11 +25,21 @@
           </el-select>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入身份码" v-model="addpig.pigid">
+          <el-input
+            placeholder="请输入身份码"
+            v-model.number="addpig.pigid"
+            maxlength="15"
+            show-word-limit
+          >
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入耳标号" v-model="addpig.earid">
+          <el-input
+            placeholder="请输入耳标号"
+            v-model.number="addpig.earid"
+            maxlength="12"
+            show-word-limit
+          >
           </el-input>
         </el-col>
       </el-row>
@@ -43,6 +53,7 @@
                 value-format="yyyy-MM-dd"
                 v-model="addpig.breedtime"
                 type="date"
+                :picker-options="pickerOptions"
                 placeholder="选择配种日期">
               </el-date-picker>
             </div>
@@ -55,13 +66,18 @@
         <el-col :span="6">
           <el-input
             placeholder="请输入与配公猪号"
-            v-model="addpig.malepignum">
+            v-model="addpig.malepignum"
+            maxlength="15"
+            show-word-limit
+          >
           </el-input>
         </el-col>
       </el-row>
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-input placeholder="请输入背膘厚" v-model="addpig.backfat">
+          <el-input
+            placeholder="请输入背膘厚"
+            v-model.number="addpig.backfat">
           </el-input>
         </el-col>
         <el-col :span="6">
@@ -180,7 +196,6 @@ export default {
       })
     },
     addpigs () {
-      console.log(this.addpig.vaccine)
       additionpig(this.addpig).then((res) => {
         console.log(res)
         // this.$message.success(res.data.message)

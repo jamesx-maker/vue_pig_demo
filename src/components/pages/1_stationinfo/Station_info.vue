@@ -15,12 +15,18 @@
                   show-word-limit
                   class="handle-input mr10">
         </el-input>
-        <el-input v-model.number="query.station_id"
-                  placeholder="饲喂站号"
-                  maxlength="4"
-                  show-word-limit
-                  class="handle-input mr10"></el-input>
-        <el-button type="primary" icon="el-icon-check" @click="handleAddition">添加</el-button>
+        <el-input
+          v-model.number="query.station_id"
+          placeholder="饲喂站号"
+          maxlength="4"
+          show-word-limit
+          class="handle-input mr10"
+        ></el-input>
+        <el-button
+          type="primary"
+          icon="el-icon-check"
+          @click="handleAddition"
+        >添加</el-button>
       </div>
       <el-table
         :data="tableData"
@@ -36,8 +42,8 @@
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.state==='运行中'?'success':(scope.row.state==='已关机'?'danger':'')"
-            >{{scope.row.state}}
+              :type="scope.row.status==='运行中'?'success':(scope.row.status==='已关机'?'danger':'')"
+            >{{scope.row.status}}
             </el-tag>
           </template>
         </el-table-column>
@@ -63,8 +69,8 @@
         <el-pagination
           background
           layout="total, prev, pager, next"
-          :current-page="query.pageIndex"
-          :page-size='query.pageSize'
+          :current-page="page.pageIndex"
+          :page-size='page.pageSize'
           :total="tableData.length"
           @current-change="handlePageChange"
         ></el-pagination>
@@ -89,6 +95,7 @@
 </template>
 
 <script>
+import { addstation, getstation } from '../../../api/request'
 
 export default {
   name: 'Station_info',
@@ -96,7 +103,9 @@ export default {
     return {
       query: {
         room: '',
-        station_id: '',
+        station_id: ''
+      },
+      page: {
         pageIndex: 1,
         pageSize: 10
       },
@@ -105,49 +114,49 @@ export default {
           id: '01 - 0123',
           temperature: 25,
           humidity: 0.45,
-          state: '运行中'
+          status: '运行中'
         },
         {
           id: '02 - 0451',
           temperature: 25,
           humidity: 0.45,
-          state: '已关机'
+          status: '已关机'
         },
         {
           id: '11 - 0123',
           temperature: 25,
           humidity: 0.45,
-          state: '运行中'
+          status: '运行中'
         },
         {
           id: '82 - 0451',
           temperature: 25,
           humidity: 0.45,
-          state: '已关机'
+          status: '已关机'
         },
         {
           id: '01 - 0123',
           temperature: 25,
           humidity: 0.45,
-          state: '运行中'
+          status: '运行中'
         },
         {
           id: '02 - 0451',
           temperature: 25,
           humidity: 0.45,
-          state: '已关机'
+          status: '已关机'
         },
         {
           id: '11 - 0123',
           temperature: 25,
           humidity: 0.45,
-          state: '运行中'
+          status: '运行中'
         },
         {
           id: '82 - 0451',
           temperature: 25,
           humidity: 0.45,
-          state: '已关机'
+          status: '已关机'
         }
       ],
       editVisible: false,
@@ -158,7 +167,10 @@ export default {
     }
   },
   created () {
-    // this.getData()
+    getstation(this.page).then(res => {
+      console.log(res)
+      this.tableData = res.data.all_station
+    })
   },
   methods: {
     // 高位补0函数
@@ -170,19 +182,24 @@ export default {
     },
     // 触发添加按钮
     handleAddition () {
-      // console.log(typeof (this.query.room))
-      // console.log(typeof (this.query.station_id))
       if (typeof (this.query.room) === 'number' && typeof (this.query.station_id) === 'number') {
         const room = this.formatZero(this.query.room, 2)
         const stationId = this.formatZero(this.query.station_id, 4)
-        this.tableData.push(
-          {
-            id: room + '-' + stationId,
-            temperature: 25,
-            humidity: 0.45,
-            state: '已关机'
+        const sendpar = room + '-' + stationId
+        addstation(sendpar).then(res => {
+          if (res.status === 200) {
+            this.$message.success(res.data.code)
+            console.log(res)
+            getstation(this.page).then(res => {
+              console.log(res)
+            })
+          } else {
+            this.$message.error(res.data.code)
           }
-        )
+        })
+        // getstation(this.query).then(res => {
+        //   console.log(res)
+        // })
       } else {
         this.$message.error('格式错误，请重新输入')
       }
