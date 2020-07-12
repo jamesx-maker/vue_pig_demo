@@ -109,9 +109,8 @@
         <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
         <el-table-column label="与配公猪号" prop="malepignum" align="center"></el-table-column>
         <el-table-column label="配种日期" prop="breedtime" align="center"></el-table-column>
-        <el-table-column label="背膘厚" prop="backfat" align="center"></el-table-column>
+        <el-table-column label="背膘厚/mm" prop="backfat" align="center"></el-table-column>
         <el-table-column label="胎龄" prop="gesage" align="center"></el-table-column>
-        <el-table-column label="品种" prop="kind" align="center"></el-table-column>
         <el-table-column label="疫苗情况" prop="vaccine" align="center"></el-table-column>
         <!--      <el-table-column label="操作" width="80px">-->
         <!--        <template slot-scope="scope">-->
@@ -124,7 +123,11 @@
 </template>
 
 <script>
-import { getstation, querypig, additionpig } from '../../../api/request'
+import {
+  getstation,
+  getStationPig,
+  additionpig
+} from '../../../api/request'
 
 export default {
   name: 'addition_pig',
@@ -172,22 +175,18 @@ export default {
       }
     }
   },
+  created () {
+    getstation({ pageIndex: '空' }).then(res => {
+      // console.log(res)
+      this.station_options = res.data.station_options
+    })
+  },
   methods: {
-    getstationid () {
-      getstation().then((res) => {
-        console.log(res)
-        // this.options.splice(0)
-        // for (let i = 0; i < res.data.id.length; i++) {
-        //   this.options.push({
-        //     value: res.data.id[i],
-        //     label: res.data.id[i]
-        //   })
-        // }
-      })
-    },
     getstationpig (id) {
-      querypig(id).then((res) => {
+      console.log(id)
+      getStationPig({ id: id }).then(res => {
         console.log(res)
+        this.existpigs = res.data.stationpig
         // this.stationpigs.splice(0)
         // const result = JSON.parse(res.data.pigs)
         // for (const i in result) {

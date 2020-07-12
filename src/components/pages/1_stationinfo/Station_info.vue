@@ -111,12 +111,12 @@ export default {
         total: 0
       },
       tableData: [
-        {
-          id: '01 - 0123',
-          temperature: 25,
-          humidity: 0.45,
-          status: '运行中'
-        }
+        // {
+        //   id: '01 - 0123',
+        //   temperature: 25,
+        //   humidity: 0.45,
+        //   status: '运行中'
+        // }
       ],
       editVisible: false,
       pageTotal: 0,
@@ -129,7 +129,7 @@ export default {
     getstation(this.page).then(res => {
       console.log(res)
       this.tableData = res.data.all_station
-      console.log(res.data.total)
+      // console.log(res.data.total)
       this.page.total = res.data.total
     })
   },

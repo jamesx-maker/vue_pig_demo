@@ -47,10 +47,11 @@ export function addstation (data) {
 }
 
 // 获取猪只信息
-export function querypig () {
+export function getStationPig (data) {
   return axios({
-    url: `${base.url}/pig/`,
-    method: 'get'
+    url: `${base.url}/pigbase/`,
+    method: 'get',
+    params: data
   })
 }
 
