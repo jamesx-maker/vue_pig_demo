@@ -197,17 +197,6 @@ export default {
     addpigs () {
       additionpig(this.addpig).then((res) => {
         console.log(res)
-        // this.$message.success(res.data.message)
-        // console.log(res)
-        // this.getstationpig(this.addpig.pig_stationid_id)
-        // this.addpig.malepignum = ''
-        // this.addpig.pigid = ''
-        // this.addpig.backfat = ''
-        // this.addpig.gesage = ''
-        // this.addpig.vaccine = ''
-        // this.addpig.earid = ''
-        // this.addpig.kind = ''
-        // this.addpig.breedtime = ''
       })
     }
   }
