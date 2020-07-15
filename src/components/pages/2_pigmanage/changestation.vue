@@ -97,18 +97,25 @@ export default {
       this.dialogFormVisible = true
     },
     changestation (pigid) {
-      changestation({ newstation: this.newstation, pigid: pigid }).then(res => {
-        console.log(res)
-        this.dialogFormVisible = false
-        getStationPig({ id: this.pig_stationid }).then(res => {
-          // console.log(res)
-          this.existpigs = res.data.stationpig
+      if (this.newstation === '') {
+        this.$message({
+          type: 'warning',
+          message: '没有选择新的饲喂站'
         })
-      })
-      this.$message({
-        type: 'success',
-        message: '转栏成功'
-      })
+      } else {
+        changestation({ newstation: this.newstation, pigid: pigid }).then(res => {
+          console.log(res)
+          this.dialogFormVisible = false
+          getStationPig({ id: this.pig_stationid }).then(res => {
+            // console.log(res)
+            this.existpigs = res.data.stationpig
+          })
+        })
+        this.$message({
+          type: 'success',
+          message: '转栏成功'
+        })
+      }
     }
   }
 }
