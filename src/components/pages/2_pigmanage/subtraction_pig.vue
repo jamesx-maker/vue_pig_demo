@@ -11,13 +11,13 @@
       <div class="container">
         <el-row :gutter="20" class="row">
           <el-col :span="6">
-            <el-select v-model="addpig.pig_stationid_id"
+            <el-select v-model="subpig.pig_stationid"
                        clearable
                        placeholder="请选择饲喂站"
-                       @change="getstationpig(addpig.pig_stationid_id)"
+                       @change="getstationpig(subpig.pig_stationid)"
                        size="250px">
               <el-option
-                v-for="item in options"
+                v-for="item in station_options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -25,13 +25,13 @@
             </el-select>
           </el-col>
         </el-row>
-        <el-table :data="stationpigs" border>
-          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
+        <el-table :data="existpigs" border>
           <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
           <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-          <el-table-column label="操作离栏">
+          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
+          <el-table-column label="操作离栏" align="center">
             <template slot-scope="scope">
-              <el-button size="mini" type="danger" @click="decpigs(scope.row.stationid,scope.row.pigid)">出栏</el-button>
+              <el-button size="mini" type="danger" @click="subpigs(scope.row.pigid)">离栏</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -40,15 +40,21 @@
 </template>
 
 <script>
+import {
+  getstation,
+  getStationPig,
+  subtractionpig
+} from '../../../api/request'
+
 export default {
   name: 'subtraction_pig',
   data () {
     return {
-      options: [],
-      // stationid: '',
       stationpigs: [],
-      addpig: {
-        pig_stationid_id: '',
+      station_options: [],
+      existpigs: [],
+      subpig: {
+        pig_stationid: '',
         pigid: '',
         earid: '',
         pigkind: ''
@@ -56,55 +62,41 @@ export default {
     }
   },
   created () {
-    // this.getstationid()
+    getstation({ pageIndex: '空' }).then(res => {
+      // console.log(res)
+      this.station_options = res.data.station_options
+    })
   },
   methods: {
-    getstationid () {
-      this.$http.get('getstationid/').then((res) => {
-        // console.log
-        this.options.splice(0)
-        for (let i = 0; i < res.data.id.length; i++) {
-          this.options.push({
-            value: res.data.id[i],
-            label: res.data.id[i]
+    getstationpig (id) {
+      // console.log(id)
+      getStationPig({ id: id }).then(res => {
+        // console.log(res)
+        this.existpigs = res.data.stationpig
+      })
+    },
+    subpigs (pigid) {
+      console.log(pigid)
+      this.$confirm('此操作将使母猪离栏,是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        subtractionpig({ pigid: pigid }).then(res => {
+          getStationPig({ id: this.subpig.pig_stationid }).then(res => {
+            // console.log(res)
+            this.existpigs = res.data.stationpig
           })
-        }
-      })
-    },
-    getstationpig (A) {
-      this.$http.post('getstationpig/', A).then((res) => {
-        this.stationpigs.splice(0)
-        // console.log(res)
-        const result = JSON.parse(res.data.pigs)
-        // console.log(result)
-        for (const i in result) {
-          this.stationpigs.push(result[i].fields)
-        }
-        // console.log(this.stationpigs)
-      })
-    },
-    addpigs () {
-      this.$http.post('addpigs/', this.addpig).then((res) => {
-        if (res.data.code !== 'ok') return this.$message.error(res.data.message)
-        this.$message.success(res.data.message)
-        // console.log(res)
-        this.getstationpig(this.addpig.pig_stationid_id)
-        this.addpig.malepignum = ''
-        this.addpig.pigid = ''
-        this.addpig.backfat = ''
-        this.addpig.gesage = ''
-        this.addpig.vaccine = ''
-        this.addpig.earid = ''
-        this.addpig.kind = ''
-        this.addpig.breedtime = ''
-      })
-    },
-    decpigs (A, B) {
-      this.$http.post('decpigs/', [A, B]).then((res) => {
-        if (res.data.code !== 'ok') return this.$message.error(res.data.message)
-        this.$message.success(res.data.message)
-        console.log(res)
-        this.getstationpig(this.addpig.pig_stationid_id)
+        })
+        this.$message({
+          type: 'success',
+          message: '离栏成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消离栏'
+        })
       })
     }
   }

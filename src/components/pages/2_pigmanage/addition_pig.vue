@@ -77,7 +77,7 @@
         <el-col :span="6">
           <el-input
             placeholder="请输入背膘厚"
-            v-model.number="addpig.backfat">
+            v-model="addpig.backfat">
           </el-input>
         </el-col>
         <el-col :span="6">
@@ -112,11 +112,6 @@
         <el-table-column label="背膘厚/mm" prop="backfat" align="center"></el-table-column>
         <el-table-column label="胎龄" prop="gesage" align="center"></el-table-column>
         <el-table-column label="疫苗情况" prop="vaccine" align="center"></el-table-column>
-        <!--      <el-table-column label="操作" width="80px">-->
-        <!--        <template slot-scope="scope">-->
-        <!--          <el-button size="mini" type="danger" @click="decpigs(scope.row.stationid,scope.row.pigid)">出栏</el-button>-->
-        <!--        </template>-->
-        <!--      </el-table-column>-->
       </el-table>
     </div>
   </div>
@@ -183,20 +178,23 @@ export default {
   },
   methods: {
     getstationpig (id) {
-      console.log(id)
+      // console.log(id)
       getStationPig({ id: id }).then(res => {
-        console.log(res)
+        // console.log(res)
         this.existpigs = res.data.stationpig
-        // this.stationpigs.splice(0)
-        // const result = JSON.parse(res.data.pigs)
-        // for (const i in result) {
-        //   this.stationpigs.push(result[i].fields)
-        // }
       })
     },
     addpigs () {
       additionpig(this.addpig).then((res) => {
-        console.log(res)
+        if (res.status === 201) {
+          this.$message.warning(res.data.code)
+        } else {
+          getStationPig({ id: this.addpig.pig_stationid }).then(res => {
+            // console.log(res)
+            this.existpigs = res.data.stationpig
+          })
+          this.$message.success(res.data.code)
+        }
       })
     }
   }
@@ -219,6 +217,6 @@ export default {
     width: auto;
   }
   .el-input{
-    width: auto;
+    width: 206.4px;
   }
 </style>

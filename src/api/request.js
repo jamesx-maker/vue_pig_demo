@@ -64,6 +64,15 @@ export function additionpig (data) {
   })
 }
 
+// 离栏母猪
+export function subtractionpig (data) {
+  return axios({
+    url: `${base.url}/pigbase/`,
+    method: 'delete',
+    data: JSON.stringify(data)
+  })
+}
+
 // 获取拟合散点
 export function getpoint () {
   return axios({
