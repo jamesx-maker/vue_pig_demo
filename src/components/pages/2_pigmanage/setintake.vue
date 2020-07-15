@@ -27,9 +27,22 @@
         <el-table :data="existpigs" border>
           <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
           <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
-          <el-table-column label="背膘厚/mm" prop="backfat" align="center"></el-table-column>
-          <el-table-column label="妊娠天数" prop="" align="center"></el-table-column>
+          <el-table-column label="品种" prop="pigkind" width="120px" align="center"></el-table-column>
+          <el-table-column label="背膘厚/mm" width="120px" align="center">
+            <template slot-scope="scope">
+              {{scope.row.backfat}}
+              <el-button
+                style="margin-left: 15px"
+                type="primary"
+                icon="el-icon-edit"
+                size="mini"
+                circle
+                @click="setbackfat(scope.row.pigid,scope.row.backfat)"
+              ></el-button>
+            </template>
+          </el-table-column>
+          <el-table-column label="妊娠天数" prop="" width="120px" align="center"></el-table-column>
+          <el-table-column label="采食量/kg" prop="" align="center"></el-table-column>
           <el-table-column label="默认采食量/kg" prop="" align="center"></el-table-column>
           <el-table-column label="推荐采食量/kg" prop="" align="center"></el-table-column>
           <el-table-column label="修订采食量/kg" align="center">
@@ -41,7 +54,7 @@
                 icon="el-icon-check"
                 size="mini"
                 circle
-                @click="setintake(scope.row.pigid)"
+                @click="setintake(scope.row.pigid, scope.row.setnum)"
               ></el-button>
             </template>
           </el-table-column>
@@ -80,7 +93,29 @@ export default {
         this.existpigs = res.data.stationpig
       })
     },
-    setintake (pigid) {}
+    setbackfat (pigid, newbackfat) {
+      console.log(pigid)
+      console.log(newbackfat)
+    },
+    setintake (pigid, setnum) {
+      this.$confirm('此操作将修改母猪采食量,是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log(pigid)
+        console.log(setnum)
+        this.$message({
+          type: 'success',
+          message: '设置采食量成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消设置'
+        })
+      })
+    }
   }
 }
 </script>
