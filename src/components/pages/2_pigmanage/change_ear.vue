@@ -11,13 +11,13 @@
       <div class="container">
         <el-row :gutter="20" class="row">
           <el-col :span="6">
-            <el-select v-model="addpig.pig_stationid_id"
+            <el-select v-model="pig_stationid"
                        clearable
                        placeholder="请选择饲喂站"
-                       @change="getstationpig(addpig.pig_stationid_id)"
+                       @change="getstationpig(pig_stationid)"
                        size="250px">
               <el-option
-                v-for="item in options"
+                v-for="item in station_options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -25,88 +25,80 @@
             </el-select>
           </el-col>
         </el-row>
-        <el-table :data="stationpigs" border>
+        <el-table :data="existpigs" border>
           <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
           <el-table-column label="原耳标号" prop="earid" align="center"></el-table-column>
-          <el-table-column label="设置新耳标号" prop="setearid" align="center"></el-table-column>
+          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
+          <el-table-column label="设置新耳标号" prop="setearid" align="center">
+            <template slot-scope="scope">
+              <el-button size="mini" type="danger" @click="change">更换耳标</el-button>
+              <el-dialog title="输入新耳标号" :visible.sync="dialogFormVisible" width="400px">
+                <el-input v-model.number="newearid" placeholder="输入新耳标号"></el-input>
+                <div slot="footer" class="dialog-footer">
+                  <el-button @click="close">取 消</el-button>
+                  <el-button type="primary" @click="changeearid(scope.row.pigid)">确 定</el-button>
+                </div>
+              </el-dialog>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
 </template>
 
 <script>
+import {
+  getstation,
+  getStationPig
+} from '../../../api/request'
+
 export default {
   name: 'change_ear',
   data () {
     return {
-      pickerOptions: {
-        disabledDate (time) {
-          return time.getTime() > Date.now()
-        }
-      },
-      options: [],
-      stationpigs: [],
-      addpig: {
-        pig_stationid_id: '',
-        pigid: '',
-        earid: '',
-        kind: '',
-        malepignum: '',
-        backfat: '',
-        gesage: '',
-        vaccine: '',
-        breedtime: ''
-      }
+      newearid: '',
+      station_options: [],
+      dialogFormVisible: false,
+      existpigs: [],
+      pig_stationid: ''
     }
   },
+  created () {
+    getstation({ pageIndex: '空' }).then(res => {
+      // console.log(res)
+      this.station_options = res.data.station_options
+    })
+  },
   methods: {
-    getstationid () {
-      this.$http.get('getstationid/').then((res) => {
-        // console.log
-        this.options.splice(0)
-        for (let i = 0; i < res.data.id.length; i++) {
-          this.options.push({
-            value: res.data.id[i],
-            label: res.data.id[i]
-          })
-        }
-      })
-    },
-    getstationpig (A) {
-      this.$http.post('getstationpig/', A).then((res) => {
-        this.stationpigs.splice(0)
+    getstationpig (id) {
+      getStationPig({ id: id }).then(res => {
         // console.log(res)
-        const result = JSON.parse(res.data.pigs)
-        // console.log(result)
-        for (const i in result) {
-          this.stationpigs.push(result[i].fields)
-        }
-        // console.log(this.stationpigs)
+        this.existpigs = res.data.stationpig
       })
     },
-    addpigs () {
-      this.$http.post('addpigs/', this.addpig).then((res) => {
-        if (res.data.code !== 'ok') return this.$message.error(res.data.message)
-        this.$message.success(res.data.message)
-        // console.log(res)
-        this.getstationpig(this.addpig.pig_stationid_id)
-        this.addpig.malepignum = ''
-        this.addpig.pigid = ''
-        this.addpig.backfat = ''
-        this.addpig.gesage = ''
-        this.addpig.vaccine = ''
-        this.addpig.earid = ''
-        this.addpig.kind = ''
-        this.addpig.breedtime = ''
+    close () {
+      this.dialogFormVisible = false
+      this.$message({
+        type: 'info',
+        message: '已取消转栏'
       })
     },
-    decpigs (A, B) {
-      this.$http.post('decpigs/', [A, B]).then((res) => {
-        if (res.data.code !== 'ok') return this.$message.error(res.data.message)
-        this.$message.success(res.data.message)
-        console.log(res)
-        this.getstationpig(this.addpig.pig_stationid_id)
-      })
+    change () {
+      this.dialogFormVisible = true
+    },
+    changeearid (pigid) {
+      if (typeof (this.newearid) === 'number') {
+        this.dialogFormVisible = false
+        this.$message({
+          type: 'success',
+          message: '更换成功'
+        })
+      } else {
+        this.$message({
+          type: 'warning',
+          message: '耳标号输入错误,请重新输入'
+        })
+      }
     }
   }
 }
