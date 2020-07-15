@@ -82,6 +82,15 @@ export function changestation (data) {
   })
 }
 
+// 更换耳标
+export function changeearid (data) {
+  return axios({
+    url: `${base.url}/pigbase/`,
+    method: 'patch',
+    data: JSON.stringify(data)
+  })
+}
+
 // 获取拟合散点
 export function getpoint () {
   return axios({

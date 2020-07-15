@@ -31,24 +31,24 @@
           <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
           <el-table-column label="设置新饲喂站" align="center">
             <template slot-scope="scope">
-              <el-button size="mini" type="danger" @click="change">转栏</el-button>
-              <el-dialog title="请选择新的饲喂站" :visible.sync="dialogFormVisible" width="400px">
-                <el-select v-model="newstation" placeholder="请选择新的饲喂站">
-                  <el-option
-                    v-for="item in station_options"
-                    :key="item.index"
-                    :label="item.label"
-                    :value="item.value">
-                  </el-option>
-                </el-select>
-                <div slot="footer" class="dialog-footer">
-                  <el-button @click="close">取 消</el-button>
-                  <el-button type="primary" @click="changestation(scope.row.pigid)">确 定</el-button>
-                </div>
-              </el-dialog>
+              <el-button size="mini" type="danger" @click="change(scope.row.pigid)">转栏</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <el-dialog title="请选择新的饲喂站" :visible.sync="dialogFormVisible" width="400px">
+          <el-select v-model="newstation" placeholder="请选择新的饲喂站" style="margin-left: 80px">
+            <el-option
+              v-for="item in station_options"
+              :key="item.index"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="close">取 消</el-button>
+            <el-button type="primary" @click="changestation">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
 </template>
@@ -64,12 +64,12 @@ export default {
   name: 'changestation',
   data () {
     return {
-      options: [],
       station_options: [],
       existpigs: [],
       dialogFormVisible: false,
-      newstation: [],
-      pig_stationid: ''
+      newstation: '',
+      pig_stationid: '',
+      sendpigid: ''
     }
   },
   created () {
@@ -93,17 +93,20 @@ export default {
         message: '已取消转栏'
       })
     },
-    change () {
+    change (pigid) {
+      // console.log(pigid)
+      this.sendpigid = pigid
       this.dialogFormVisible = true
     },
-    changestation (pigid) {
+    changestation () {
       if (this.newstation === '') {
         this.$message({
           type: 'warning',
           message: '没有选择新的饲喂站'
         })
       } else {
-        changestation({ newstation: this.newstation, pigid: pigid }).then(res => {
+        console.log(this.sendpigid)
+        changestation({ newstation: this.newstation, pigid: this.sendpigid }).then(res => {
           console.log(res)
           this.dialogFormVisible = false
           getStationPig({ id: this.pig_stationid }).then(res => {

@@ -11,12 +11,12 @@
       <div class="container">
         <el-row :gutter="20">
           <el-col :span="6">
-            <el-select v-model="addpig.pig_stationid_id"
+            <el-select v-model="pig_stationid"
                        placeholder="请选择饲喂站"
-                       @change="getstationpig(addpig.pig_stationid_id)"
+                       @change="getstationpig(pig_stationid)"
                        size="250px">
               <el-option
-                v-for="item in options"
+                v-for="item in station_options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -24,24 +24,25 @@
             </el-select>
           </el-col>
         </el-row>
-        <el-table :data="stationpigs" border>
-          <el-table-column type="index"></el-table-column>
-          <el-table-column label="身份码" prop="pigid"></el-table-column>
-          <el-table-column label="耳标号" prop="earid"></el-table-column>
-          <el-table-column label="品种" prop="pigkind"></el-table-column>
-          <el-table-column label="背膘厚/mm" prop="backfat"></el-table-column>
-          <el-table-column label="胎龄" prop="gesage"></el-table-column>
-          <el-table-column label="妊娠天数" prop=""></el-table-column>
-          <el-table-column label="默认采食量/kg" prop=""></el-table-column>
-          <el-table-column label="推荐采食量/kg" prop=""></el-table-column>
-          <el-table-column label="修订采食量/kg">
+        <el-table :data="existpigs" border>
+          <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
+          <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
+          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
+          <el-table-column label="背膘厚/mm" prop="backfat" align="center"></el-table-column>
+          <el-table-column label="妊娠天数" prop="" align="center"></el-table-column>
+          <el-table-column label="默认采食量/kg" prop="" align="center"></el-table-column>
+          <el-table-column label="推荐采食量/kg" prop="" align="center"></el-table-column>
+          <el-table-column label="修订采食量/kg" align="center">
             <template slot-scope="scope">
-              <el-input placeholder="请输入" v-model="scope.row.setnum"></el-input>
-              <el-button type="success"
-                         icon="el-icon-edit"
-                         size="mini"
-                         circle
-                         @click="decpigs(scope.row.stationid,scope.row.pigid)"></el-button>
+              <el-input placeholder="请输入采食量" v-model="scope.row.setnum"></el-input>
+              <el-button
+                style="margin-left: 15px"
+                type="success"
+                icon="el-icon-check"
+                size="mini"
+                circle
+                @click="setintake(scope.row.pigid)"
+              ></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -50,49 +51,36 @@
 </template>
 
 <script>
+import {
+  getstation,
+  getStationPig
+} from '../../../api/request'
+
 export default {
   name: 'setintake',
   data () {
     return {
-      options: [],
-      // stationid: '',
+      station_options: [],
+      existpigs: [],
+      pig_stationid: '',
       stationpigs: [],
-      setfeed: '',
-      addpig: {
-        pig_stationid_id: ''
-      }
+      setfeed: ''
     }
   },
   created () {
-    this.getstationid()
-  },
-  mounted () {
+    getstation({ pageIndex: '空' }).then(res => {
+      // console.log(res)
+      this.station_options = res.data.station_options
+    })
   },
   methods: {
-    getstationid () {
-      this.$http.get('getstationid/').then((res) => {
-        // console.log
-        this.options.splice(0)
-        for (let i = 0; i < res.data.id.length; i++) {
-          this.options.push({
-            value: res.data.id[i],
-            label: res.data.id[i]
-          })
-        }
+    getstationpig (id) {
+      getStationPig({ id: id }).then(res => {
+        // console.log(res)
+        this.existpigs = res.data.stationpig
       })
     },
-    getstationpig (A) {
-      this.$http.post('getstationpig/', A).then((res) => {
-        this.stationpigs.splice(0)
-        // console.log(res)
-        const result = JSON.parse(res.data.pigs)
-        // console.log(result)
-        for (const i in result) {
-          this.stationpigs.push(result[i].fields)
-        }
-        // console.log(this.stationpigs)
-      })
-    }
+    setintake (pigid) {}
   }
 }
 </script>
@@ -113,6 +101,6 @@ export default {
   width: auto;
 }
 .el-input{
-  width: auto;
+  width: 120px;
 }
 </style>

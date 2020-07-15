@@ -29,19 +29,24 @@
           <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
           <el-table-column label="原耳标号" prop="earid" align="center"></el-table-column>
           <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
-          <el-table-column label="设置新耳标号" prop="setearid" align="center">
+          <el-table-column label="设置新耳标号" align="center">
             <template slot-scope="scope">
-              <el-button size="mini" type="danger" @click="change">更换耳标</el-button>
-              <el-dialog title="输入新耳标号" :visible.sync="dialogFormVisible" width="400px">
-                <el-input v-model.number="newearid" placeholder="输入新耳标号"></el-input>
-                <div slot="footer" class="dialog-footer">
-                  <el-button @click="close">取 消</el-button>
-                  <el-button type="primary" @click="changeearid(scope.row.pigid)">确 定</el-button>
-                </div>
-              </el-dialog>
+              <el-button size="mini" type="danger" @click="change(scope.row.pigid)">更换耳标</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <el-dialog title="输入新耳标号" :visible.sync="dialogFormVisible" width="400px"  style="margin-left: 80px">
+          <el-input
+            v-model.number="newearid"
+            placeholder="输入新耳标号"
+            maxlength="12"
+            show-word-limit
+          ></el-input>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="close">取 消</el-button>
+            <el-button type="primary" @click="changeearid">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
 </template>
@@ -49,7 +54,8 @@
 <script>
 import {
   getstation,
-  getStationPig
+  getStationPig,
+  changeearid
 } from '../../../api/request'
 
 export default {
@@ -60,7 +66,8 @@ export default {
       station_options: [],
       dialogFormVisible: false,
       existpigs: [],
-      pig_stationid: ''
+      pig_stationid: '',
+      sendpigid: ''
     }
   },
   created () {
@@ -83,11 +90,21 @@ export default {
         message: '已取消转栏'
       })
     },
-    change () {
+    change (pigid) {
+      // console.log(pigid)
+      this.sendpigid = pigid
       this.dialogFormVisible = true
     },
-    changeearid (pigid) {
+    changeearid () {
+      // console.log(this.newearid)
       if (typeof (this.newearid) === 'number') {
+        changeearid({ newearid: this.newearid, pigid: this.sendpigid }).then(res => {
+          // console.log(res)
+          getStationPig({ id: this.pig_stationid }).then(res => {
+            // console.log(res)
+            this.existpigs = res.data.stationpig
+          })
+        })
         this.dialogFormVisible = false
         this.$message({
           type: 'success',
