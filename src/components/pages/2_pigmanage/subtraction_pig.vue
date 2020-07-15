@@ -18,7 +18,7 @@
                        size="250px">
               <el-option
                 v-for="item in station_options"
-                :key="item.value"
+                :key="item.index"
                 :label="item.label"
                 :value="item.value">
               </el-option>
