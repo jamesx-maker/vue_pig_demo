@@ -27,6 +27,7 @@
         <el-table :data="stationpigs" border>
           <el-table-column type="index"></el-table-column>
           <el-table-column label="身份码" prop="pigid"></el-table-column>
+          <el-table-column label="耳标号" prop="earid"></el-table-column>
           <el-table-column label="品种" prop="pigkind"></el-table-column>
           <el-table-column label="背膘厚/mm" prop="backfat"></el-table-column>
           <el-table-column label="胎龄" prop="gesage"></el-table-column>

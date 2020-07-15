@@ -106,8 +106,8 @@ export default {
         })
       })
       this.$message({
-        type: 'info',
-        message: '已取消转栏'
+        type: 'success',
+        message: '转栏成功'
       })
     }
   }
