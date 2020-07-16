@@ -75,8 +75,11 @@ const routes = [
       },
       {
         path: '/default_intake',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/defaultintake'),
-        meta: { title: '默认饲喂量' }
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7-setting/defaultintake'),
+        meta: {
+          title: '默认饲喂量',
+          permission: true
+        }
       },
       {
         path: '/food_consume',

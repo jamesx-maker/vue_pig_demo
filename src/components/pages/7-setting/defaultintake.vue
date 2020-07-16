@@ -1,6 +1,6 @@
 <template>
   <div>
-    <bread bigtitle="数据查询" smalltitle="默认饲喂量" icon="el-icon-s-data"></bread>
+    <bread bigtitle="系统设置" smalltitle="默认饲喂量" icon="el-icon-setting"></bread>
     <div class="container">
       <el-row :gutter="20" class="row">
         <el-col :span="6">

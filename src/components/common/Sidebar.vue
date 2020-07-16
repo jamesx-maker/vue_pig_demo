@@ -106,20 +106,8 @@ export default {
               title: '采食信息'
             },
             {
-              index: 'default_intake',
-              title: '默认饲喂量'
-            },
-            {
               index: 'food_consume',
               title: '饲料消耗'
-            },
-            {
-              index: 'pigreport',
-              title: '母猪报告'
-            },
-            {
-              index: 'errorreport',
-              title: '异常信息报告'
             },
             {
               index: 'delivery_warn',
@@ -128,6 +116,14 @@ export default {
             {
               index: 'farrow',
               title: '生产信息'
+            },
+            {
+              index: 'pigreport',
+              title: '母猪报告'
+            },
+            {
+              index: 'errorreport',
+              title: '异常信息报告'
             }
           ]
         },
@@ -169,6 +165,17 @@ export default {
             {
               index: 'othersetting',
               title: '其他设置'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-setting',
+          index: 'setting',
+          title: '系统设置',
+          subs: [
+            {
+              index: 'default_intake',
+              title: '默认饲喂量'
             }
           ]
         }
