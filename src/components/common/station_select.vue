@@ -4,8 +4,7 @@
              placeholder="请选择饲喂站"
              @change="getstationpig(pig_stationid)"
              size="250px"
-             filterable
-  >
+             filterable>
     <el-option
       v-for="item in station_options"
       :key="item.value"

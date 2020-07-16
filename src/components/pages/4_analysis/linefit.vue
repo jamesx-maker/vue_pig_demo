@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-data-line"></i> 统计分析
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>背膘变化模拟</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <bread bigtitle="统计分析" smalltitle="背膘变化模拟" icon="el-icon-data-line"></bread>
     <div class="container">
       <div>
         <el-row :gutter="20">
@@ -15,7 +8,9 @@
             <el-select
               v-model="pig_stationid"
               placeholder="请选择饲喂站"
-              @change="getstationpig(pig_stationid)">
+              @change="getstationpig(pig_stationid)"
+              filterable
+              clearable>
               <el-option
                 v-for="item in station_options"
                 :key="item.value"
@@ -45,9 +40,13 @@ import {
   getpoint,
   getstation
 } from '../../../api/request'
+import bread from '../../common/bread'
 
 export default {
   name: 'linefit',
+  components: {
+    bread
+  },
   data () {
     return {
       station_options: [],
@@ -103,7 +102,7 @@ export default {
           axisLine: {
             symbol: ['none', 'arrow']
           },
-          min: 0,
+          min: 7,
           splitLine: {
             lineStyle: {
               type: 'dashed'

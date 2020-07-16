@@ -119,7 +119,7 @@ export default {
             },
             {
               index: 'pigreport',
-              title: '母猪报告'
+              title: '母猪饲喂报告'
             },
             {
               index: 'errorreport',
