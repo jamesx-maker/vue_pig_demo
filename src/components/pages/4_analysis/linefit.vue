@@ -9,19 +9,49 @@
       </el-breadcrumb>
     </div>
     <div class="container">
-      <div id="main" style="width: 1050px;height:550px;"></div>
+      <div>
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <el-select
+              v-model="pig_stationid"
+              placeholder="请选择饲喂站"
+              @change="getstationpig(pig_stationid)">
+              <el-option
+                v-for="item in station_options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="6">
+            <el-input placeholder="请输入耳标号">
+            </el-input>
+          </el-col>
+          <el-col :span="6">
+            <el-button type="primary" >查询</el-button>
+          </el-col>
+        </el-row>
+      </div>
+      <el-divider></el-divider>
+      <div id="main" style="width: 95%;height:600px; margin-top: 30px"></div>
     </div>
   </div>
 </template>
 
 <script>
 import echarts from 'echarts'
-import { getpoint } from '../../../api/request'
+import {
+  getpoint,
+  getstation
+} from '../../../api/request'
 
 export default {
   name: 'linefit',
   data () {
     return {
+      station_options: [],
+      pig_stationid: '',
       echarts_option: {
         title: {
           text: '背膘变化模拟',
@@ -141,6 +171,10 @@ export default {
   },
   created () {
     this.GetPicture()
+    getstation({ pageIndex: '空' }).then(res => {
+      // console.log(res)
+      this.station_options = res.data.station_options
+    })
   },
   mounted () {
     this.draw()
@@ -166,5 +200,10 @@ export default {
 </script>
 
 <style scoped>
-
+.el-select{
+  width: 210px;
+}
+.el-input{
+  width: 210px;
+}
 </style>

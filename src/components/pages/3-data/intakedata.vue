@@ -102,8 +102,7 @@ export default {
   margin-top: 10px;
 }
 .el-select{
-  width: auto;
-  max-width: 210px;
+  width: 210px;
 }
 .el-input{
   width: 210px;
