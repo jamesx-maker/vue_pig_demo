@@ -129,7 +129,6 @@ export default {
     margin-top: 10px;
   }
   .el-select{
-    width: auto;
-    max-width: 202px;
+    width: 210px;
   }
 </style>

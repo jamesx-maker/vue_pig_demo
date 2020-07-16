@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import { getsystem } from '../../../api/request'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    station_list: []
+    stationnum: 0,
+    pignum: 0
   },
   mutations: {
   },

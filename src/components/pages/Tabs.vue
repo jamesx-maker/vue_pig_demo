@@ -119,7 +119,6 @@ export default {
   .message-title {
     cursor: pointer;
   }
-
   .handle-row {
     margin-top: 30px;
   }

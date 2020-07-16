@@ -27,6 +27,14 @@ export function Login (data) {
   })
 }
 
+// 系统首页获取饲喂站数量和母猪数量
+export function getsystem () {
+  return axios({
+    url: `${base.url}/system/`,
+    method: 'get'
+  })
+}
+
 // 查询饲喂站id
 export function getstation (data) {
   return axios({

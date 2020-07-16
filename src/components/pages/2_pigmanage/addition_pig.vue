@@ -111,7 +111,7 @@
         <el-table-column label="配种日期" prop="breedtime" align="center"></el-table-column>
         <el-table-column label="背膘厚/mm" prop="backfat" align="center"></el-table-column>
         <el-table-column label="胎龄" prop="gesage" align="center"></el-table-column>
-        <el-table-column label="疫苗情况" prop="vaccine" align="center"></el-table-column>
+        <el-table-column label="已注射疫苗" prop="vaccine" align="center"></el-table-column>
       </el-table>
     </div>
   </div>
@@ -154,6 +154,18 @@ export default {
         {
           value: '疫苗5',
           label: '疫苗5'
+        },
+        {
+          value: '疫苗6',
+          label: '疫苗6'
+        },
+        {
+          value: '疫苗7',
+          label: '疫苗7'
+        },
+        {
+          value: '疫苗8',
+          label: '疫苗8'
         }
       ],
       existpigs: [],
@@ -165,7 +177,7 @@ export default {
         malepignum: '',
         backfat: '',
         gesage: '',
-        vaccine: '',
+        vaccine: [],
         breedtime: ''
       }
     }
@@ -185,7 +197,8 @@ export default {
       })
     },
     addpigs () {
-      console.log(this.addpig.backfat)
+      // console.log(this.addpig.backfat)
+      this.addpig.vaccine.join(',')
       additionpig(this.addpig).then((res) => {
         if (res.status === 201) {
           this.$message.warning(res.data.code)
@@ -210,14 +223,12 @@ export default {
     margin-top: 10px;
   }
   .el-select{
-    width: auto;
-    max-width: 206.4px;
+    width: 210px;
   }
   .date-picker{
-    max-width: 206.4px !important;
-    width: auto;
+    width: 210px;
   }
   .el-input{
-    width: 206.4px;
+    width: 210px;
   }
 </style>

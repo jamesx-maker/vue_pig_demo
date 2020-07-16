@@ -132,14 +132,9 @@ export default {
   margin-top: 10px;
 }
 .el-select{
-  width: auto;
-  max-width: 202px;
-}
-.date-picker{
-  max-width: 202px !important;
-  width: auto;
+  width: 210px;
 }
 .el-input{
-  width: auto;
+  width: 210px;
 }
 </style>
