@@ -1,6 +1,6 @@
 <template>
   <div>
-    <bread bigtitle="母猪管理" smalltitle="生产信息" icon="el-icon-magic-stick"></bread>
+    <bread bigtitle="母猪管理" smalltitle="生产信息" icon="el-icon-s-data"></bread>
     <div class="container">
       <div class="farrowitem">
         <div class="leftitem">

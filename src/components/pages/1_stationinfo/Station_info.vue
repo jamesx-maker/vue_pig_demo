@@ -8,26 +8,35 @@
       </el-breadcrumb>
     </div>
     <div class="container">
-      <div class="handle-box">
-        <el-input v-model.number="query.room"
-                  placeholder="请输入单元号"
-                  maxlength="2"
-                  show-word-limit
-                  class="handle-input mr10">
-        </el-input>
-        <el-input
-          v-model.number="query.station_id"
-          placeholder="饲喂站号"
-          maxlength="4"
-          show-word-limit
-          class="handle-input mr10"
-        ></el-input>
-        <el-button
+        <div class="handle-box">
+          <el-row :gutter="20">
+            <el-col :span="6">
+              <el-input v-model.number="query.room"
+                        placeholder="请输入单元号"
+                        maxlength="2"
+                        show-word-limit
+                        class="handle-input mr10">
+              </el-input>
+            </el-col>
+            <el-col :span="6">
+              <el-input
+                v-model.number="query.station_id"
+                placeholder="饲喂站号"
+                maxlength="4"
+                show-word-limit
+                class="handle-input mr10"
+              ></el-input>
+            </el-col>
+            <el-col :span="6">
+              <el-button
           type="primary"
           icon="el-icon-check"
           @click="handleAddition"
         >添加</el-button>
+            </el-col>
+          </el-row>
       </div>
+      <el-divider></el-divider>
       <el-table
         :data="tableData"
         border

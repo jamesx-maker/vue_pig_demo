@@ -60,12 +60,12 @@ const routes = [
       },
       {
         path: '/farrow',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/farrow'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/farrow'),
         meta: { title: '生产信息' }
       },
       {
         path: '/delivery_warn',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/delivery_warn'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/delivery_warn'),
         meta: { title: '分娩提醒' }
       },
       {

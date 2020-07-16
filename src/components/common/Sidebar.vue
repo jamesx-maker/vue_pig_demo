@@ -93,14 +93,6 @@ export default {
             {
               index: 'setintake',
               title: '下料设置'
-            },
-            {
-              index: 'farrow',
-              title: '生产信息'
-            },
-            {
-              index: 'delivery_warn',
-              title: '分娩提醒'
             }
           ]
         },
@@ -128,6 +120,14 @@ export default {
             {
               index: 'errorreport',
               title: '异常信息报告'
+            },
+            {
+              index: 'delivery_warn',
+              title: '分娩信息'
+            },
+            {
+              index: 'farrow',
+              title: '生产信息'
             }
           ]
         },
@@ -171,27 +171,27 @@ export default {
               title: '其他设置'
             }
           ]
-        },
-        {
-          icon: 'el-icon-lx-global',
-          index: 'i18n',
-          title: '国际化功能'
-        },
-        {
-          icon: 'el-icon-lx-warn',
-          index: '7',
-          title: '错误处理',
-          subs: [
-            {
-              index: 'permission',
-              title: '权限测试'
-            },
-            {
-              index: '404',
-              title: '404页面'
-            }
-          ]
         }
+        // {
+        //   icon: 'el-icon-lx-global',
+        //   index: 'i18n',
+        //   title: '国际化功能'
+        // },
+        // {
+        //   icon: 'el-icon-lx-warn',
+        //   index: '7',
+        //   title: '错误处理',
+        //   subs: [
+        //     {
+        //       index: 'permission',
+        //       title: '权限测试'
+        //     },
+        //     {
+        //       index: '404',
+        //       title: '404页面'
+        //     }
+        //   ]
+        // }
       ]
     }
   },

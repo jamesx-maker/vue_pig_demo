@@ -1,6 +1,6 @@
 <template>
   <div>
-    <bread bigtitle="母猪管理" smalltitle="分娩提醒" icon="el-icon-magic-stick"></bread>
+    <bread bigtitle="数据查询" smalltitle="分娩提醒" icon="el-icon-s-data"></bread>
     <div class="container">
       <el-table :data="stationpigs" border>
         <el-table-column label="饲喂站" prop="stationid"></el-table-column>

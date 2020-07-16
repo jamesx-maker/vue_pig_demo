@@ -32,7 +32,7 @@
           <el-input
             placeholder="请输入耳标号"
             v-model.number="addpig.earid"
-            maxlength="12"
+            maxlength="8"
             show-word-limit
           >
           </el-input>
@@ -61,7 +61,7 @@
         <el-col :span="6">
           <el-input
             placeholder="请输入与配公猪号"
-            v-model="addpig.malepignum"
+            v-model.number="addpig.malepignum"
             maxlength="15"
             show-word-limit
           >
@@ -166,15 +166,15 @@ export default {
       ],
       existpigs: [],
       addpig: {
-        pig_stationid: '',
-        pigid: '',
-        earid: '',
-        kind: '',
-        malepignum: '',
-        backfat: '',
-        gesage: '',
-        vaccine: [],
-        breedtime: ''
+        // pig_stationid: '',
+        // pigid: '',
+        // earid: '',
+        // kind: '',
+        // malepignum: '',
+        // backfat: '',
+        // gesage: '',
+        // vaccine: [],
+        // breedtime: ''
       }
     }
   },
@@ -188,6 +188,13 @@ export default {
     })
   },
   methods: {
+    // 高位补0函数
+    formatZero (num, len) {
+      if (String(num).length > len) {
+        return num
+      }
+      return (Array(len).join(0) + num).slice(-len)
+    },
     getstationpig (id) {
       // console.log(id)
       getStationPig({ id: id }).then(res => {
@@ -198,6 +205,9 @@ export default {
     addpigs () {
       // console.log(this.addpig.backfat)
       this.addpig.vaccine.join(',')
+      this.addpig.pigid = this.formatZero(this.addpig.pigid, 15)
+      this.addpig.earid = this.formatZero(this.addpig.earid, 8)
+      this.addpig.malepignum = this.formatZero(this.addpig.malepignum, 8)
       additionpig(this.addpig).then((res) => {
         if (res.status === 201) {
           this.$message.warning(res.data.code)
@@ -205,6 +215,7 @@ export default {
           getStationPig({ id: this.addpig.pig_stationid }).then(res => {
             // console.log(res)
             this.existpigs = res.data.stationpig
+            this.addpig = {}
           })
           this.$message.success(res.data.code)
         }
