@@ -70,52 +70,52 @@ const routes = [
       },
       {
         path: '/intake_data',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/intakedata'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/intakedata'),
         meta: { title: '采食信息' }
       },
       {
         path: '/default_intake',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/defaultintake'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/defaultintake'),
         meta: { title: '默认饲喂量' }
       },
       {
         path: '/food_consume',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/food_consume'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/food_consume'),
         meta: { title: '饲料消耗' }
       },
       {
         path: '/linefit',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_analysis/linefit'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4_analysis/linefit'),
         meta: { title: '背膘变化模拟' }
       },
       {
         path: '/intake_spread',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_analysis/intakespread'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4_analysis/intakespread'),
         meta: { title: '采食分布' }
       },
       {
         path: '/errorcode',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/6_machinemanage/errorcode'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_machinemanage/errorcode'),
         meta: { title: '故障码' }
       },
       {
         path: '/usersetting',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7_usermanage/usersetting'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/6_usermanage/usersetting'),
         meta: { title: '用户设置' }
       },
       {
         path: '/othersetting',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7_usermanage/othersetting'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/6_usermanage/othersetting'),
         meta: { title: '其他设置' }
       },
       {
         path: '/pigreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/pigreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/pigreport'),
         meta: { title: '母猪报告' }
       },
       {
         path: '/errorreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4-data/errorreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/errorreport'),
         meta: { title: '异常信息报告' }
       },
       // 默认
