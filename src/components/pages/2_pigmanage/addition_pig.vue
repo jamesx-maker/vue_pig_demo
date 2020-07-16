@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-magic-stick"></i> 母猪管理
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>入栏</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <bread bigtitle="母猪管理" smalltitle="入栏" icon="el-icon-magic-stick"></bread>
     <div class="container">
       <el-row :gutter="20">
         <el-col :span="6">
@@ -15,7 +8,9 @@
                      clearable
                      placeholder="请选择饲喂站"
                      @change="getstationpig(addpig.pig_stationid)"
-                     size="250px">
+                     size="250px"
+                     filterable
+          >
             <el-option
               v-for="item in station_options"
               :key="item.value"
@@ -123,6 +118,7 @@ import {
   getStationPig,
   additionpig
 } from '../../../api/request'
+import bread from '../../common/bread'
 
 export default {
   name: 'addition_pig',
@@ -182,6 +178,9 @@ export default {
       }
     }
   },
+  components: {
+    bread
+  },
   created () {
     getstation({ pageIndex: '空' }).then(res => {
       // console.log(res)
@@ -216,19 +215,23 @@ export default {
 </script>
 
 <style scoped>
-  .el-table{
+  .el-table {
     margin-top: 10px;
   }
-  .el-col{
+
+  .el-col {
     margin-top: 10px;
   }
-  .el-select{
+
+  .el-select {
     width: 210px;
   }
-  .date-picker{
+
+  .date-picker {
     width: 210px;
   }
-  .el-input{
+
+  .el-input {
     width: 210px;
   }
 </style>

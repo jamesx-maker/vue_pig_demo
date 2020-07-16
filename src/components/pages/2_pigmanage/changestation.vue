@@ -1,56 +1,51 @@
 <template>
-    <div>
-      <div class="crumbs">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item>
-            <i class="el-icon-magic-stick"></i> 母猪管理
-          </el-breadcrumb-item>
-          <el-breadcrumb-item>转栏</el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
-      <div class="container">
-        <el-row :gutter="20" class="row">
-          <el-col :span="6">
-            <el-select v-model="pig_stationid"
-                       clearable
-                       placeholder="请选择饲喂站"
-                       @change="getstationpig(pig_stationid)"
-                       size="250px">
-              <el-option
-                v-for="item in station_options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-col>
-        </el-row>
-        <el-table :data="existpigs" border>
-          <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
-          <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
-          <el-table-column label="设置新饲喂站" align="center">
-            <template slot-scope="scope">
-              <el-button size="mini" type="danger" @click="change(scope.row.pigid)">转栏</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-dialog title="请选择新的饲喂站" :visible.sync="dialogFormVisible" width="400px">
-          <el-select v-model="newstation" placeholder="请选择新的饲喂站" style="margin-left: 80px">
+  <div>
+    <bread bigtitle="母猪管理" smalltitle="转栏" icon="el-icon-magic-stick"></bread>
+    <div class="container">
+      <el-row :gutter="20" class="row">
+        <el-col :span="6">
+          <el-select v-model="pig_stationid"
+                     clearable
+                     placeholder="请选择饲喂站"
+                     @change="getstationpig(pig_stationid)"
+                     size="250px"
+                     filterable
+          >
             <el-option
               v-for="item in station_options"
-              :key="item.index"
+              :key="item.value"
               :label="item.label"
               :value="item.value">
             </el-option>
           </el-select>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="close">取 消</el-button>
-            <el-button type="primary" @click="changestation">确 定</el-button>
-          </div>
-        </el-dialog>
-      </div>
+        </el-col>
+      </el-row>
+      <el-table :data="existpigs" border>
+        <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
+        <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
+        <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
+        <el-table-column label="设置新饲喂站" align="center">
+          <template slot-scope="scope">
+            <el-button size="mini" type="danger" @click="change(scope.row.pigid)">转栏</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-dialog title="请选择新的饲喂站" :visible.sync="dialogFormVisible" width="400px">
+        <el-select v-model="newstation" placeholder="请选择新的饲喂站" style="margin-left: 80px">
+          <el-option
+            v-for="item in station_options"
+            :key="item.index"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="close">取 消</el-button>
+          <el-button type="primary" @click="changestation">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
+  </div>
 </template>
 
 <script>
@@ -59,6 +54,7 @@ import {
   getStationPig,
   changestation
 } from '../../../api/request'
+import bread from '../../common/bread'
 
 export default {
   name: 'changestation',
@@ -71,6 +67,9 @@ export default {
       pig_stationid: '',
       sendpigid: ''
     }
+  },
+  components: {
+    bread
   },
   created () {
     getstation({ pageIndex: '空' }).then(res => {

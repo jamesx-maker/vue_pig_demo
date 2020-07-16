@@ -1,20 +1,15 @@
 <template>
     <div>
-      <div class="crumbs">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item>
-            <i class="el-icon-magic-stick"></i> 母猪管理
-          </el-breadcrumb-item>
-          <el-breadcrumb-item>下料设置</el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
+      <bread bigtitle="母猪管理" smalltitle="下料设置" icon="el-icon-magic-stick"></bread>
       <div class="container">
         <el-row :gutter="20">
           <el-col :span="6">
             <el-select v-model="pig_stationid"
                        placeholder="请选择饲喂站"
                        @change="getstationintake(pig_stationid)"
-                       size="250px">
+                       size="250px"
+                       filterable
+            >
               <el-option
                 v-for="item in station_options"
                 :key="item.value"
@@ -81,9 +76,13 @@ import {
   changebackfat,
   changeintake
 } from '../../../api/request'
+import bread from '../../common/bread'
 
 export default {
   name: 'setintake',
+  components: {
+    bread
+  },
   data () {
     return {
       station_options: [],

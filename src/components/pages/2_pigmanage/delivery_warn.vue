@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-magic-stick"></i> 母猪管理
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>分娩提醒</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <bread bigtitle="母猪管理" smalltitle="分娩提醒" icon="el-icon-magic-stick"></bread>
     <div class="container">
       <el-table :data="stationpigs" border>
         <el-table-column label="饲喂站" prop="stationid"></el-table-column>
@@ -22,8 +15,13 @@
 </template>
 
 <script>
+import bread from '../../common/bread'
+
 export default {
   name: 'delivery_warn',
+  components: {
+    bread
+  },
   data () {
     return {
       stationpigs: []

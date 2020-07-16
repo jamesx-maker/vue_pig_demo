@@ -1,56 +1,54 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-magic-stick"></i> 母猪管理
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>生产信息</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <bread bigtitle="母猪管理" smalltitle="生产信息" icon="el-icon-magic-stick"></bread>
     <div class="container">
-     <div class="farrowitem">
-      <div class="leftitem">
-        <div class="1"
-        style="width: 300px;height: 100px;">
-          <el-select
-            v-model="pig_earid"
-            style="margin-left: 20px;"
-            clearable
-            placeholder="请选择耳标号">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+      <div class="farrowitem">
+        <div class="leftitem">
+          <div class="1"
+               style="width: 300px;height: 100px;">
+            <el-select
+              v-model="pig_earid"
+              style="margin-left: 20px;"
+              clearable
+              placeholder="请选择耳标号">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </div>
+          <div style="width: 300px;height: 100px;margin-left: 20px;">疫病：无</div>
+          <div style="width: 300px;height: 100px;margin-left: 20px;">体况：良好</div>
+          <div style="width: 300px;height: 100px;margin-left: 20px;">配种周：40</div>
+          <div style="width: 300px;height: 100px;margin-left: 20px;">
+            <el-button type="primary">录入生产信息</el-button>
+          </div>
         </div>
-        <div style="width: 300px;height: 100px;margin-left: 20px;">疫病：无</div>
-        <div style="width: 300px;height: 100px;margin-left: 20px;">体况：良好</div>
-        <div style="width: 300px;height: 100px;margin-left: 20px;">配种周：40</div>
-        <div style="width: 300px;height: 100px;margin-left: 20px;">
-          <el-button type="primary">录入生产信息</el-button>
+        <div class="rightitem">
+          <table class="myTable" style="width:100%">
+            <tr v-for="(item,index) in statDatas" v-bind:key="index">
+              <td class="column">{{item.key}}</td>
+              <td class="column">{{item.value}}</td>
+              <td class="column">{{item.key1}}</td>
+              <td class="column">{{item.value1}}</td>
+            </tr>
+          </table>
         </div>
       </div>
-      <div class="rightitem">
-        <table class="myTable" style="width:100%">
-          <tr v-for="(item,index) in statDatas" v-bind:key="index">
-            <td class="column">{{item.key}}</td>
-            <td class="column">{{item.value}}</td>
-            <td class="column">{{item.key1}}</td>
-            <td class="column">{{item.value1}}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
     </div>
   </div>
 </template>
 
 <script>
+import bread from '../../common/bread'
+
 export default {
   name: 'farrow',
+  components: {
+    bread
+  },
   data () {
     return {
       options: [],
@@ -135,27 +133,31 @@ export default {
 </script>
 
 <style scoped>
-  .farrowitem{
+  .farrowitem {
     display: flex;
     flex-wrap: wrap;
     width: 1050px;
     margin: auto;
   }
-  .leftitem{
+
+  .leftitem {
     width: 400px;
     height: 500px;
     /*background-color: #409EFF;*/
   }
-  .rightitem{
+
+  .rightitem {
     margin-left: 40px;
     width: 600px;
     /*background-color: #67C23A;*/
   }
+
   .myTable {
     border-collapse: collapse;
     margin: 0 auto;
     text-align: center;
   }
+
   .myTable td,
   .myTable th {
     border: 1px solid #cad9ea;

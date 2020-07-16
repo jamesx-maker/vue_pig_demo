@@ -1,13 +1,6 @@
 <template>
     <div>
-      <div class="crumbs">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item>
-            <i class="el-icon-magic-stick"></i> 母猪管理
-          </el-breadcrumb-item>
-          <el-breadcrumb-item>离栏</el-breadcrumb-item>
-        </el-breadcrumb>
-      </div>
+      <bread bigtitle="母猪管理" smalltitle="离栏" icon="el-icon-magic-stick"></bread>
       <div class="container">
         <el-row :gutter="20" class="row">
           <el-col :span="6">
@@ -15,7 +8,9 @@
                        clearable
                        placeholder="请选择饲喂站"
                        @change="getstationpig(subpig.pig_stationid)"
-                       size="250px">
+                       size="250px"
+                       filterable
+            >
               <el-option
                 v-for="item in station_options"
                 :key="item.index"
@@ -45,9 +40,13 @@ import {
   getStationPig,
   subtractionpig
 } from '../../../api/request'
+import bread from '../../common/bread'
 
 export default {
   name: 'subtraction_pig',
+  components: {
+    bread
+  },
   data () {
     return {
       stationpigs: [],
