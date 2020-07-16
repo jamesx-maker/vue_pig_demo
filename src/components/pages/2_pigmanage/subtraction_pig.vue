@@ -29,7 +29,7 @@
           <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
           <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
           <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
-          <el-table-column label="操作离栏" align="center">
+          <el-table-column label="是否离栏" align="center">
             <template slot-scope="scope">
               <el-button size="mini" type="danger" @click="subpigs(scope.row.pigid)">离栏</el-button>
             </template>

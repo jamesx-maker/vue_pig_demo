@@ -86,12 +86,18 @@ const routes = [
       {
         path: '/linefit',
         component: () => import(/* webpackChunkName: "form" */ '../components/pages/4_analysis/linefit'),
-        meta: { title: '背膘变化模拟' }
+        meta: {
+          title: '背膘变化模拟',
+          permission: true
+        }
       },
       {
         path: '/intake_spread',
         component: () => import(/* webpackChunkName: "form" */ '../components/pages/4_analysis/intakespread'),
-        meta: { title: '采食分布' }
+        meta: {
+          title: '采食分布',
+          permission: true
+        }
       },
       {
         path: '/errorcode',

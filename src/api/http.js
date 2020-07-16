@@ -49,7 +49,7 @@ axios.interceptors.response.use(
     const { status } = error.response
 
     if (status === 401) {
-      Message.error('登录失败，请重试')
+      Message.error('用户名或密码错误，请重试')
       // 清楚token
       localStorage.removeItem('eToken')
       // 跳转到登录页面

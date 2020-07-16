@@ -3,7 +3,7 @@
       <div class="crumbs">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item>
-            <i class="el-icon-magic-stick"></i> 数据查询
+            <i class="el-icon-s-data"></i> 数据查询
           </el-breadcrumb-item>
           <el-breadcrumb-item>默认饲喂量</el-breadcrumb-item>
         </el-breadcrumb>

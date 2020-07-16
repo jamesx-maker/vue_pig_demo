@@ -147,7 +147,7 @@ export default {
           ]
         },
         {
-          icon: 'el-icon-data-line',
+          icon: 'el-icon-s-opportunity',
           index: 'machine_manage',
           title: '设备管理',
           subs: [
