@@ -84,9 +84,9 @@ const routes = [
         meta: { title: '饲料消耗' }
       },
       {
-        path: '/growfit',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_analysis/growfit'),
-        meta: { title: '生长拟合' }
+        path: '/linefit',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_analysis/linefit'),
+        meta: { title: '背膘变化模拟' }
       },
       {
         path: '/intake_spread',
@@ -121,11 +121,6 @@ const routes = [
       // 默认
       // 默认
       // 默认
-      {
-        path: '/icon',
-        component: () => import(/* webpackChunkName: "icon" */ '../components/pages/Icon.vue'),
-        meta: { title: '自定义图标' }
-      },
       {
         path: '/table',
         component: () => import(/* webpackChunkName: "table" */ '../components/pages/BaseTable.vue'),

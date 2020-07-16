@@ -13,7 +13,7 @@
           <el-col :span="6">
             <el-select v-model="pig_stationid"
                        placeholder="请选择饲喂站"
-                       @change="getstationpig(pig_stationid)"
+                       @change="getstationintake(pig_stationid)"
                        size="250px">
               <el-option
                 v-for="item in station_options"
@@ -37,17 +37,17 @@
                 icon="el-icon-edit"
                 size="mini"
                 circle
-                @click="setbackfat(scope.row.pigid,scope.row.backfat)"
+                @click="set(scope.row.pigid)"
               ></el-button>
             </template>
           </el-table-column>
-          <el-table-column label="妊娠天数" prop="" width="120px" align="center"></el-table-column>
-          <el-table-column label="采食量/kg" prop="" align="center"></el-table-column>
-          <el-table-column label="默认采食量/kg" prop="" align="center"></el-table-column>
-          <el-table-column label="推荐采食量/kg" prop="" align="center"></el-table-column>
+          <el-table-column label="妊娠天数" prop="breeddays" width="120px" align="center"></el-table-column>
+          <el-table-column label="采食量/kg" prop="final_quantity" align="center"></el-table-column>
+          <el-table-column label="默认采食量/kg" prop="index_quantity" align="center"></el-table-column>
+          <el-table-column label="推荐采食量/kg" prop="algo_quantity" align="center"></el-table-column>
           <el-table-column label="修订采食量/kg" align="center">
             <template slot-scope="scope">
-              <el-input placeholder="请输入采食量" v-model="scope.row.setnum"></el-input>
+              <el-input placeholder="请输入采食量" v-model="scope.row.setnum" class="input2"></el-input>
               <el-button
                 style="margin-left: 15px"
                 type="success"
@@ -59,6 +59,17 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-dialog title="设置背膘厚" :visible.sync="dialogFormVisible" width="400px"  style="margin-left: 80px">
+          <el-input
+            v-model="newbackfat"
+            placeholder="请输入背膘厚"
+            class="input1"
+          ></el-input>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="close">取 消</el-button>
+            <el-button type="primary" @click="setbackfat">确 定</el-button>
+          </div>
+        </el-dialog>
       </div>
     </div>
 </template>
@@ -66,7 +77,9 @@
 <script>
 import {
   getstation,
-  getStationPig
+  getintake,
+  changebackfat,
+  changeintake
 } from '../../../api/request'
 
 export default {
@@ -77,7 +90,10 @@ export default {
       existpigs: [],
       pig_stationid: '',
       stationpigs: [],
-      setfeed: ''
+      newbackfat: '',
+      setfeed: '',
+      sendpigid: '',
+      dialogFormVisible: false
     }
   },
   created () {
@@ -87,34 +103,78 @@ export default {
     })
   },
   methods: {
-    getstationpig (id) {
-      getStationPig({ id: id }).then(res => {
-        // console.log(res)
+    getstationintake (id) {
+      getintake({ id: id }).then(res => {
+        console.log(res)
         this.existpigs = res.data.stationpig
       })
     },
-    setbackfat (pigid, newbackfat) {
-      console.log(pigid)
-      console.log(newbackfat)
+    set (pigid) {
+      this.sendpigid = pigid
+      this.dialogFormVisible = true
     },
-    setintake (pigid, setnum) {
-      this.$confirm('此操作将修改母猪采食量,是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        console.log(pigid)
-        console.log(setnum)
+    setbackfat () {
+      if (this.newbackfat === '') {
+        this.$message({
+          type: 'warning',
+          message: '输入错误,请重新输入'
+        })
+      } else {
+        console.log(this.sendpigid)
+        console.log(this.newbackfat)
+        changebackfat({ pigid: this.sendpigid, backfat: this.newbackfat }).then(res => {
+          console.log(res)
+          getintake({ id: this.pig_stationid }).then(res => {
+            console.log(res)
+            this.existpigs = res.data.stationpig
+          })
+        })
         this.$message({
           type: 'success',
-          message: '设置采食量成功!'
+          message: '设置背膘厚成功!'
         })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消设置'
-        })
+        this.dialogFormVisible = false
+      }
+    },
+    close () {
+      this.dialogFormVisible = false
+      this.$message({
+        type: 'info',
+        message: '已取消设置'
       })
+    },
+    setintake (pigid, setnum) {
+      if (setnum === undefined) {
+        this.$message({
+          type: 'warning',
+          message: '没有输入采食量'
+        })
+      } else {
+        this.$confirm('此操作将修改母猪采食量,是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          // console.log(setnum)
+          // console.log(typeof (setnum))
+          changeintake({ pigid: pigid, setnum: setnum }).then(res => {
+            console.log(res)
+            getintake({ id: this.pig_stationid }).then(res => {
+              console.log(res)
+              this.existpigs = res.data.stationpig
+            })
+          })
+          this.$message({
+            type: 'success',
+            message: '设置采食量成功!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消设置'
+          })
+        })
+      }
     }
   }
 }
@@ -131,11 +191,11 @@ export default {
   width: auto;
   max-width: 202px;
 }
-.date-picker{
-  max-width: 202px !important;
-  width: auto;
+.input1{
+  width: 250px;
+  margin-left: 55px;
 }
-.el-input{
+.input2{
   width: 120px;
 }
 </style>

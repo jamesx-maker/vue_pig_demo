@@ -91,10 +91,37 @@ export function changeearid (data) {
   })
 }
 
+// 获取采食
+export function getintake (data) {
+  return axios({
+    url: `${base.url}/setintake/`,
+    method: 'get',
+    params: data
+  })
+}
+
+// 设置背膘
+export function changebackfat (data) {
+  return axios({
+    url: `${base.url}/setintake/`,
+    method: 'post',
+    data: JSON.stringify(data)
+  })
+}
+
+// 设置下料
+export function changeintake (data) {
+  return axios({
+    url: `${base.url}/setintake/`,
+    method: 'put',
+    data: JSON.stringify(data)
+  })
+}
+
 // 获取拟合散点
 export function getpoint () {
   return axios({
-    url: `${base.url}/getpoint/`,
+    url: `${base.url}/linefit/`,
     method: 'get'
   })
 }

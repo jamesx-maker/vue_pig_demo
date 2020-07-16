@@ -137,8 +137,8 @@ export default {
           title: '统计分析',
           subs: [
             {
-              index: 'growfit',
-              title: '生长拟合'
+              index: 'linefit',
+              title: '背膘变化模拟'
             },
             {
               index: 'intake_spread',
@@ -171,11 +171,6 @@ export default {
               title: '其他设置'
             }
           ]
-        },
-        {
-          icon: 'el-icon-lx-emoji',
-          index: 'icon',
-          title: '自定义图标'
         },
         {
           icon: 'el-icon-lx-global',

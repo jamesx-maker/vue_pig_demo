@@ -185,6 +185,7 @@ export default {
       })
     },
     addpigs () {
+      console.log(this.addpig.backfat)
       additionpig(this.addpig).then((res) => {
         if (res.status === 201) {
           this.$message.warning(res.data.code)
