@@ -1,37 +1,37 @@
 <template>
-    <div>
-      <bread bigtitle="母猪管理" smalltitle="离栏" icon="el-icon-magic-stick"></bread>
-      <div class="container">
-        <el-row :gutter="20" class="row">
-          <el-col :span="6">
-            <el-select v-model="subpig.pig_stationid"
-                       clearable
-                       placeholder="请选择饲喂站"
-                       @change="getstationpig(subpig.pig_stationid)"
-                       size="250px"
-                       filterable
-            >
-              <el-option
-                v-for="item in station_options"
-                :key="item.index"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-col>
-        </el-row>
-        <el-table :data="existpigs" border>
-          <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
-          <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-          <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
-          <el-table-column label="是否离栏" align="center">
-            <template slot-scope="scope">
-              <el-button size="mini" type="danger" @click="subpigs(scope.row.pigid)">离栏</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+  <div>
+    <bread bigtitle="母猪管理" smalltitle="离栏" icon="el-icon-magic-stick"></bread>
+    <div class="container">
+      <el-row :gutter="20" class="row">
+        <el-col :span="6">
+          <el-select v-model="subpig.pig_stationid"
+                     clearable
+                     placeholder="请选择饲喂站"
+                     @change="getstationpig(subpig.pig_stationid)"
+                     size="250px"
+                     filterable
+          >
+            <el-option
+              v-for="item in station_options"
+              :key="item.index"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
+      <el-table :data="existpigs" border>
+        <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
+        <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
+        <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
+        <el-table-column label="是否离栏" align="center">
+          <template slot-scope="scope">
+            <el-button size="mini" type="danger" @click="subpigs(scope.row.pigid)">离栏</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
+  </div>
 </template>
 
 <script>
