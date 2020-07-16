@@ -9,6 +9,7 @@
 export default {
   name: 'app',
   created () {
+    // console.log(this.$store.state.station_list)
   }
 }
 </script>
