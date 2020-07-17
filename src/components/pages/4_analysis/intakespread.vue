@@ -35,7 +35,7 @@
             </el-select>
           </el-col>
           <el-col :span="6">
-            <el-button type="primary" >查询</el-button>
+            <el-button type="primary" @click="picture">查询</el-button>
           </el-col>
         </el-row>
       </div>
@@ -77,6 +77,7 @@ export default {
         xAxis: [
           {
             type: 'category',
+            name: '时间',
             data: ['2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22', '24'],
             axisTick: {
               alignWithLabel: true
@@ -86,6 +87,7 @@ export default {
         yAxis: [
           {
             type: 'value',
+            name: '占比/%',
             axisLine: {
               symbol: ['none', 'arrow']
             },
@@ -101,7 +103,7 @@ export default {
             name: '采食量',
             type: 'bar',
             barWidth: '60%',
-            data: [1.2, 1.7, 2.1, 2.3, 2.6, 3.0, 3.2, 2.9, 2.2, 1.5, 0.8, 0.3]
+            data: []
           }
         ]
       },
@@ -117,10 +119,30 @@ export default {
       const myChart = echarts.init(document.getElementById('main'))
       // 指定图表的配置项和数据
       myChart.setOption(this.echarts_option)
+    },
+    picture () {
+      this.echarts_option.series[0].data = [4, 7, 11, 15, 19, 25, 26, 20, 17, 13, 8, 3]
     }
   },
   mounted () {
     this.draw()
+  },
+  watch: {
+    // 观察option的变化
+    echarts_option: {
+      handler (newVal, oldVal) {
+        if (this.myChart) {
+          if (newVal) {
+            this.myChart.setOption(newVal)
+          } else {
+            this.myChart.setOption(oldVal)
+          }
+        } else {
+          this.draw()
+        }
+      },
+      deep: true // 对象内部属性的监听，关键。
+    }
   }
 }
 </script>

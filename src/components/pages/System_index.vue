@@ -19,7 +19,7 @@
           </div>
           <div class="user-info-list">
             上次登录时间：
-            <span>2020-06-14</span>
+            <span>2020-07-17</span>
           </div>
           <div class="user-info-list">
             上次登录地点：
@@ -132,7 +132,7 @@ export default {
       name: localStorage.getItem('ms_username'),
       todoList: [
         {
-          title: '下周三要添加饲料',
+          title: '耳标损坏',
           status: false
         },
         {

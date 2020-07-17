@@ -111,11 +111,11 @@ export default {
             },
             {
               index: 'delivery_warn',
-              title: '分娩信息'
+              title: '分娩提醒'
             },
             {
               index: 'farrow',
-              title: '生产信息'
+              title: '分娩信息录入'
             },
             {
               index: 'pigreport',

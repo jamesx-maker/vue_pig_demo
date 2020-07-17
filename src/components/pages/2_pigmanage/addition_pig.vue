@@ -76,7 +76,11 @@
           </el-input>
         </el-col>
         <el-col :span="6">
-          <el-input placeholder="请输入胎龄" v-model="addpig.gesage">
+          <el-input
+            placeholder="请输入胎龄"
+            v-model.number="addpig.gesage"
+            maxlength="2"
+            show-word-limit>
           </el-input>
         </el-col>
         <el-col :span="6">
@@ -84,7 +88,10 @@
             placeholder="请选择疫苗情况"
             v-model="addpig.vaccine"
             multiple
-            collapse-tags>
+            collapse-tags
+            clearable
+            filterable
+            allow-create>
             <el-option
               v-for="item in vaccine_options"
               :key="item.value"

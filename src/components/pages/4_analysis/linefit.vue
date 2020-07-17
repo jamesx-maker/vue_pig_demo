@@ -24,7 +24,7 @@
             </el-input>
           </el-col>
           <el-col :span="6">
-            <el-button type="primary" >查询</el-button>
+            <el-button type="primary" @click="picture">查询</el-button>
           </el-col>
         </el-row>
       </div>
@@ -161,6 +161,9 @@ export default {
         this.echarts_option.series[1].data = this.generateData(this.Line, Param)
       })
     },
+    picture () {
+      this.GetPicture()
+    },
     draw () {
       // 基于准备好的dom，初始化echarts实例
       const myChart = echarts.init(document.getElementById('main'))
@@ -169,7 +172,6 @@ export default {
     }
   },
   created () {
-    this.GetPicture()
     getstation({ pageIndex: '空' }).then(res => {
       // console.log(res)
       this.station_options = res.data.station_options
