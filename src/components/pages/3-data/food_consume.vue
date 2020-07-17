@@ -6,9 +6,24 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <el-select
-              v-model="pig_stationid"
+              v-model="roomid"
+              placeholder="请选择单元号"
+              @change="getroomid(roomid)"
+              filterable
+              clearable>
+              <el-option
+                v-for="item in room_options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-col>
+          <el-col :span="6">
+            <el-select
+              v-model="stationid"
               placeholder="请选择饲喂站"
-              @change="getstationpig(pig_stationid)"
+              @change="getstationid(stationid)"
               filterable
               clearable>
               <el-option
@@ -18,10 +33,6 @@
                 :value="item.value">
               </el-option>
             </el-select>
-          </el-col>
-          <el-col :span="6">
-            <el-input placeholder="请输入耳标号">
-            </el-input>
           </el-col>
           <el-col :span="6">
             <el-date-picker
@@ -86,8 +97,11 @@ export default {
         ]
       },
       pig_stationid: '',
+      room_options: [],
       station_options: [],
-      datavalue: ''
+      datavalue: '',
+      roomid: '',
+      stationid: ''
     }
   },
   created () {

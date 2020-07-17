@@ -1,23 +1,18 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-data-line"></i> 统计分析
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>采食分布</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <bread bigtitle="统计分析" smalltitle="采食分布" icon="el-icon-data-line"></bread>
     <div class="container">
       <div>
         <el-row :gutter="20">
           <el-col :span="6">
             <el-select
-              v-model="pig_stationid"
-              placeholder="请选择饲喂站"
-              @change="getstationpig(pig_stationid)">
+              v-model="roomid"
+              placeholder="请选择单元号"
+              @change="getroomid(roomid)"
+              filterable
+              clearable>
               <el-option
-                v-for="item in station_options"
+                v-for="item in room_options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -25,8 +20,19 @@
             </el-select>
           </el-col>
           <el-col :span="6">
-            <el-input placeholder="请输入耳标号">
-            </el-input>
+            <el-select
+              v-model="stationid"
+              placeholder="请选择饲喂站"
+              @change="getstationid(stationid)"
+              filterable
+              clearable>
+              <el-option
+                v-for="item in station_options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-col>
           <el-col :span="6">
             <el-button type="primary" >查询</el-button>
@@ -41,8 +47,13 @@
 
 <script>
 import echarts from 'echarts'
+import bread from '../../common/bread'
+
 export default {
   name: 'intakespread',
+  components: {
+    bread
+  },
   data () {
     return {
       echarts_option: {
@@ -93,7 +104,11 @@ export default {
             data: [1.2, 1.7, 2.1, 2.3, 2.6, 3.0, 3.2, 2.9, 2.2, 1.5, 0.8, 0.3]
           }
         ]
-      }
+      },
+      roomid: '',
+      stationid: '',
+      station_options: [],
+      room_options: []
     }
   },
   methods: {
