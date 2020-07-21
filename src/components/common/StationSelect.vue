@@ -17,9 +17,6 @@
 </template>
 
 <script>
-import {
-  getstation
-} from '../../api/request'
 
 export default {
   name: 'StationSelect',
@@ -29,9 +26,9 @@ export default {
       StationId: ''
     }
   },
-  async created () {
-    const res = await getstation()
-    this.StationList = res.data.station_options
+  created () {
+    this.StationList = this.$store.state.StationIist
+    // console.log(this.StationList)
   },
   methods: {
     getstationpig (StationId) {

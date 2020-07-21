@@ -7,14 +7,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     RoomId: 0,
-    StationId: 0
+    StationIist: []
   },
   mutations: {
     SetRoomId (state, RoomId) {
       state.RoomId = RoomId
     },
-    SetStationId (state, StationId) {
-      state.StationId = StationId
+    SetStationId (state, StationIist) {
+      state.StationIist = StationIist
     }
   },
   actions: {
