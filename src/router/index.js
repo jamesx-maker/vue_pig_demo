@@ -127,6 +127,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/errorreport'),
         meta: { title: '异常信息报告' }
       },
+      {
+        path: '/test',
+        component: () => import(/* webpackChunkName: "form" */ '../components/pages/test'),
+        meta: { title: '测试页面' }
+      },
       // 默认
       // 默认
       // 默认

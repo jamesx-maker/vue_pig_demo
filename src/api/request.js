@@ -40,7 +40,7 @@ export function getstation (data) {
   return axios({
     url: `${base.url}/station/`,
     method: 'get',
-    params: data
+    params: data || {}
     // params: { params: JSON.stringify(data) }
   })
 }

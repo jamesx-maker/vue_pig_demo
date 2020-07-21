@@ -172,17 +172,7 @@ export default {
         }
       ],
       existpigs: [],
-      addpig: {
-        // pig_stationid: '',
-        // pigid: '',
-        // earid: '',
-        // kind: '',
-        // malepignum: '',
-        // backfat: '',
-        // gesage: '',
-        // vaccine: [],
-        // breedtime: ''
-      }
+      addpig: {}
     }
   },
   components: {

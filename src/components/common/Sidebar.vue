@@ -178,6 +178,11 @@ export default {
               title: '默认饲喂量'
             }
           ]
+        },
+        {
+          icon: 'el-icon-lx-global',
+          index: 'test',
+          title: '测试页面'
         }
         // {
         //   icon: 'el-icon-lx-global',
