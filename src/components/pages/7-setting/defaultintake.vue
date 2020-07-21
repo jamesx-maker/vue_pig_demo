@@ -28,19 +28,19 @@
                 align="center">
               </el-table-column>
               <el-table-column
-                prop="date"
+                prop="value1"
                 label="50-100"
                 width="100"
                 align="center">
               </el-table-column>
               <el-table-column
-                prop="name"
+                prop="value2"
                 label="100-150"
                 width="100"
                 align="center">
               </el-table-column>
               <el-table-column
-                prop="address"
+                prop="value3"
                 label="150-200"
                 width="100"
                 align="center">
@@ -127,31 +127,31 @@ export default {
       tableData: [
         {
           key: '妊娠初期',
-          date: '1.0',
-          name: '1.2',
-          address: '1.4',
+          value1: '1.0',
+          value2: '1.2',
+          value3: '1.4',
           value4: '1.6'
         },
         {
           key: '妊娠前期',
-          date: '1.80',
-          name: '1.92',
-          address: '2.07',
-          value4: '2.20'
+          value1: '1.0',
+          value2: '1.2',
+          value3: '1.4',
+          value4: '1.6'
         },
         {
           key: '妊娠中期',
-          date: '2.20',
-          name: '2.40',
-          address: '2.60',
-          value4: '2.80'
+          value1: '1.0',
+          value2: '1.2',
+          value3: '1.4',
+          value4: '1.6'
         },
         {
           key: '妊娠后期',
-          date: '3.00',
-          name: '3.25',
-          address: '3.50',
-          value4: '3.75'
+          value1: '1.0',
+          value2: '1.2',
+          value3: '1.4',
+          value4: '1.6'
         }],
       timeData: [
         {
