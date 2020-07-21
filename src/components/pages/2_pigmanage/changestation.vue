@@ -4,20 +4,21 @@
     <div class="container">
       <el-row :gutter="20" class="row">
         <el-col :span="6">
-          <el-select v-model="pig_stationid"
-                     clearable
-                     placeholder="请选择饲喂站"
-                     @change="getstationpig(pig_stationid)"
-                     size="250px"
-                     filterable
-          >
-            <el-option
-              v-for="item in station_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <StationSelect @StationChange="PigChange"></StationSelect>
+<!--          <el-select v-model="pig_stationid"-->
+<!--                     clearable-->
+<!--                     placeholder="请选择饲喂站"-->
+<!--                     @change="getstationpig(pig_stationid)"-->
+<!--                     size="250px"-->
+<!--                     filterable-->
+<!--          >-->
+<!--            <el-option-->
+<!--              v-for="item in station_options"-->
+<!--              :key="item.value"-->
+<!--              :label="item.label"-->
+<!--              :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
         </el-col>
       </el-row>
       <el-table :data="existpigs" border>
@@ -33,7 +34,7 @@
       <el-dialog title="请选择新的饲喂站" :visible.sync="dialogFormVisible" width="400px">
         <el-select v-model="newstation" placeholder="请选择新的饲喂站" style="margin-left: 80px">
           <el-option
-            v-for="item in station_options"
+            v-for="item in NewStationList"
             :key="item.index"
             :label="item.label"
             :value="item.value">
@@ -50,40 +51,37 @@
 
 <script>
 import {
-  getstation,
   getStationPig,
   changestation
 } from '../../../api/request'
 import bread from '../../common/bread'
+import StationSelect from '../../common/StationSelect'
 
 export default {
   name: 'changestation',
   data () {
     return {
-      station_options: [],
+      NewStationList: [],
       existpigs: [],
       dialogFormVisible: false,
       newstation: '',
-      pig_stationid: '',
+      NowStationId: '',
       sendpigid: ''
     }
   },
   components: {
-    bread
-  },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
+    bread,
+    StationSelect
   },
   methods: {
-    getstationpig (id) {
-      // console.log(id)
-      getStationPig({ id: id }).then(res => {
-        // console.log(res)
-        this.existpigs = res.data.stationpig
-      })
+    async GetPigs () {
+      const res = await getStationPig({ id: this.NowStationId })
+      this.existpigs = res.data.stationpig
+    },
+    PigChange (StationId, StationList) {
+      this.NowStationId = StationId
+      this.NewStationList = StationList
+      this.GetPigs()
     },
     close () {
       this.dialogFormVisible = false
@@ -93,7 +91,6 @@ export default {
       })
     },
     change (pigid) {
-      // console.log(pigid)
       this.sendpigid = pigid
       this.dialogFormVisible = true
     },
@@ -108,14 +105,11 @@ export default {
         changestation({ newstation: this.newstation, pigid: this.sendpigid }).then(res => {
           console.log(res)
           this.dialogFormVisible = false
-          getStationPig({ id: this.pig_stationid }).then(res => {
-            // console.log(res)
-            this.existpigs = res.data.stationpig
+          this.GetPigs()
+          this.$message({
+            type: 'success',
+            message: '转栏成功'
           })
-        })
-        this.$message({
-          type: 'success',
-          message: '转栏成功'
         })
       }
     }

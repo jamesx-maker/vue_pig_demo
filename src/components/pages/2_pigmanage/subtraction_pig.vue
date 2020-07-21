@@ -4,20 +4,7 @@
     <div class="container">
       <el-row :gutter="20" class="row">
         <el-col :span="6">
-          <el-select v-model="subpig.pig_stationid"
-                     clearable
-                     placeholder="请选择饲喂站"
-                     @change="getstationpig(subpig.pig_stationid)"
-                     size="250px"
-                     filterable
-          >
-            <el-option
-              v-for="item in station_options"
-              :key="item.index"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <StationSelect @StationChange="PigChange"></StationSelect>
         </el-col>
       </el-row>
       <el-table :data="existpigs" border>
@@ -36,43 +23,39 @@
 
 <script>
 import {
-  getstation,
   getStationPig,
   subtractionpig
 } from '../../../api/request'
 import bread from '../../common/bread'
+import StationSelect from '../../common/StationSelect'
 
 export default {
   name: 'subtraction_pig',
   components: {
-    bread
+    bread,
+    StationSelect
   },
   data () {
     return {
       stationpigs: [],
       station_options: [],
       existpigs: [],
+      NowStationId: '',
       subpig: {
-        pig_stationid: '',
         pigid: '',
         earid: '',
         pigkind: ''
       }
     }
   },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
-  },
   methods: {
-    getstationpig (id) {
-      // console.log(id)
-      getStationPig({ id: id }).then(res => {
-        // console.log(res)
-        this.existpigs = res.data.stationpig
-      })
+    async GetPigs () {
+      const res = await getStationPig({ id: this.NowStationId })
+      this.existpigs = res.data.stationpig
+    },
+    PigChange (StationId) {
+      this.NowStationId = StationId
+      this.GetPigs()
     },
     subpigs (pigid) {
       console.log(pigid)
@@ -82,14 +65,11 @@ export default {
         type: 'warning'
       }).then(() => {
         subtractionpig({ pigid: pigid }).then(res => {
-          getStationPig({ id: this.subpig.pig_stationid }).then(res => {
-            // console.log(res)
-            this.existpigs = res.data.stationpig
+          this.GetPigs()
+          this.$message({
+            type: 'success',
+            message: '离栏成功!'
           })
-        })
-        this.$message({
-          type: 'success',
-          message: '离栏成功!'
         })
       }).catch(() => {
         this.$message({

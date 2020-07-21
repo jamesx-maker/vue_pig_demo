@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getstationpig (StationId) {
-      this.$emit('StationChange', StationId)
+      this.$emit('StationChange', StationId, this.StationList)
     }
   }
 }
