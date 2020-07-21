@@ -5,20 +5,6 @@
       <el-row :gutter="20" class="row">
         <el-col :span="6">
           <StationSelect @StationChange="PigChange"></StationSelect>
-<!--          <el-select v-model="pig_stationid"-->
-<!--                     clearable-->
-<!--                     placeholder="请选择饲喂站"-->
-<!--                     @change="getstationpig(pig_stationid)"-->
-<!--                     size="250px"-->
-<!--                     filterable-->
-<!--          >-->
-<!--            <el-option-->
-<!--              v-for="item in station_options"-->
-<!--              :key="item.value"-->
-<!--              :label="item.label"-->
-<!--              :value="item.value">-->
-<!--            </el-option>-->
-<!--          </el-select>-->
         </el-col>
       </el-row>
       <el-table :data="existpigs" border>

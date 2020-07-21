@@ -4,20 +4,21 @@
     <div class="container">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-select v-model="addpig.pig_stationid"
-                     clearable
-                     placeholder="请选择饲喂站"
-                     @change="getstationpig(addpig.pig_stationid)"
-                     size="250px"
-                     filterable
-          >
-            <el-option
-              v-for="item in station_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <StationSelect @StationChange="PigChange"></StationSelect>
+<!--          <el-select v-model="addpig.pig_stationid"-->
+<!--                     clearable-->
+<!--                     placeholder="请选择饲喂站"-->
+<!--                     @change="getstationpig(addpig.pig_stationid)"-->
+<!--                     size="250px"-->
+<!--                     filterable-->
+<!--          >-->
+<!--            <el-option-->
+<!--              v-for="item in station_options"-->
+<!--              :key="item.value"-->
+<!--              :label="item.label"-->
+<!--              :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
         </el-col>
         <el-col :span="6">
           <el-input
@@ -121,11 +122,12 @@
 
 <script>
 import {
-  getstation,
   getStationPig,
   additionpig
 } from '../../../api/request'
+
 import bread from '../../common/bread'
+import StationSelect from '../../common/StationSelect'
 
 export default {
   name: 'addition_pig',
@@ -136,7 +138,6 @@ export default {
           return time.getTime() > Date.now()
         }
       },
-      station_options: [],
       vaccine_options: [
         {
           value: '疫苗1',
@@ -172,17 +173,13 @@ export default {
         }
       ],
       existpigs: [],
-      addpig: {}
+      addpig: {},
+      NowStationId: ''
     }
   },
   components: {
-    bread
-  },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
+    bread,
+    StationSelect
   },
   methods: {
     // 高位补0函数
@@ -192,28 +189,30 @@ export default {
       }
       return (Array(len).join(0) + num).slice(-len)
     },
-    getstationpig (id) {
-      // console.log(id)
-      getStationPig({ id: id }).then(res => {
-        // console.log(res)
-        this.existpigs = res.data.stationpig
-      })
+    async GetPigs () {
+      const res = await getStationPig({ id: this.NowStationId })
+      this.existpigs = res.data.stationpig
+    },
+    PigChange (StationId) {
+      this.NowStationId = StationId
+      this.GetPigs()
     },
     addpigs () {
-      // console.log(this.addpig.backfat)
-      this.addpig.vaccine.join(',')
+      if (this.addpig.vaccine.length === 0) {
+        this.addpig.vaccine = ['暂无']
+      } else {
+        this.addpig.vaccine.join(',')
+      }
       this.addpig.pigid = this.formatZero(this.addpig.pigid, 15)
       this.addpig.earid = this.formatZero(this.addpig.earid, 8)
       this.addpig.malepignum = this.formatZero(this.addpig.malepignum, 8)
+      this.addpig.pig_stationid = this.NowStationId
       additionpig(this.addpig).then((res) => {
         if (res.status === 201) {
           this.$message.warning(res.data.code)
         } else {
-          getStationPig({ id: this.addpig.pig_stationid }).then(res => {
-            // console.log(res)
-            this.existpigs = res.data.stationpig
-            this.addpig = {}
-          })
+          this.GetPigs()
+          this.addpig = {}
           this.$message.success(res.data.code)
         }
       })

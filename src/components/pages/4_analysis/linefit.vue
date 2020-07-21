@@ -3,30 +3,7 @@
     <bread bigtitle="统计分析" smalltitle="背膘变化模拟" icon="el-icon-data-line"></bread>
     <div class="container">
       <div>
-        <el-row :gutter="20">
-          <el-col :span="6">
-            <el-select
-              v-model="pig_stationid"
-              placeholder="请选择饲喂站"
-              @change="getstationpig(pig_stationid)"
-              filterable
-              clearable>
-              <el-option
-                v-for="item in station_options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-col>
-          <el-col :span="6">
-            <el-input placeholder="请输入耳标号">
-            </el-input>
-          </el-col>
-          <el-col :span="6">
-            <el-button type="primary" @click="picture">查询</el-button>
-          </el-col>
-        </el-row>
+        <linetop @picture="picture"></linetop>
       </div>
       <el-divider></el-divider>
       <div id="main" style="width: 95%;height:600px; margin-top: 30px"></div>
@@ -37,20 +14,19 @@
 <script>
 import echarts from 'echarts'
 import {
-  getpoint,
-  getstation
+  getpoint
 } from '../../../api/request'
 import bread from '../../common/bread'
+import linetop from './linetop'
 
 export default {
   name: 'linefit',
   components: {
-    bread
+    bread,
+    linetop
   },
   data () {
     return {
-      station_options: [],
-      pig_stationid: '',
       echarts_option: {
         title: {
           text: '背膘变化模拟',
@@ -155,13 +131,14 @@ export default {
     },
     GetPicture () {
       getpoint().then(res => {
-        console.log(res)
+        // console.log(res)
         this.echarts_option.series[0].data = res.data.pointdata
         const Param = res.data.coefficient
         this.echarts_option.series[1].data = this.generateData(this.Line, Param)
       })
     },
-    picture () {
+    picture (fitpig) {
+      console.log(fitpig)
       this.GetPicture()
     },
     draw () {
@@ -170,12 +147,6 @@ export default {
       // 指定图表的配置项和数据
       myChart.setOption(this.echarts_option)
     }
-  },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
   },
   mounted () {
     this.draw()
@@ -201,10 +172,4 @@ export default {
 </script>
 
 <style scoped>
-.el-select{
-  width: 210px;
-}
-.el-input{
-  width: 210px;
-}
 </style>

@@ -42,5 +42,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .el-select {
+    width: 210px;
+  }
 </style>

@@ -134,13 +134,11 @@ export default {
       id: -1
     }
   },
-  created () {
-    getstation(this.page).then(res => {
-      console.log(res)
-      this.tableData = res.data.all_station
-      // console.log(res.data.total)
-      this.page.total = res.data.total
-    })
+  async created () {
+    const res = await getstation(this.page)
+    this.tableData = res.data.all_station
+    // console.log(res.data.total)
+    this.page.total = res.data.total
   },
   methods: {
     // 高位补0函数
