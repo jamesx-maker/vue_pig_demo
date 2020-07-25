@@ -4,20 +4,7 @@
     <div class="container">
       <el-row :gutter="20" class="row">
         <el-col :span="6">
-          <el-select v-model="pig_stationid"
-                     clearable
-                     placeholder="请选择饲喂站"
-                     @change="getstationpig(pig_stationid)"
-                     size="250px"
-                     filterable
-          >
-            <el-option
-              v-for="item in station_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <StationSelect @StationChange="PigChange"></StationSelect>
         </el-col>
       </el-row>
       <el-table :data="existpigs" border>
@@ -48,39 +35,42 @@
 
 <script>
 import {
-  getstation,
   getStationPig,
   changeearid
 } from '../../../api/request'
 import bread from '../../common/bread'
+import StationSelect from '../../common/StationSelect'
 
 export default {
   name: 'change_ear',
   components: {
-    bread
+    bread,
+    StationSelect
   },
   data () {
     return {
       newearid: '',
-      station_options: [],
       dialogFormVisible: false,
       existpigs: [],
-      pig_stationid: '',
-      sendpigid: ''
+      sendpigid: '',
+      NowStationId: ''
     }
   },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
-  },
   methods: {
-    getstationpig (id) {
-      getStationPig({ id: id }).then(res => {
-        // console.log(res)
-        this.existpigs = res.data.stationpig
-      })
+    // 高位补0函数
+    formatZero (num, len) {
+      if (String(num).length > len) {
+        return num
+      }
+      return (Array(len).join(0) + num).slice(-len)
+    },
+    async GetPigs () {
+      const res = await getStationPig({ id: this.NowStationId })
+      this.existpigs = res.data.stationpig
+    },
+    PigChange (StationId) {
+      this.NowStationId = StationId
+      this.GetPigs()
     },
     close () {
       this.dialogFormVisible = false
@@ -97,18 +87,16 @@ export default {
     changeearid () {
       // console.log(this.newearid)
       if (typeof (this.newearid) === 'number') {
-        changeearid({ newearid: this.newearid, pigid: this.sendpigid }).then(res => {
+        const newearid = this.formatZero(this.newearid, 8)
+        changeearid({ newearid: newearid, pigid: this.sendpigid }).then(res => {
           // console.log(res)
-          getStationPig({ id: this.pig_stationid }).then(res => {
-            // console.log(res)
-            this.existpigs = res.data.stationpig
+          this.GetPigs()
+          this.$message({
+            type: 'success',
+            message: '更换成功'
           })
         })
         this.dialogFormVisible = false
-        this.$message({
-          type: 'success',
-          message: '更换成功'
-        })
       } else {
         this.$message({
           type: 'warning',

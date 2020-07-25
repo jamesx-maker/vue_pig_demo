@@ -4,19 +4,20 @@
     <div class="container">
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-select v-model="pig_stationid"
-                     placeholder="请选择饲喂站"
-                     @change="getstationintake(pig_stationid)"
-                     size="250px"
-                     filterable
-          >
-            <el-option
-              v-for="item in station_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <StationSelect @StationChange="PigChange"></StationSelect>
+<!--          <el-select v-model="pig_stationid"-->
+<!--                     placeholder="请选择饲喂站"-->
+<!--                     @change="getstationintake(pig_stationid)"-->
+<!--                     size="250px"-->
+<!--                     filterable-->
+<!--          >-->
+<!--            <el-option-->
+<!--              v-for="item in station_options"-->
+<!--              :key="item.value"-->
+<!--              :label="item.label"-->
+<!--              :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
         </el-col>
       </el-row>
       <el-table :data="existpigs" border>
@@ -71,42 +72,38 @@
 
 <script>
 import {
-  getstation,
   getintake,
   changebackfat,
   changeintake
 } from '../../../api/request'
+
 import bread from '../../common/bread'
+import StationSelect from '../../common/StationSelect'
 
 export default {
   name: 'setintake',
   components: {
-    bread
+    bread,
+    StationSelect
   },
   data () {
     return {
-      station_options: [],
+      NowStationId: '',
       existpigs: [],
-      pig_stationid: '',
-      stationpigs: [],
       newbackfat: '',
       setfeed: '',
       sendpigid: '',
       dialogFormVisible: false
     }
   },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
-  },
   methods: {
-    getstationintake (id) {
-      getintake({ id: id }).then(res => {
-        console.log(res)
-        this.existpigs = res.data.stationpig
-      })
+    async GetPigs () {
+      const res = await getintake({ id: this.NowStationId })
+      this.existpigs = res.data.stationpig
+    },
+    PigChange (StationId) {
+      this.NowStationId = StationId
+      this.GetPigs()
     },
     set (pigid) {
       this.sendpigid = pigid
@@ -123,10 +120,7 @@ export default {
         console.log(this.newbackfat)
         changebackfat({ pigid: this.sendpigid, backfat: this.newbackfat }).then(res => {
           console.log(res)
-          getintake({ id: this.pig_stationid }).then(res => {
-            console.log(res)
-            this.existpigs = res.data.stationpig
-          })
+          this.GetPigs()
         })
         this.$message({
           type: 'success',
@@ -157,15 +151,11 @@ export default {
           // console.log(setnum)
           // console.log(typeof (setnum))
           changeintake({ pigid: pigid, setnum: setnum }).then(res => {
-            console.log(res)
-            getintake({ id: this.pig_stationid }).then(res => {
-              console.log(res)
-              this.existpigs = res.data.stationpig
+            this.GetPigs()
+            this.$message({
+              type: 'success',
+              message: '设置采食量成功!'
             })
-          })
-          this.$message({
-            type: 'success',
-            message: '设置采食量成功!'
           })
         }).catch(() => {
           this.$message({

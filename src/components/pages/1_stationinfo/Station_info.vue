@@ -104,7 +104,10 @@
 </template>
 
 <script>
-import { addstation, getstation } from '../../../api/request'
+import {
+  addstation,
+  getstation
+} from '../../../api/request'
 
 export default {
   name: 'Station_info',
@@ -134,13 +137,13 @@ export default {
       id: -1
     }
   },
-  created () {
-    getstation(this.page).then(res => {
-      console.log(res)
-      this.tableData = res.data.all_station
-      // console.log(res.data.total)
-      this.page.total = res.data.total
-    })
+  async created () {
+    this.querystation()
+  },
+  async querystation () {
+    const res = await getstation(this.page)
+    this.tableData = res.data.all_station
+    this.page.total = res.data.total
   },
   methods: {
     // 高位补0函数
@@ -159,13 +162,7 @@ export default {
         addstation(sendpar).then(res => {
           if (res.status === 200) {
             this.$message.success(res.data.code)
-            // console.log(res)
-            getstation(this.page).then(res => {
-              // console.log(res)
-              this.tableData = res.data.all_station
-              console.log(res.data.total)
-              this.page.total = res.data.total
-            })
+            this.querystation()
           } else {
             this.$message.error(res.data.code)
           }

@@ -6,10 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    stationnum: 0,
-    pignum: 0
+    RoomId: 0,
+    StationIist: []
   },
   mutations: {
+    SetRoomId (state, RoomId) {
+      state.RoomId = RoomId
+    },
+    SetStationId (state, StationIist) {
+      state.StationIist = StationIist
+    }
   },
   actions: {
   },

@@ -1,28 +1,11 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-s-data"></i> 数据查询
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>采食信息</el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+    <bread bigtitle="数据查询" smalltitle="采食信息" icon="el-icon-s-data"></bread>
     <div class="container">
       <!--      搜索与添加区域-->
       <el-row :gutter="20">
         <el-col :span="6">
-          <el-select
-            v-model="pig_stationid"
-            placeholder="请选择饲喂站"
-            @change="getstationpig(pig_stationid)">
-            <el-option
-              v-for="item in station_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
+          <StationSelect @StationChange="PigChange"></StationSelect>
         </el-col>
         <el-col :span="6">
           <el-input placeholder="请输入耳标号">
@@ -33,7 +16,7 @@
         </el-col>
       </el-row>
       <!--    饲喂站列表区域-->
-      <el-table border>
+      <el-table border :data="existpigs">
         <el-table-column type="index"></el-table-column>
         <el-table-column label="身份码" ></el-table-column>
         <el-table-column label="耳标号" ></el-table-column>
@@ -67,31 +50,30 @@
 
 <script>
 import {
-  getstation,
   getStationPig
 } from '../../../api/request'
-
+import bread from '../../common/bread'
+import StationSelect from '../../common/StationSelect'
 export default {
   name: 'intakedata',
+  components: {
+    bread,
+    StationSelect
+  },
   data () {
     return {
-      station_options: [],
-      pig_stationid: '',
-      stationpigs: []
+      NowStationId: '',
+      existpigs: []
     }
   },
-  created () {
-    getstation({ pageIndex: '空' }).then(res => {
-      // console.log(res)
-      this.station_options = res.data.station_options
-    })
-  },
   methods: {
-    getstationpig (id) {
-      getStationPig({ id: id }).then(res => {
-        // console.log(res)
-        this.existpigs = res.data.stationpig
-      })
+    async GetPigs () {
+      const res = await getStationPig({ id: this.NowStationId })
+      this.existpigs = res.data.stationpig
+    },
+    PigChange (StationId) {
+      this.NowStationId = StationId
+      this.GetPigs()
     }
   }
 }
