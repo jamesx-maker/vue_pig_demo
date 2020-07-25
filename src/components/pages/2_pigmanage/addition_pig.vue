@@ -105,9 +105,9 @@
         </el-col>
       </el-row>
       <el-table :data="existpigs" border>
-        <el-table-column label="饲喂站号" prop="stationid" align="center"></el-table-column>
-        <el-table-column label="品种" prop="pigkind" align="center"></el-table-column>
-        <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
+        <el-table-column label="饲喂站号" prop="stationid" align="center" width="120px"></el-table-column>
+        <el-table-column label="品种" prop="pigkind" align="center" width="120px"></el-table-column>
+        <el-table-column label="身份码" prop="pigid" align="center" width="140px"></el-table-column>
         <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
         <el-table-column label="与配公猪号" prop="malepignum" align="center"></el-table-column>
         <el-table-column label="配种日期" prop="breedtime" align="center"></el-table-column>

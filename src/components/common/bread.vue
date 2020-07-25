@@ -17,7 +17,10 @@ export default {
     smalltitle: String,
     icon: String
   },
-  name: 'bread'
+  name: 'bread',
+  data () {
+    return {}
+  }
 }
 </script>
 
