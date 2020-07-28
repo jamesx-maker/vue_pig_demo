@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <el-menu
-      class="sidebar-el-menu"
+      class="sidebar-el-menu el-menu-vertical-demo"
       :default-active="onRoutes"
       :collapse="collapse"
       background-color="#324157"

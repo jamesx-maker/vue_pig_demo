@@ -30,14 +30,15 @@
           <div slot="header" class="clearfix">
             <span>品种详情</span>
           </div>
-          长白
-          <el-progress :percentage="71.3" color="#42b983"></el-progress>
-          大白
-          <el-progress :percentage="24.1" color="#f1e05a"></el-progress>
-          梅山
-          <el-progress :percentage="13.7"></el-progress>
-          杜洛克
-          <el-progress :percentage="5.9" color="#f56c6c"></el-progress>
+          <PigProgress></PigProgress>
+<!--          长白-->
+<!--          <el-progress :percentage="71.3" color="#42b983"></el-progress>-->
+<!--          大白-->
+<!--          <el-progress :percentage="24.1" color="#f1e05a"></el-progress>-->
+<!--          梅山-->
+<!--          <el-progress :percentage="13.7"></el-progress>-->
+<!--          杜洛克-->
+<!--          <el-progress :percentage="5.9" color="#f56c6c"></el-progress>-->
         </el-card>
       </el-col>
       <el-col :span="16">
@@ -124,9 +125,13 @@
 <script>
 // import bus from '../common/bus'
 import { getsystem } from '../../api/request'
+import PigProgress from '../common/PigProgress'
 
 export default {
   name: 'system_index',
+  components: {
+    PigProgress
+  },
   data () {
     return {
       name: localStorage.getItem('ms_username'),
