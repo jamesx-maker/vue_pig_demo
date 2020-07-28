@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/home',
-    component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
+    component: () => import(/* webpackChunkName: "home" */ '../components/home/Home.vue'),
     meta: { title: '自述文件' },
     children: [
       {

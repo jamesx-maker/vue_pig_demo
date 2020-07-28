@@ -8,34 +8,7 @@
       </el-breadcrumb>
     </div>
     <div class="container">
-        <div class="handle-box">
-          <el-row :gutter="20">
-            <el-col :span="6">
-              <el-input v-model.number="query.room"
-                        placeholder="请输入单元号"
-                        maxlength="2"
-                        show-word-limit
-                        class="handle-input mr10">
-              </el-input>
-            </el-col>
-            <el-col :span="6">
-              <el-input
-                v-model.number="query.station_id"
-                placeholder="饲喂站号"
-                maxlength="4"
-                show-word-limit
-                class="handle-input mr10"
-              ></el-input>
-            </el-col>
-            <el-col :span="6">
-              <el-button
-          type="primary"
-          icon="el-icon-check"
-          @click="handleAddition"
-        >添加</el-button>
-            </el-col>
-          </el-row>
-      </div>
+      <AddStationForm @AddNewStation="HandleAddition"></AddStationForm>
       <el-divider></el-divider>
       <el-table
         :data="tableData"
@@ -87,7 +60,7 @@
     </div>
     <!-- 编辑弹出框 -->
     <el-dialog title="开关机" :visible.sync="editVisible" width="30%">
-      <div align="center">
+      <div>
         <el-button
           icon="el-icon-check"
           type="success"
@@ -108,15 +81,15 @@ import {
   addstation,
   getstation
 } from '../../../api/request'
+import AddStationForm from '../../common/AddStationForm'
 
 export default {
   name: 'Station_info',
+  components: {
+    AddStationForm
+  },
   data () {
     return {
-      query: {
-        room: '',
-        station_id: ''
-      },
       page: {
         pageIndex: 1,
         pageSize: 10,
@@ -140,39 +113,24 @@ export default {
   async created () {
     this.querystation()
   },
-  async querystation () {
-    const res = await getstation(this.page)
-    this.tableData = res.data.all_station
-    this.page.total = res.data.total
-  },
   methods: {
-    // 高位补0函数
-    formatZero (num, len) {
-      if (String(num).length > len) {
-        return num
-      }
-      return (Array(len).join(0) + num).slice(-len)
+    async querystation () {
+      const res = await getstation(this.page)
+      this.tableData = res.data.all_station
+      this.page.total = res.data.total
     },
     // 触发添加按钮
-    handleAddition () {
-      if (typeof (this.query.room) === 'number' && typeof (this.query.station_id) === 'number') {
-        const room = this.formatZero(this.query.room, 2)
-        const stationId = this.formatZero(this.query.station_id, 4)
-        const sendpar = room + '-' + stationId
-        addstation(sendpar).then(res => {
-          if (res.status === 200) {
-            this.$message.success(res.data.code)
-            this.querystation()
-          } else {
-            this.$message.error(res.data.code)
-          }
-        })
-        // getstation(this.query).then(res => {
-        //   console.log(res)
-        // })
+    async HandleAddition (SendNewStation) {
+      const res = await addstation(SendNewStation)
+      if (res.status === 200) {
+        this.$message.success(res.data.code)
+        this.querystation()
       } else {
-        this.$message.error('格式错误，请重新输入')
+        this.$message.error(res.data.code)
       }
+      // getstation(this.query).then(res => {
+      //   console.log(res)
+      // })
     },
     // 删除操作
     handleDelete (index) {
@@ -204,14 +162,6 @@ export default {
 </script>
 
 <style scoped>
-  .handle-box {
-    margin-bottom: 20px;
-  }
-
-  .handle-select {
-    width: 120px;
-  }
-
   .handle-input {
     width: 200px;
     display: inline-block;
@@ -224,10 +174,6 @@ export default {
 
   .red {
     color: #ff0000;
-  }
-
-  .mr10 {
-    margin-right: 10px;
   }
 
   .table-td-thumb {
