@@ -14,7 +14,7 @@ export default {
   name: 'app',
   created () {
     getstation().then(res => {
-      this.$store.commit('SetStationId', res.data.station_options)
+      this.$store.commit('Set_Build_Unit_StationId', res.data.station_options)
     })
     // 在页面加载时读取sessionStorage里的状态信息
     if (sessionStorage.getItem('store')) {

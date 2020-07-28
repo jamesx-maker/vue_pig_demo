@@ -5,9 +5,8 @@
       :model="NewStation"
       ref="ValidateForm"
       :rules="rules"
-      hide-required-asterisk
-      class="demo-form-inline">
-      <el-form-item label="栋号：" prop="Building" autocomplete="off">
+      hide-required-asterisk>
+      <el-form-item label="栋号：" prop="Building">
         <el-input
           v-model.number="NewStation.Building"
           placeholder="请输入栋号"
@@ -23,9 +22,9 @@
           show-word-limit
         ></el-input>
       </el-form-item>
-      <el-form-item label="饲喂站号：" prop="Room">
+      <el-form-item label="饲喂站号：" prop="StationId">
         <el-input
-          v-model.number="NewStation.Room"
+          v-model.number="NewStation.StationId"
           placeholder="请输入饲喂站号"
           maxlength="4"
           show-word-limit
@@ -76,7 +75,7 @@ export default {
       NewStation: {
         Building: '',
         Unit: '',
-        Room: ''
+        StationId: ''
       },
       rules: {
         Building: [
@@ -87,7 +86,7 @@ export default {
           { required: true, message: '单元号不能为空', trigger: 'blur' },
           { type: 'number', message: '单元号必须为数字值' }
         ],
-        Room: [
+        StationId: [
           { required: true, message: '饲喂站号不能为空', trigger: 'blur' },
           { type: 'number', message: '饲喂站号必须为数字值' }
         ]
@@ -98,8 +97,8 @@ export default {
     SendNewStation () {
       const Building = this.formatZero(this.NewStation.Building, 2)
       const Unit = this.formatZero(this.NewStation.Unit, 2)
-      const Room = this.formatZero(this.NewStation.Room, 4)
-      return Building + '-' + Unit + '-' + Room
+      const StationId = this.formatZero(this.NewStation.StationId, 4)
+      return Building + '-' + Unit + '-' + StationId
     }
   },
   methods: {

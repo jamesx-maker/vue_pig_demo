@@ -2,7 +2,7 @@
   <div>
     <el-select v-model="StationId"
                clearable
-               placeholder="请选择饲喂站"
+               placeholder="请选择母猪区号"
                @change="getstationpig(StationId)"
                size="250px"
                filterable>

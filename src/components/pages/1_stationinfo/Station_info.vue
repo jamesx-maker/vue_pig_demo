@@ -18,7 +18,7 @@
         header-cell-class-name="table-header"
       >
 <!--        <el-table-column type="selection" width="55" align="center"></el-table-column>-->
-        <el-table-column prop="id" label="饲喂站号" align="center"></el-table-column>
+        <el-table-column prop="build_unit_station" label="饲喂站号" align="center"></el-table-column>
         <el-table-column prop="temperature" label="温度/℃" align="center"></el-table-column>
         <el-table-column prop="humidity" label="湿度" align="center"></el-table-column>
         <el-table-column label="状态" align="center">
@@ -97,7 +97,7 @@ export default {
       },
       tableData: [
         // {
-        //   id: '01 - 0123',
+        //   id: '01--01--0123',
         //   temperature: 25,
         //   humidity: 0.45,
         //   status: '运行中'

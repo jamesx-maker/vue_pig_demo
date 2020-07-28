@@ -13,8 +13,8 @@ export default new Vuex.Store({
     SetRoomId (state, RoomId) {
       state.RoomId = RoomId
     },
-    SetStationId (state, StationIist) {
-      state.StationIist = StationIist
+    Set_Build_Unit_StationId (state, StationList) {
+      state.StationIist = StationList
     }
   },
   actions: {

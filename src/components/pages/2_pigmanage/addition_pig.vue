@@ -2,95 +2,96 @@
   <div>
     <bread bigtitle="母猪管理" smalltitle="入栏" icon="el-icon-magic-stick"></bread>
     <div class="container">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <StationSelect @StationChange="PigChange"></StationSelect>
-        </el-col>
-        <el-col :span="6">
-          <el-input
-            placeholder="请输入身份码"
-            v-model.number="addpig.pigid"
-            maxlength="15"
-            show-word-limit
-          >
-          </el-input>
-        </el-col>
-        <el-col :span="6">
-          <el-input
-            placeholder="请输入耳标号"
-            v-model.number="addpig.earid"
-            maxlength="8"
-            show-word-limit
-          >
-          </el-input>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <template>
-            <div class="block">
-              <span class="demonstration"></span>
-              <el-date-picker
-                class="date-picker"
-                value-format="yyyy-MM-dd"
-                v-model="addpig.breedtime"
-                type="date"
-                :picker-options="pickerOptions"
-                placeholder="选择配种日期">
-              </el-date-picker>
-            </div>
-          </template>
-        </el-col>
-        <el-col :span="6">
-          <el-input placeholder="请输入品种" v-model="addpig.kind">
-          </el-input>
-        </el-col>
-        <el-col :span="6">
-          <el-input
-            placeholder="请输入与配公猪号"
-            v-model.number="addpig.malepignum"
-            maxlength="15"
-            show-word-limit
-          >
-          </el-input>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <el-input
-            placeholder="请输入背膘厚"
-            v-model="addpig.backfat">
-          </el-input>
-        </el-col>
-        <el-col :span="6">
-          <el-input
-            placeholder="请输入胎龄"
-            v-model.number="addpig.gesage"
-            maxlength="2"
-            show-word-limit>
-          </el-input>
-        </el-col>
-        <el-col :span="6">
-          <el-select
-            placeholder="请选择疫苗情况"
-            v-model="addpig.vaccine"
-            multiple
-            collapse-tags
-            clearable
-            filterable
-            allow-create>
-            <el-option
-              v-for="item in vaccine_options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-            </el-option>
-          </el-select>
-        </el-col>
-        <el-col :span="6">
-          <el-button type="primary" @click="addpigs">入栏</el-button>
-        </el-col>
-      </el-row>
+      <AddPigForm></AddPigForm>
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="6">-->
+<!--          <StationSelect @StationChange="PigChange"></StationSelect>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-input-->
+<!--            placeholder="请输入身份码"-->
+<!--            v-model.number="addpig.pigid"-->
+<!--            maxlength="15"-->
+<!--            show-word-limit-->
+<!--          >-->
+<!--          </el-input>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-input-->
+<!--            placeholder="请输入耳标号"-->
+<!--            v-model.number="addpig.earid"-->
+<!--            maxlength="8"-->
+<!--            show-word-limit-->
+<!--          >-->
+<!--          </el-input>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="6">-->
+<!--          <template>-->
+<!--            <div class="block">-->
+<!--              <span class="demonstration"></span>-->
+<!--              <el-date-picker-->
+<!--                class="date-picker"-->
+<!--                value-format="yyyy-MM-dd"-->
+<!--                v-model="addpig.breedtime"-->
+<!--                type="date"-->
+<!--                :picker-options="pickerOptions"-->
+<!--                placeholder="选择配种日期">-->
+<!--              </el-date-picker>-->
+<!--            </div>-->
+<!--          </template>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-input placeholder="请输入品种" v-model="addpig.kind">-->
+<!--          </el-input>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-input-->
+<!--            placeholder="请输入与配公猪号"-->
+<!--            v-model.number="addpig.malepignum"-->
+<!--            maxlength="15"-->
+<!--            show-word-limit-->
+<!--          >-->
+<!--          </el-input>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+<!--      <el-row :gutter="20">-->
+<!--        <el-col :span="6">-->
+<!--          <el-input-->
+<!--            placeholder="请输入背膘厚"-->
+<!--            v-model="addpig.backfat">-->
+<!--          </el-input>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-input-->
+<!--            placeholder="请输入胎龄"-->
+<!--            v-model.number="addpig.gesage"-->
+<!--            maxlength="2"-->
+<!--            show-word-limit>-->
+<!--          </el-input>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-select-->
+<!--            placeholder="请选择疫苗情况"-->
+<!--            v-model="addpig.vaccine"-->
+<!--            multiple-->
+<!--            collapse-tags-->
+<!--            clearable-->
+<!--            filterable-->
+<!--            allow-create>-->
+<!--            <el-option-->
+<!--              v-for="item in vaccine_options"-->
+<!--              :key="item.value"-->
+<!--              :label="item.label"-->
+<!--              :value="item.value">-->
+<!--            </el-option>-->
+<!--          </el-select>-->
+<!--        </el-col>-->
+<!--        <el-col :span="6">-->
+<!--          <el-button type="primary" @click="addpigs">入栏</el-button>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
       <el-table :data="existpigs" border>
         <el-table-column label="饲喂站号" prop="stationid" align="center" width="120px"></el-table-column>
         <el-table-column label="品种" prop="pigkind" align="center" width="120px"></el-table-column>
@@ -113,7 +114,7 @@ import {
 } from '../../../api/request'
 
 import bread from '../../common/bread'
-import StationSelect from '../../common/StationSelect'
+import AddPigForm from '../../common/AddPigForm'
 
 export default {
   name: 'addition_pig',
@@ -165,7 +166,7 @@ export default {
   },
   components: {
     bread,
-    StationSelect
+    AddPigForm
   },
   methods: {
     // 高位补0函数
