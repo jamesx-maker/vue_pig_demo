@@ -16,7 +16,7 @@
           </div>
           <div style="width: 300px;height: 100px;margin-left: 20px;">疫病：无</div>
           <div style="width: 300px;height: 100px;margin-left: 20px;">体况：良好</div>
-          <div style="width: 300px;height: 100px;margin-left: 20px;">配种周：40</div>
+<!--          <div style="width: 300px;height: 100px;margin-left: 20px;">配种周：40</div>-->
           <div style="width: 300px;height: 100px;margin-left: 20px;">
             <el-button type="primary" @click="add_farrow">录入生产信息</el-button>
           </div>

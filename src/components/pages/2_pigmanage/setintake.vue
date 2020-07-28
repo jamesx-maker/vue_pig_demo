@@ -22,8 +22,8 @@
       </el-row>
       <el-table :data="existpigs" border>
         <el-table-column label="身份码" prop="pigid" align="center"></el-table-column>
-        <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-        <el-table-column label="品种" prop="pigkind" width="120px" align="center"></el-table-column>
+        <el-table-column label="耳标号" prop="earid" width="110px" align="center"></el-table-column>
+        <el-table-column label="品种" prop="pigkind" width="110px" align="center"></el-table-column>
         <el-table-column label="背膘厚/mm" width="120px" align="center">
           <template slot-scope="scope">
             {{scope.row.backfat}}
@@ -37,10 +37,10 @@
             ></el-button>
           </template>
         </el-table-column>
-        <el-table-column label="妊娠天数" prop="breeddays" width="120px" align="center"></el-table-column>
-        <el-table-column label="采食量/kg" prop="final_quantity" align="center"></el-table-column>
-        <el-table-column label="默认采食量/kg" prop="index_quantity" align="center"></el-table-column>
-        <el-table-column label="推荐采食量/kg" prop="algo_quantity" align="center"></el-table-column>
+        <el-table-column label="妊娠天数" prop="breeddays" width="100px" align="center"></el-table-column>
+        <el-table-column label="采食量/kg" prop="final_quantity" width="100px" align="center"></el-table-column>
+        <el-table-column label="默认采食量/kg" prop="index_quantity" width="120px" align="center"></el-table-column>
+        <el-table-column label="推荐采食量/kg" prop="algo_quantity" width="120px" align="center"></el-table-column>
         <el-table-column label="修订采食量/kg" align="center">
           <template slot-scope="scope">
             <el-input placeholder="请输入采食量" v-model="scope.row.setnum" class="input2"></el-input>

@@ -4,7 +4,7 @@
     <div class="container">
       <div>
         <el-row :gutter="20">
-          <el-col :span="6">
+          <el-col :span="5">
             <el-select
               v-model="roomid"
               placeholder="请选择单元号"
@@ -19,7 +19,7 @@
               </el-option>
             </el-select>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="5">
             <el-select
               v-model="stationid"
               placeholder="请选择饲喂站"
@@ -34,7 +34,7 @@
               </el-option>
             </el-select>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="8">
             <el-date-picker
               v-model="datavalue"
               type="daterange"
@@ -47,8 +47,9 @@
             </el-date-picker>
           </el-col>
           <el-col :span="6">
-            <el-button type="primary" >查询</el-button>
+            <el-button type="primary" style="margin-left: 20px">查询</el-button>
           </el-col>
+<!--            <el-button type="primary" >查询</el-button>-->
         </el-row>
       </div>
     </div>
