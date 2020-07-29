@@ -71,9 +71,9 @@ export default {
           Login(this.param).then(res => {
             if (res.status === 200) {
               this.$message.success('登录成功')
-              localStorage.clear()
-              localStorage.setItem('ms_username', this.param.username)
-              localStorage.setItem('token', 'HZAU')
+              sessionStorage.clear()
+              sessionStorage.setItem('ms_username', this.param.username)
+              sessionStorage.setItem('token', 'HZAU')
               this.$router.push('/index')
             }
             console.log(res)

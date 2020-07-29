@@ -189,7 +189,7 @@ router.beforeEach((to, from, next) => {
   // from:代表从哪个路径跳转
   // next放行
   document.title = `${to.meta.title} | HZAU-pig-system`
-  const role = localStorage.getItem('ms_username')
+  const role = sessionStorage.getItem('ms_username')
   // const tokenStr = window.sessionStorage.getItem('token')
   // if (!tokenStr) return next('/login')
   if (!role && to.path !== '/login') {

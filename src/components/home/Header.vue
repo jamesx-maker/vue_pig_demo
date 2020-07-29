@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     username () {
-      const username = localStorage.getItem('ms_username')
+      const username = sessionStorage.getItem('ms_username')
       return username || this.name
     }
   },
@@ -67,9 +67,9 @@ export default {
     // 用户名下拉菜单选择事件
     handleCommand (command) {
       // eslint-disable-next-line eqeqeq
-      if (command == 'loginout') {
-        localStorage.removeItem('ms_username')
-        localStorage.removeItem('token')
+      if (command === 'loginout') {
+        sessionStorage.removeItem('ms_username')
+        sessionStorage.removeItem('token')
         this.$router.push('/login')
       }
     },
