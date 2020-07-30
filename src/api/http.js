@@ -22,8 +22,8 @@ axios.interceptors.request.use(
     startLoading()
 
     // 设置请求头
-    if (localStorage.eToken) {
-      confing.headers.Authorization = localStorage.eToken
+    if (sessionStorage.token) {
+      confing.headers.Authorization = sessionStorage.token
     }
 
     return confing

@@ -129,7 +129,7 @@ export default {
   name: 'system_index',
   data () {
     return {
-      name: localStorage.getItem('ms_username'),
+      name: sessionStorage.getItem('ms_username'),
       todoList: [
         {
           title: '耳标损坏',
