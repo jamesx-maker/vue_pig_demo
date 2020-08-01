@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { formatZero } from '../../static/func'
 export default {
   name: 'AddStationForm',
   data () {
@@ -95,20 +96,13 @@ export default {
   },
   computed: {
     SendNewStation () {
-      const Building = this.formatZero(this.NewStation.Building, 2)
-      const Unit = this.formatZero(this.NewStation.Unit, 2)
-      const StationId = this.formatZero(this.NewStation.StationId, 4)
+      const Building = formatZero(this.NewStation.Building, 2)
+      const Unit = formatZero(this.NewStation.Unit, 2)
+      const StationId = formatZero(this.NewStation.StationId, 4)
       return Building + '-' + Unit + '-' + StationId
     }
   },
   methods: {
-    // 高位补0函数
-    formatZero (num, len) {
-      if (String(num).length > len) {
-        return num
-      }
-      return (Array(len).join(0) + num).slice(-len)
-    },
     handleAddition (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

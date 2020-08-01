@@ -2,7 +2,7 @@
   <div>
     <el-select v-model="StationId"
                clearable
-               placeholder="请选择母猪区号"
+               placeholder="请选择饲喂站号"
                @change="getstationpig(StationId)"
                size="250px"
                filterable>
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getstationpig (StationId) {
-      this.$emit('StationChange', StationId, this.StationList)
+      this.$emit('StationChange', StationId)
     }
   }
 }

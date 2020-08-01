@@ -2,7 +2,7 @@
   <div>
     <bread bigtitle="母猪管理" smalltitle="入栏" icon="el-icon-magic-stick"></bread>
     <div class="container">
-      <AddPigForm></AddPigForm>
+      <AddPigForm @GetPigs="GetPigs"></AddPigForm>
 <!--      <el-row :gutter="20">-->
 <!--        <el-col :span="6">-->
 <!--          <StationSelect @StationChange="PigChange"></StationSelect>-->
@@ -92,26 +92,36 @@
 <!--          <el-button type="primary" @click="addpigs">入栏</el-button>-->
 <!--        </el-col>-->
 <!--      </el-row>-->
-      <el-table :data="existpigs" border>
-        <el-table-column label="饲喂站号" prop="stationid" align="center" width="120px"></el-table-column>
-        <el-table-column label="品种" prop="pigkind" align="center" width="120px"></el-table-column>
-        <el-table-column label="身份码" prop="pigid" align="center" width="140px"></el-table-column>
-        <el-table-column label="耳标号" prop="earid" align="center"></el-table-column>
-        <el-table-column label="与配公猪号" prop="malepignum" align="center"></el-table-column>
+      <el-table :data="existpigs">
+        <el-table-column label="饲喂站号"
+                         prop="stationid"
+                         align="center"
+                         :filters="[{text: '01-01-0001', value: '01-01-0001'},
+                         {text: '01-01-0002', value: '01-01-0002'},
+                         {text: '01-01-0003', value: '01-01-0003'},
+                         {text: '01-01-0004', value: '01-01-0004'}]"
+                         :filter-method="filterHandler"
+                         width="120px"></el-table-column>
+        <el-table-column label="母猪号" prop="pigid" align="center" width="160px"></el-table-column>
+        <el-table-column label="母猪耳标号" prop="earid" align="center"></el-table-column>
+        <el-table-column label="母猪品种" prop="pigkind" align="center" width="100px"></el-table-column>
+        <el-table-column label="与配公猪号" prop="malepignum" align="center" width="160px"></el-table-column>
+        <el-table-column label="公猪品种" prop="" align="center" width="100px"></el-table-column>
         <el-table-column label="配种日期" prop="breedtime" align="center"></el-table-column>
-        <el-table-column label="背膘厚/mm" prop="backfat" align="center"></el-table-column>
-        <el-table-column label="胎龄" prop="gesage" align="center"></el-table-column>
-        <el-table-column label="已注射疫苗" prop="vaccine" align="center"></el-table-column>
+        <el-table-column label="背膘厚/mm" prop="backfat" align="center" width="120px"></el-table-column>
+        <el-table-column label="胎龄" prop="gesage" align="center" width="120px"></el-table-column>
+        <el-table-column label="操作" align="center">
+          <template slot-scope="scope">
+            <el-button size="mini" type="danger" @click="change(scope.row)">修改</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </div>
 </template>
 
 <script>
-import {
-  getStationPig,
-  additionpig
-} from '../../../api/request'
+import { getStationPig } from '../../../api/request'
 
 import bread from '../../common/bread'
 import AddPigForm from '../../common/AddPigForm'
@@ -120,48 +130,7 @@ export default {
   name: 'addition_pig',
   data () {
     return {
-      pickerOptions: {
-        disabledDate (time) {
-          return time.getTime() > Date.now()
-        }
-      },
-      vaccine_options: [
-        {
-          value: '疫苗1',
-          label: '疫苗1'
-        },
-        {
-          value: '疫苗2',
-          label: '疫苗2'
-        },
-        {
-          value: '疫苗3',
-          label: '疫苗3'
-        },
-        {
-          value: '疫苗4',
-          label: '疫苗4'
-        },
-        {
-          value: '疫苗5',
-          label: '疫苗5'
-        },
-        {
-          value: '疫苗6',
-          label: '疫苗6'
-        },
-        {
-          value: '疫苗7',
-          label: '疫苗7'
-        },
-        {
-          value: '疫苗8',
-          label: '疫苗8'
-        }
-      ],
-      existpigs: [],
-      addpig: {},
-      NowStationId: ''
+      existpigs: []
     }
   },
   components: {
@@ -169,40 +138,19 @@ export default {
     AddPigForm
   },
   methods: {
-    // 高位补0函数
-    formatZero (num, len) {
-      if (String(num).length > len) {
-        return num
-      }
-      return (Array(len).join(0) + num).slice(-len)
-    },
-    async GetPigs () {
-      const res = await getStationPig({ id: this.NowStationId })
+    async GetPigs (StationId) {
+      const res = await getStationPig({ StationId: StationId })
       this.existpigs = res.data.stationpig
     },
-    PigChange (StationId) {
-      this.NowStationId = StationId
-      this.GetPigs()
+    change () {
+      console.log('修改')
     },
-    addpigs () {
-      if (this.addpig.vaccine.length === 0) {
-        this.addpig.vaccine = ['暂无']
-      } else {
-        this.addpig.vaccine.join(',')
-      }
-      this.addpig.pigid = this.formatZero(this.addpig.pigid, 15)
-      this.addpig.earid = this.formatZero(this.addpig.earid, 8)
-      this.addpig.malepignum = this.formatZero(this.addpig.malepignum, 8)
-      this.addpig.pig_stationid = this.NowStationId
-      additionpig(this.addpig).then((res) => {
-        if (res.status === 201) {
-          this.$message.warning(res.data.code)
-        } else {
-          this.GetPigs()
-          this.addpig = {}
-          this.$message.success(res.data.code)
-        }
-      })
+    filterHandler (value, row, column) {
+      const property = column.property
+      console.log(value)
+      // console.log(row)
+      // console.log(column.property)
+      return row[property] === value
     }
   }
 }

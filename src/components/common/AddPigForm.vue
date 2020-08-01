@@ -1,6 +1,6 @@
 <template>
   <div class="handle-box">
-    <el-row class="row-bg" :gutter="120">
+    <el-row class="row-bg" :gutter="200">
       <el-col :span="18">
         <el-form
           ref="ValidateForm"
@@ -11,39 +11,49 @@
           hide-required-asterisk>
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item label="母猪区号：">
+              <el-form-item label="饲喂站号：">
                 <StationSelect @StationChange="StationChange"></StationSelect>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="饲喂站号：">
-                <el-input v-model="NewPig.StationId"></el-input>
+              <el-form-item label="母猪号：">
+                <el-input
+                  v-model="NewPig.PigId"
+                  maxlength="15"
+                  show-word-limit></el-input>
               </el-form-item>
+<!--              <el-form-item label="饲喂站号：">-->
+<!--                <el-input v-model="NewPig.StationId"></el-input>-->
+<!--              </el-form-item>-->
             </el-col>
             <el-col :span="8">
-              <el-form-item label="母猪号：">
-                <el-input v-model="NewPig.PigId"></el-input>
+              <el-form-item label="电子耳标：">
+                <el-input
+                  v-model="NewPig.EarId"
+                  maxlength="8"
+                  show-word-limit></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item label="电子耳标：">
-                <el-input v-model="NewPig.EarId"></el-input>
-              </el-form-item>
             </el-col>
             <el-col :span="8">
               <el-form-item label="与配公猪号：">
-                <el-input v-model="NewPig.MalePigId"></el-input>
+                <el-input
+                  v-model="NewPig.MalePigId"
+                  maxlength="15"
+                  show-word-limit></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-form-item label="配种日期：">
+              <el-form-item label="配种时间：">
                 <el-date-picker
                   class="date-picker"
                   v-model="NewPig.BreedTime"
-                  value-format="yyyy-MM-dd"
-                  type="date"
+                  format="yyyy-MM-dd HH:mm"
+                  value-format="yyyy-MM-dd HH:mm"
+                  type="datetime"
                   :picker-options="pickerOptions"
                   placeholder="选择配种日期">
                 </el-date-picker>
@@ -58,7 +68,10 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="胎龄：">
-                <el-input v-model="NewPig.GestationalAge"></el-input>
+                <el-input
+                  v-model="NewPig.GestationalAge"
+                  maxlength="2"
+                  show-word-limit></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="1">
@@ -156,6 +169,8 @@
 
 <script>
 import StationSelect from './StationSelect'
+import { formatZero } from '../../static/func'
+import { additionpig } from '../../api/request'
 
 export default {
   name: 'AddPigForm',
@@ -165,8 +180,7 @@ export default {
   data () {
     return {
       NewPig: {
-        Build_Unit: '',
-        StationId: '',
+        Build_Unit_StationId: '',
         PigId: '',
         EarId: '',
         MalePigId: '',
@@ -182,17 +196,47 @@ export default {
       }
     }
   },
+  computed: {
+    SendPig () {
+      return {
+        Build_Unit_StationId: this.NewPig.Build_Unit_StationId,
+        PigId: formatZero(this.NewPig.PigId, 15),
+        EarId: formatZero(this.NewPig.EarId, 8),
+        MalePigId: formatZero(this.NewPig.MalePigId, 15),
+        BreedTime: this.NewPig.BreedTime,
+        BackFat: this.NewPig.BackFat,
+        GestationalAge: this.NewPig.GestationalAge
+      }
+    }
+  },
   methods: {
-    StationChange () {
-      console.log(123)
+    StationChange (StationId) {
+      this.NewPig.Build_Unit_StationId = StationId
+      this.$emit('GetPigs', this.NewPig.Build_Unit_StationId)
     },
     addpigs () {
-      console.log('入栏')
+      additionpig(this.SendPig).then((res) => {
+        if (res.status === 201) {
+          this.$message.warning(res.data.code)
+        } else {
+          console.log(this.NewPig.Build_Unit_StationId)
+          this.$emit('GetPigs', this.NewPig.Build_Unit_StationId)
+          this.NewPig = {
+            Build_Unit_StationId: this.NewPig.Build_Unit_StationId,
+            PigId: '',
+            EarId: '',
+            MalePigId: '',
+            BreedTime: '',
+            BackFat: '',
+            GestationalAge: ''
+          }
+          this.$message.success(res.data.code)
+        }
+      })
     }
   }
 }
 </script>
-
 <style scoped>
   .handle-box {
     margin-top: 10px;

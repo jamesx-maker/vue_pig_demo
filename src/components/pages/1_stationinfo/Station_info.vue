@@ -24,7 +24,8 @@
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.status==='运行中'?'success':(scope.row.status==='已关机'?'danger':'')"
+              effect="dark"
+              :type="scope.row.status==='运行中'?'success':(scope.row.status==='已关机'?'danger':'warning')"
             >{{scope.row.status}}
             </el-tag>
           </template>
