@@ -39,9 +39,9 @@
 import {
   getStationPig,
   changestation
-} from '../../../api/request'
-import bread from '../../common/bread'
-import StationSelect from '../../common/StationSelect'
+} from '../../api/request'
+import bread from '../../components/common/bread'
+import StationSelect from '../../components/common/StationSelect'
 
 export default {
   name: 'changestation',

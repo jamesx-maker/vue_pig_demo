@@ -24,7 +24,6 @@
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">
             <el-tag
-              effect="dark"
               :type="scope.row.status==='运行中'?'success':(scope.row.status==='已关机'?'danger':'warning')"
             >{{scope.row.status}}
             </el-tag>
@@ -81,8 +80,8 @@
 import {
   addstation,
   getstation
-} from '../../../api/request'
-import AddStationForm from '../../common/AddStationForm'
+} from '../../api/request'
+import AddStationForm from '../../components/common/AddStationForm'
 
 export default {
   name: 'Station_info',

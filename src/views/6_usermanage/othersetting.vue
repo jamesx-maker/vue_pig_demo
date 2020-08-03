@@ -1,18 +1,18 @@
 <template>
   <div>
-    <bread bigtitle="用户管理" smalltitle="用户设置" icon="el-icon-user"></bread>
+    <bread bigtitle="用户管理" smalltitle="其他设置" icon="el-icon-user"></bread>
     <div class="container">
       <div>
-        用户设置页面
+        其他设置页面
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import bread from '../../common/bread'
+import bread from '../../components/common/bread'
 export default {
-  name: 'usersetting',
+  name: 'othersetting',
   components: {
     bread
   }

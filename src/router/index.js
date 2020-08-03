@@ -25,57 +25,57 @@ const routes = [
     children: [
       {
         path: '/index',
-        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/System_index.vue'),
+        component: () => import(/* webpackChunkName: "dashboard" */ '../views/System_index.vue'),
         meta: { title: '系统首页' }
       },
       {
         path: '/station_info',
-        component: () => import(/* webpackChunkName: "dashboard" */ '../components/pages/1_stationinfo/Station_info'),
+        component: () => import(/* webpackChunkName: "dashboard" */ '../views/1_stationinfo/Station_info'),
         meta: { title: '饲喂站信息' }
       },
       {
         path: '/addition_pig',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/addition_pig'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/2_pigmanage/addition_pig'),
         meta: { title: '入栏' }
       },
       {
         path: '/subtraction_pig',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/subtraction_pig'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/2_pigmanage/subtraction_pig'),
         meta: { title: '离栏' }
       },
       {
         path: '/change_station',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/changestation'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/2_pigmanage/changestation'),
         meta: { title: '转栏' }
       },
       {
         path: '/change_ear',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/change_ear'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/2_pigmanage/change_ear'),
         meta: { title: '更换耳标' }
       },
       {
         path: '/setintake',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/2_pigmanage/setintake'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/2_pigmanage/setintake'),
         meta: { title: '下料设置' }
       },
       {
         path: '/farrow',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/farrow'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/farrow'),
         meta: { title: '生产信息' }
       },
       {
         path: '/delivery_warn',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/delivery_warn'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/delivery_warn'),
         meta: { title: '分娩提醒' }
       },
       {
         path: '/intake_data',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/intakedata'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/intakedata'),
         meta: { title: '采食信息' }
       },
       {
         path: '/default_intake',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/7-setting/defaultintake'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/7-setting/defaultintake'),
         meta: {
           title: '默认饲喂量',
           permission: true
@@ -83,12 +83,12 @@ const routes = [
       },
       {
         path: '/food_consume',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/food_consume'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/food_consume'),
         meta: { title: '饲料消耗' }
       },
       {
         path: '/linefit',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4_analysis/linefit'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/4_analysis/linefit'),
         meta: {
           title: '背膘变化模拟',
           permission: true
@@ -96,7 +96,7 @@ const routes = [
       },
       {
         path: '/intake_spread',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/4_analysis/intakespread'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/4_analysis/intakespread'),
         meta: {
           title: '采食分布',
           permission: true
@@ -104,27 +104,27 @@ const routes = [
       },
       {
         path: '/errorcode',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/5_machinemanage/errorcode'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/5_machinemanage/errorcode'),
         meta: { title: '故障码' }
       },
       {
         path: '/usersetting',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/6_usermanage/usersetting'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/6_usermanage/usersetting'),
         meta: { title: '用户设置' }
       },
       {
         path: '/othersetting',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/6_usermanage/othersetting'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/6_usermanage/othersetting'),
         meta: { title: '其他设置' }
       },
       {
         path: '/pigreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/pigreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/pigreport'),
         meta: { title: '母猪报告' }
       },
       {
         path: '/errorreport',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/3-data/errorreport'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/errorreport'),
         meta: { title: '异常信息报告' }
       },
       {
@@ -139,11 +139,6 @@ const routes = [
         path: '/table',
         component: () => import(/* webpackChunkName: "table" */ '../components/pages/BaseTable.vue'),
         meta: { title: '基础表格' }
-      },
-      {
-        path: '/tabs',
-        component: () => import(/* webpackChunkName: "tabs" */ '../components/pages/Tabs.vue'),
-        meta: { title: 'tab选项卡' }
       },
       {
         // 国际化组件

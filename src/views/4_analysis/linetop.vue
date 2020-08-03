@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import StationSelect from '../../common/StationSelect'
+import StationSelect from '../../components/common/StationSelect'
 import {
   getStationPig
-} from '../../../api/request'
+} from '../../api/request'
 export default {
   name: 'linetop',
   components: {

@@ -121,10 +121,10 @@
 </template>
 
 <script>
-import { getStationPig } from '../../../api/request'
+import { getStationPig } from '../../api/request'
 
-import bread from '../../common/bread'
-import AddPigForm from '../../common/AddPigForm'
+import bread from '../../components/common/bread'
+import AddPigForm from '../../components/common/AddPigForm'
 
 export default {
   name: 'addition_pig',

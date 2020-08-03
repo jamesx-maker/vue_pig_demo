@@ -47,7 +47,7 @@
 
 <script>
 import echarts from 'echarts'
-import bread from '../../common/bread'
+import bread from '../../components/common/bread'
 
 export default {
   name: 'intakespread',

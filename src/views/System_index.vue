@@ -11,7 +11,7 @@
       <el-col :span="8">
         <el-card shadow="hover" class="mgb20" style="height:252px;">
           <div class="user-info">
-            <img src="../../assets/img/HZAU.jpg" class="user-avator" alt/>
+            <img src="../assets/img/HZAU.jpg" class="user-avator" alt/>
             <div class="user-info-cont">
               <div class="user-info-name">{{name}}</div>
               <div>{{role}}</div>
@@ -123,7 +123,7 @@
 
 <script>
 // import bus from '../common/bus'
-import { getsystem } from '../../api/request'
+import { getsystem } from '../api/request'
 
 export default {
   name: 'system_index',

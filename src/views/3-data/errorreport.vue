@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import bread from '../../common/bread'
+import bread from '../../components/common/bread'
 
 export default {
   name: 'errorreport',
