@@ -8,6 +8,7 @@
           <StationSelect @StationChange="PigChange"></StationSelect>
         </el-col>
         <el-col :span="6">
+          <span>耳标号：</span>
           <el-input placeholder="请输入耳标号">
           </el-input>
         </el-col>
@@ -68,7 +69,7 @@ export default {
   },
   methods: {
     async GetPigs () {
-      const res = await getStationPig({ id: this.NowStationId })
+      const res = await getStationPig({ StationId: this.NowStationId })
       this.existpigs = res.data.stationpig
     },
     PigChange (StationId) {

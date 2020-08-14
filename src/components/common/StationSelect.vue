@@ -1,5 +1,6 @@
 <template>
   <div>
+    <slot><span>饲喂站号：</span></slot>
     <el-select v-model="StationId"
                clearable
                placeholder="请选择饲喂站号"

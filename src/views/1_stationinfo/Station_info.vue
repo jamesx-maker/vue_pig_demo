@@ -81,7 +81,7 @@ import {
   addstation,
   getstation
 } from '../../api/request'
-import AddStationForm from '../../components/common/AddStationForm'
+import AddStationForm from '../../components/form/AddStationForm'
 
 export default {
   name: 'Station_info',
@@ -115,7 +115,7 @@ export default {
   },
   methods: {
     async querystation () {
-      const res = await getstation(this.page)
+      const res = await getstation()
       this.tableData = res.data.all_station
       this.page.total = res.data.total
     },

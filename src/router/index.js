@@ -59,9 +59,9 @@ const routes = [
         meta: { title: '下料设置' }
       },
       {
-        path: '/farrow',
-        component: () => import(/* webpackChunkName: "form" */ '../views/3-data/farrow'),
-        meta: { title: '生产信息' }
+        path: '/vaccine',
+        component: () => import(/* webpackChunkName: "form" */ '../views/2_pigmanage/vaccine'),
+        meta: { title: '免疫计划' }
       },
       {
         path: '/delivery_warn',
@@ -129,27 +129,22 @@ const routes = [
       },
       {
         path: '/test',
-        component: () => import(/* webpackChunkName: "form" */ '../components/pages/test'),
+        component: () => import(/* webpackChunkName: "form" */ '../components/common/test'),
         meta: { title: '测试页面' }
       },
       // 默认
       // 默认
       // 默认
       {
-        path: '/table',
-        component: () => import(/* webpackChunkName: "table" */ '../components/pages/BaseTable.vue'),
-        meta: { title: '基础表格' }
-      },
-      {
         // 国际化组件
         path: '/i18n',
-        component: () => import(/* webpackChunkName: "i18n" */ '../components/pages/I18n.vue'),
+        component: () => import(/* webpackChunkName: "i18n" */ '../components/common/I18n.vue'),
         meta: { title: '国际化' }
       },
       {
         // 权限页面
         path: '/permission',
-        component: () => import(/* webpackChunkName: "permission" */ '../components/pages/Permission.vue'),
+        component: () => import(/* webpackChunkName: "permission" */ '../components/common/Permission.vue'),
         meta: {
           title: '权限测试',
           permission: true
@@ -157,12 +152,12 @@ const routes = [
       },
       {
         path: '/404',
-        component: () => import(/* webpackChunkName: "404" */ '../components/pages/404.vue'),
+        component: () => import(/* webpackChunkName: "404" */ '../components/common/404.vue'),
         meta: { title: '404' }
       },
       {
         path: '/403',
-        component: () => import(/* webpackChunkName: "403" */ '../components/pages/403.vue'),
+        component: () => import(/* webpackChunkName: "403" */ '../components/common/403.vue'),
         meta: { title: '403' }
       }
     ]

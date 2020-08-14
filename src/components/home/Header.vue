@@ -46,7 +46,7 @@
   </div>
 </template>
 <script>
-import bus from '../common/bus'
+import bus from '../../bus'
 
 export default {
   data () {

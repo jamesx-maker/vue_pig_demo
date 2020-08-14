@@ -24,31 +24,16 @@
               <el-table-column
                 prop="key"
                 label=""
-                width="100"
                 align="center">
               </el-table-column>
               <el-table-column
                 prop="value1"
-                label="50-100"
-                width="100"
+                label="一胎猪"
                 align="center">
               </el-table-column>
               <el-table-column
                 prop="value2"
-                label="100-150"
-                width="100"
-                align="center">
-              </el-table-column>
-              <el-table-column
-                prop="value3"
-                label="150-200"
-                width="100"
-                align="center">
-              </el-table-column>
-              <el-table-column
-                prop="value4"
-                label="200-250"
-                width="100"
+                label="经产猪"
                 align="center">
               </el-table-column>
             </el-table>
@@ -65,32 +50,21 @@
               :data="timeData"
               highlight-current-row
               @current-change="handleCurrentChange"
-              style="width: 100%">
+              width="100%">
               <el-table-column
                 align="center"
                 prop="key"
-                label=""
-                width="120">
+                label="">
               </el-table-column>
               <el-table-column
                 align="center"
                 property="date"
-                label="起始"
-                width="120">
+                label="起始">
               </el-table-column>
               <el-table-column
                 align="center"
                 property="name"
-                label="终止"
-                width="120">
-              </el-table-column>
-              <el-table-column
-                label="操作"
-                align="center">
-                <el-button
-                  size="mini"
-                  @click="handleEdit(scope.$index, scope.row)">编辑
-                </el-button>
+                label="终止">
               </el-table-column>
             </el-table>
           </div>
@@ -128,30 +102,22 @@ export default {
         {
           key: '妊娠初期',
           value1: '1.0',
-          value2: '1.2',
-          value3: '1.4',
-          value4: '1.6'
+          value2: '1.2'
         },
         {
           key: '妊娠前期',
           value1: '1.0',
-          value2: '1.2',
-          value3: '1.4',
-          value4: '1.6'
+          value2: '1.2'
         },
         {
           key: '妊娠中期',
           value1: '1.0',
-          value2: '1.2',
-          value3: '1.4',
-          value4: '1.6'
+          value2: '1.2'
         },
         {
           key: '妊娠后期',
           value1: '1.0',
-          value2: '1.2',
-          value3: '1.4',
-          value4: '1.6'
+          value2: '1.2'
         }],
       timeData: [
         {

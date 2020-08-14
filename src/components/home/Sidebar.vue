@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import bus from '../common/bus'
+import bus from '../../bus'
 
 export default {
   data () {
@@ -93,6 +93,10 @@ export default {
             {
               index: 'setintake',
               title: '下料设置'
+            },
+            {
+              index: 'vaccine',
+              title: '免疫计划'
             }
           ]
         },
@@ -112,10 +116,6 @@ export default {
             {
               index: 'delivery_warn',
               title: '分娩提醒'
-            },
-            {
-              index: 'farrow',
-              title: '分娩信息录入'
             },
             {
               index: 'pigreport',

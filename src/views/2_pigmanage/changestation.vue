@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     async GetPigs () {
-      const res = await getStationPig({ id: this.NowStationId })
+      const res = await getStationPig({ StationId: this.NowStationId })
       this.existpigs = res.data.stationpig
     },
     PigChange (StationId, StationList) {
