@@ -69,11 +69,12 @@ export default {
       this.$refs.login.validate(valid => {
         if (valid) {
           Login(this.param).then(res => {
+            // console.log(res)
             if (res.status === 200) {
               this.$message.success('登录成功')
               sessionStorage.clear()
               sessionStorage.setItem('ms_username', this.param.username)
-              sessionStorage.setItem('token', 'HZAU')
+              sessionStorage.setItem('token', res.data.token)
               this.$router.push('/index')
             }
             console.log(res)

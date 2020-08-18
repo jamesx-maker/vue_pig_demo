@@ -23,7 +23,7 @@ axios.interceptors.request.use(
 
     // 设置请求头
     if (sessionStorage.token) {
-      confing.headers.Authorization = sessionStorage.token
+      confing.headers.Authorization = 'JWT ' + sessionStorage.token
     }
 
     return confing
@@ -50,8 +50,14 @@ axios.interceptors.response.use(
 
     if (status === 401) {
       Message.error('用户名或密码错误，请重试')
-      // 清楚token
-      localStorage.removeItem('eToken')
+      // 清除token
+      localStorage.removeItem('token')
+      // 跳转到登录页面
+      router.push('/login')
+    } else if (status === 403) {
+      // token已过期
+      // 清除token
+      localStorage.removeItem('token')
       // 跳转到登录页面
       router.push('/login')
     }

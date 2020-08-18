@@ -167,9 +167,9 @@ export default {
   },
   created () {
     getsystem().then(res => {
-      console.log(res)
-      this.station_num = res.data.station_num
-      this.pig_num = res.data.pig_num
+      // console.log(res.data)
+      this.station_num = res.data.data.station_num
+      this.pig_num = res.data.data.pig_num
     })
   },
   // activated() {

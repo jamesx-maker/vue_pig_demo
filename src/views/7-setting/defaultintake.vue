@@ -118,6 +118,11 @@ export default {
           key: '妊娠后期',
           value1: '1.0',
           value2: '1.2'
+        },
+        {
+          key: '分娩前期',
+          value1: '1.0',
+          value2: '1.2'
         }],
       timeData: [
         {
@@ -139,6 +144,11 @@ export default {
           key: '妊娠后期',
           date: '90',
           name: '107'
+        },
+        {
+          key: '分娩前期',
+          date: '108',
+          name: '114'
         }
       ],
       currentRow: null

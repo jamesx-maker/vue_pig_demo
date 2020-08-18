@@ -23,7 +23,7 @@ export function Login (data) {
   return axios({
     url: `${base.url}/login/`,
     method: 'post',
-    data: JSON.stringify(data)
+    data: data
   })
 }
 
